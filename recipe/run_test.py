@@ -12,6 +12,7 @@ try:
     import cupy
 except ImportError as e:
     print("No GPU available. Exiting without running CuPy's tests.")
+    print('Got ImportError: "%s"' % str(e))
     sys.exit(0)
 
 # Run CuPy's test suite
