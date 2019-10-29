@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "6.4.0" %}
-{% set sha256 = "2a3cd1812f043ba9451b8ca4e5a4c31f9acc486c003f6970836e1a46c735c82e" %}
+{% set version = "6.5.0" %}
+{% set sha256 = "0454ff66301ec2b1bab775ed655d8a3a75ae00bb2a37ca6c265f4fa2c3102edb" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
 
 build:
   number: 1
-  skip: True  # [not (linux64 and cuda_compiler_version != "None")]
+  skip: True  # [(not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
     # So add that location last in the header search paths
