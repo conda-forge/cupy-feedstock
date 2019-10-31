@@ -209,6 +209,13 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@asi1024](https://github.com/asi1024/)
+* [@beam2d](https://github.com/beam2d/)
+* [@emcastillo](https://github.com/emcastillo/)
+* [@hvy](https://github.com/hvy/)
 * [@jakirkham](https://github.com/jakirkham/)
+* [@kmaehashi](https://github.com/kmaehashi/)
 * [@leofang](https://github.com/leofang/)
+* [@niboshi](https://github.com/niboshi/)
+* [@toslunar](https://github.com/toslunar/)
 
