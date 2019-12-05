@@ -10,10 +10,6 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_cuda_compiler_version10.0python2.7:
-        CONFIG: linux_cuda_compiler_version10.0python2.7
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-cuda:10.0
       linux_cuda_compiler_version10.0python3.6:
         CONFIG: linux_cuda_compiler_version10.0python3.6
         UPLOAD_PACKAGES: True
@@ -26,10 +22,6 @@ jobs:
         CONFIG: linux_cuda_compiler_version10.0python3.8
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-cuda:10.0
-      linux_cuda_compiler_version10.1python2.7:
-        CONFIG: linux_cuda_compiler_version10.1python2.7
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-cuda:10.1
       linux_cuda_compiler_version10.1python3.6:
         CONFIG: linux_cuda_compiler_version10.1python3.6
         UPLOAD_PACKAGES: True
@@ -42,10 +34,6 @@ jobs:
         CONFIG: linux_cuda_compiler_version10.1python3.8
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-cuda:10.1
-      linux_cuda_compiler_version9.2python2.7:
-        CONFIG: linux_cuda_compiler_version9.2python2.7
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-cuda:9.2
       linux_cuda_compiler_version9.2python3.6:
         CONFIG: linux_cuda_compiler_version9.2python3.6
         UPLOAD_PACKAGES: True
