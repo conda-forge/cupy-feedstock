@@ -25,7 +25,7 @@ build:
     - export CFLAGS="${CFLAGS} -I/usr/include"
     - export CPPFLAGS="${CPPFLAGS} -I/usr/include"
     - export CXXFLAGS="${CXXFLAGS} -I/usr/include"
-    - export CUB_PATH=./cub_v1.8.0  # TODO(leofang): remove this
+    - export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
     - "{{ PYTHON }} -m pip install . -vv"
   missing_dso_whitelist:
     - "*/libcuda.*"
