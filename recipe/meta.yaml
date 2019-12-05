@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "6.5.0" %}
-{% set sha256 = "0454ff66301ec2b1bab775ed655d8a3a75ae00bb2a37ca6c265f4fa2c3102edb" %}
+{% set version = "7.0.0" %}
+{% set sha256 = "b67a4bafc1fb5f5625051c38c6bbf126bfc04f23929b0cd93c59a8590334a887" %}
 
 package:
   name: {{ name|lower }}
