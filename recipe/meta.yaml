@@ -7,8 +7,14 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+    
+  # 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
+  # 2. This dependency should be removed once CuPy bunldes CUB (cupy/cupy#2584)
+  - url: https://github.com/NVlabs/cub/archive/v1.8.0.tar.gz
+    sha256: 025658f4c933cd2aa8cc88a559d013338d68de3fa639cc1f2b12cf61dc759667
+    folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
   number: 0
@@ -19,6 +25,7 @@ build:
     - export CFLAGS="${CFLAGS} -I/usr/include"
     - export CPPFLAGS="${CPPFLAGS} -I/usr/include"
     - export CXXFLAGS="${CXXFLAGS} -I/usr/include"
+    - export CUB_PATH=./cub_v1.8.0  # TODO(leofang): remove this
     - "{{ PYTHON }} -m pip install . -vv"
   missing_dso_whitelist:
     - "*/libcuda.*"
