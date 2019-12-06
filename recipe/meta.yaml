@@ -34,17 +34,18 @@ requirements:
     - pip
     - setuptools
     - cython >=0.24.0
-    - cudnn
     - fastrlock >=0.3
+    - cudnn
     - nccl
 
   run:
     - python
     - setuptools
-    - cudnn
     - fastrlock >=0.3
     - numpy >=1.9.0
     - six >=1.9.0
+    # - cudnn  <-- added via run_export
+    # - nccl   <-- added via run_export
 
 test:
   requires:
