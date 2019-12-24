@@ -10,6 +10,8 @@ cuda_compiler:
 - nvcc
 cuda_compiler_version:
 - '10.0'
+cudnn:
+- '7'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -19,6 +21,9 @@ docker_image:
 nccl:
 - 2.4.6.1
 pin_run_as_build:
+  cudnn:
+    min_pin: x.x
+    max_pin: x
   python:
     min_pin: x.x
     max_pin: x.x
