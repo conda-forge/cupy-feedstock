@@ -17,7 +17,7 @@ source:
     folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py27 or (not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
@@ -42,7 +42,7 @@ requirements:
     - setuptools
     - cython >=0.24.0
     - fastrlock >=0.3
-    - cudnn >=7.6.4  # TODO(leofang): remove custom pinning when conda-forge-pinning updates
+    - cudnn
     - nccl
 
   run:
