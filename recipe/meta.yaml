@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 2
   skip: True  # [(not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
@@ -35,7 +35,7 @@ requirements:
     - setuptools
     - cython >=0.24.0
     - fastrlock >=0.3
-    - cudnn >=7.6.4  # TODO(leofang): remove custom pinning when conda-forge-pinning updates
+    - cudnn
     - nccl
 
   run:
