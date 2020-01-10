@@ -1,3 +1,6 @@
+cudnn:
+  - 7.6.5
+
 cuda_compiler_version:         # [linux64]
   - None                       # [linux64]
   - 9.2                        # [linux64]
