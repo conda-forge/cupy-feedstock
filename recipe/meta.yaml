@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "6.6.0" %}
-{% set sha256 = "ab53d3e31d5b8276f48680d1d3f004210a5cf1115538731ada931b9f0e0efb6e" %}
+{% set version = "6.7.0" %}
+{% set sha256 = "f565a7fd0bc80a120e81a1125b994cfcbd8a667421dddb079723023bc4640959" %}
 
 package:
   name: {{ name|lower }}
@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 3
+  number: 0
   skip: True  # [(not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
