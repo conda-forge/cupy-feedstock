@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "7.0.0" %}
-{% set sha256 = "b67a4bafc1fb5f5625051c38c6bbf126bfc04f23929b0cd93c59a8590334a887" %}
+{% set version = "7.1.0" %}
+{% set sha256 = "799aee9715b1c59714d023cc7a2719bccc1f4e5fb05bf35e4d1cbff4940b9166" %}
 
 package:
   name: {{ name|lower }}
@@ -17,7 +17,7 @@ source:
     folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 2
+  number: 0
   skip: True  # [py27 or (not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
