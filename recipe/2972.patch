@@ -1,0 +1,22 @@
+From 1528cb9c3e5b34dbc3d1ebbffa69d20df9c507df Mon Sep 17 00:00:00 2001
+From: John Kirkham <jakirkham@gmail.com>
+Date: Thu, 16 Jan 2020 16:04:46 -0800
+Subject: [PATCH] Fix import of `_get_axis`
+
+---
+ cupy/cuda/cub.pyx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cupy/cuda/cub.pyx b/cupy/cuda/cub.pyx
+index b563e2c2db..bbc928d874 100644
+--- a/cupy/cuda/cub.pyx
++++ b/cupy/cuda/cub.pyx
+@@ -332,7 +332,7 @@ def cub_reduction(arr, op, axis=None, dtype=None, out=None, keepdims=False):
+     If the specified reduction is not possible, None is returned.
+     """
+     # if import at the top level, a segfault would happen when import cupy!
+-    from cupy.core._reduction import _get_axis
++    from cupy.core._kernel import _get_axis
+     cdef bint enforce_numpy_API = False
+ 
+     if op > CUPY_CUB_MAX:

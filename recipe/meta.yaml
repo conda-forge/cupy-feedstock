@@ -9,6 +9,9 @@ package:
 source:
   - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    # TODO(leofang): remove this in the next release
+    patches:
+      - 2972.patch  # see cupy/cupy#2971 & cupy/cupy#2972
     
   # 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
   # 2. This dependency should be removed once CuPy bunldes CUB (cupy/cupy#2584)
@@ -17,7 +20,7 @@ source:
     folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py27 or (not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
