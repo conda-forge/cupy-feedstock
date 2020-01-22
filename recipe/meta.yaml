@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
 {% set version = "7.1.1" %}
-{% set sha256 = "025658f4c933cd2aa8cc88a559d013338d68de3fa639cc1f2b12cf61dc759667" %}
+{% set sha256 = "bb750ca82187843db37519d021e18ada90d5666cc8bfe403dfa3545ad04eb2e5" %}
 
 package:
   name: {{ name|lower }}
@@ -9,9 +9,6 @@ package:
 source:
   - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    # TODO(leofang): remove this in the next release
-    patches:
-      - 2972.patch  # see cupy/cupy#2971 & cupy/cupy#2972
     
   # 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
   # 2. This dependency should be removed once CuPy bunldes CUB (cupy/cupy#2584)
