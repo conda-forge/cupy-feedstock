@@ -13,7 +13,7 @@ source:
       - PR_3009.patch
 
 build:
-  number: 0
+  number: 1
   skip: True  # [(not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
