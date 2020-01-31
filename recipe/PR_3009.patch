@@ -1,0 +1,22 @@
+From 58be1db1170ab2a5e4f46d6827cbdd6ee56cdefe Mon Sep 17 00:00:00 2001
+From: John Kirkham <jakirkham@gmail.com>
+Date: Wed, 29 Jan 2020 11:39:41 -0800
+Subject: [PATCH] Use `size_t nbytes` in `__cuda_array_interface__`
+
+---
+ cupy/core/core.pyx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cupy/core/core.pyx b/cupy/core/core.pyx
+index dbb8519a3c..3809888262 100644
+--- a/cupy/core/core.pyx
++++ b/cupy/core/core.pyx
+@@ -2513,7 +2513,7 @@ cpdef ndarray _convert_object_with_cuda_array_interface(a):
+     cdef object desc = a.__cuda_array_interface__
+     cdef tuple shape = desc['shape']
+     cdef int dev_id = -1
+-    cdef int nbytes
++    cdef size_t nbytes
+ 
+     ptr = desc['data'][0]
+     dtype = numpy.dtype(desc['typestr'])
