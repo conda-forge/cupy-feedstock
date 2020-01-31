@@ -9,6 +9,8 @@ package:
 source:
   - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      - PR_3009.patch
     
   # 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
   # 2. This dependency should be removed once CuPy bunldes CUB (cupy/cupy#2584)
