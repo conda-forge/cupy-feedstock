@@ -1,13 +1,13 @@
 {% set name = "cupy" %}
 {% set version = "7.2.0" %}
-{% set sha256 = "025658f4c933cd2aa8cc88a559d013338d68de3fa639cc1f2b12cf61dc759667" %}
+{% set sha256 = "add9edf3f3fc655fa547f3a2a9e23ab670cc2971ead17cb53142dfe5266a3342" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
+  - url: https://pypi.io/packages/source/c/cupy/cupy-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     
   # 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
