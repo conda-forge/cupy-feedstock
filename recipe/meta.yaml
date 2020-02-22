@@ -12,7 +12,7 @@ source:
 
   # CUB support has too many bugs, let us wait for a bit longer   
   ## 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
-  ## 2. This dependency should be removed once CuPy bunldes CUB (cupy/cupy#2584)
+  ## 2. This dependency should be removed once CuPy bundles CUB (cupy/cupy#2584)
   #- url: https://github.com/NVlabs/cub/archive/v1.8.0.tar.gz
   #  sha256: 025658f4c933cd2aa8cc88a559d013338d68de3fa639cc1f2b12cf61dc759667
   #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
