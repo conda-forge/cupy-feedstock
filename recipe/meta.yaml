@@ -9,6 +9,13 @@ package:
 source:
   - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      #################################################
+      # Include a bug-fix for CUB support.            #
+      #                                               #
+      # xref: https://github.com/cupy/cupy/pull/3152  #
+      #################################################
+      - PR_3152.patch
 
   # CUB support has too many bugs, let us wait for a bit longer   
   ## 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here

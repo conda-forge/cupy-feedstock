@@ -1,0 +1,21 @@
+From 957f09ad12c3df0f97bd1db4d3f033faf44a3217 Mon Sep 17 00:00:00 2001
+From: John Kirkham <jakirkham@gmail.com>
+Date: Tue, 3 Mar 2020 22:24:19 -0800
+Subject: [PATCH] Readd `ndarray` type to `y`
+
+---
+ cupy/cuda/cub.pyx | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/cupy/cuda/cub.pyx b/cupy/cuda/cub.pyx
+index 9f4f844ded..6df8263b22 100644
+--- a/cupy/cuda/cub.pyx
++++ b/cupy/cuda/cub.pyx
+@@ -98,6 +98,7 @@ cpdef Py_ssize_t _preprocess_array(ndarray arr, tuple reduce_axis,
+ 
+ def device_reduce(ndarray x, op, tuple out_axis, out=None,
+                   bint keepdims=False):
++    cdef ndarray y
+     cdef memory.MemoryPointer ws
+     cdef int dtype_id, ndim_out, kv_bytes, x_size, _op
+     cdef size_t ws_size
