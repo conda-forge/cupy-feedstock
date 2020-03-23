@@ -1,16 +1,15 @@
 {% set name = "cupy" %}
 {% set version = "7.2.0" %}
-{% set sha256 = "57e5063bbaaa387e40f5935c02bbc75bb53d6589d736c540535a4f0b533bc374" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
-    sha256: {{ sha256 }}
+  - git_url: https://github.com/cupy/cupy.git
+  - git_rev: {{ version }}
 
-  # CUB support has too many bugs, let us wait for a bit longer   
+  # CUB support has too many bugs, let us wait for a bit longer
   ## 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
   ## 2. This dependency should be removed once CuPy bundles CUB (cupy/cupy#2584)
   #- url: https://github.com/NVlabs/cub/archive/v1.8.0.tar.gz
@@ -18,7 +17,7 @@ source:
   #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 1
+  number: 2
   skip: True  # [py27 or (not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
@@ -28,6 +27,9 @@ build:
     - export CXXFLAGS="${CXXFLAGS} -I/usr/include"
     #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
     - "{{ PYTHON }} -m pip install . -vv"
+    # full CUDA 10.2 support was added in a commit post-7.2.0 release
+    # (d654524fa), cherry pick it and a prior commit (34d4dbd73) to support it
+    - git cherry-pick --strategy=recursive -Xtheirs -n 34d4dbd73eb534217095273499bfde03dc508d47 d654524fa1c5aae4df39090d148f5eadce4ebb2c
   missing_dso_whitelist:
     - "*/libcuda.*"
 
