@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "7.2.0" %}
-{% set sha256 = "57e5063bbaaa387e40f5935c02bbc75bb53d6589d736c540535a4f0b533bc374" %}
+{% set version = "7.3.0" %}
+{% set sha256 = "cdd37a0cfcda0ac534ab00c48aee2ea9ab0fc706f74cad24445642095b81479d" %}
 
 package:
   name: {{ name|lower }}
@@ -21,8 +21,8 @@ source:
   #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 3
-  skip: True  # [py27 or (not linux64) or cuda_compiler_version == "None"]
+  number: 0
+  skip: true  # [py27 or (not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
     # So add that location last in the header search paths
@@ -30,9 +30,9 @@ build:
     - export CPPFLAGS="${CPPFLAGS} -I/usr/include"
     - export CXXFLAGS="${CXXFLAGS} -I/usr/include"
     #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
-    - "{{ PYTHON }} -m pip install . -vv"
+    - {{ PYTHON }} -m pip install . -vv
   missing_dso_whitelist:
-    - "*/libcuda.*"
+    - '*/libcuda.*'
 
 requirements:
   build:
