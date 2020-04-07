@@ -6,6 +6,9 @@ os.environ["CUPY_TEST_GPU_LIMIT"] = "1"
 cuda_path = os.environ.get('CUDA_PATH')
 assert cuda_path is not None
 
+# Check CUDA libraries are available
+assert os.path.isfile(os.path.join(cuda_path, 'lib/libcudart.so'))
+
 # Check for CuPy (without importing)
 import pkgutil
 pkgutil.find_loader("cupy")
