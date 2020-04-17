@@ -22,7 +22,6 @@ source:
 
 build:
   number: 0
-  skip: True  # [py27]
   # temporarily disable PyPy build (conda-forge/cupy-feedstock#43)
   skip: True  # [python_impl == "pypy"]
   skip: True  # [cuda_compiler_version in (undefined, "None")]
