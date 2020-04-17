@@ -14,6 +14,8 @@ source:
 
 build:
   number: 1
+  # temporarily disable PyPy build (conda-forge/cupy-feedstock#43)
+  skip: True  # [python_impl == "pypy"]
   skip: True  # [(not linux64) or cuda_compiler_version == "None"]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
