@@ -5,6 +5,7 @@ os.environ["CUPY_TEST_GPU_LIMIT"] = "1"
 # Check CUDA_PATH is set
 cuda_path = os.environ.get('CUDA_PATH')
 assert cuda_path is not None
+print("CUDA_PATH:", cuda_path)
 
 # Check CUDA libraries are available
 assert os.path.isfile(os.path.join(cuda_path, 'lib/libcudart.so'))
