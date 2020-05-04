@@ -9,9 +9,6 @@ package:
 source:
   - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      # Include full CUDA 10.2 support: https://github.com/cupy/cupy/pull/3218
-      - fixes_3218.diff
 
   # CUB support has too many bugs, let us wait for a bit longer
   ## 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
