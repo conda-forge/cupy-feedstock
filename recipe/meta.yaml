@@ -18,7 +18,7 @@ source:
   #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 0
+  number: 1
   # temporarily disable PyPy build (conda-forge/cupy-feedstock#43)
   skip: true  # [python_impl == "pypy"]
   skip: true  # [cuda_compiler_version in (undefined, "None")]
@@ -30,6 +30,12 @@ build:
     - export CXXFLAGS="${CXXFLAGS} -I/usr/include"
     #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
     - {{ PYTHON }} -m pip install . -vv
+
+    # copy activate/deactivate scripts
+    - mkdir -p "${PREFIX}/etc/conda/activate.d"
+    - cp "${RECIPE_DIR}/activate.sh" "${PREFIX}/etc/conda/activate.d/cupy_activate.sh"
+    - mkdir -p "${PREFIX}/etc/conda/deactivate.d"
+    - cp "${RECIPE_DIR}/deactivate.sh" "${PREFIX}/etc/conda/deactivate.d/cupy_deactivate.sh"
   missing_dso_whitelist:
     - '*/libcuda.*'
 
@@ -61,6 +67,11 @@ test:
   requires:
     - pytest
     - mock
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - {{ compiler("cuda") }}  # tests need nvcc
+    #- scipy >=1.0,<1.1  <-- cause error
+
   source_files:
     - tests
 
