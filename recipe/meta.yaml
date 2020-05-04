@@ -64,6 +64,11 @@ test:
   requires:
     - pytest
     - mock
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - {{ compiler("cuda") }}  # tests need nvcc
+    #- scipy >=1.0,<1.1  <-- cause error
+
   source_files:
     - tests
 
