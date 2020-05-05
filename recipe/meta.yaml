@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "7.3.0" %}
-{% set sha256 = "cdd37a0cfcda0ac534ab00c48aee2ea9ab0fc706f74cad24445642095b81479d" %}
+{% set version = "7.4.0" %}
+{% set sha256 = "e8026947b1984d8bd7eda7292d332ee60a9aaa601e065a560c48aa40bfa1df55" %}
 
 package:
   name: {{ name|lower }}
@@ -9,9 +9,6 @@ package:
 source:
   - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      # Include full CUDA 10.2 support: https://github.com/cupy/cupy/pull/3218
-      - fixes_3218.diff
 
   # CUB support has too many bugs, let us wait for a bit longer
   ## 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
@@ -23,8 +20,8 @@ source:
 build:
   number: 1
   # temporarily disable PyPy build (conda-forge/cupy-feedstock#43)
-  skip: True  # [python_impl == "pypy"]
-  skip: True  # [cuda_compiler_version in (undefined, "None")]
+  skip: true  # [python_impl == "pypy"]
+  skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
     # CUDA 10.1 moves some headers to `/usr/include`
     # So add that location last in the header search paths
@@ -32,7 +29,7 @@ build:
     - export CPPFLAGS="${CPPFLAGS} -I/usr/include"
     - export CXXFLAGS="${CXXFLAGS} -I/usr/include"
     #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
-    - "{{ PYTHON }} -m pip install . -vv"
+    - {{ PYTHON }} -m pip install . -vv
 
     # copy activate/deactivate scripts
     - mkdir -p "${PREFIX}/etc/conda/activate.d"
@@ -40,7 +37,7 @@ build:
     - mkdir -p "${PREFIX}/etc/conda/deactivate.d"
     - cp "${RECIPE_DIR}/deactivate.sh" "${PREFIX}/etc/conda/deactivate.d/cupy_deactivate.sh"
   missing_dso_whitelist:
-    - "*/libcuda.*"
+    - '*/libcuda.*'
 
 requirements:
   build:
@@ -94,5 +91,4 @@ extra:
     - asi1024
     - emcastillo
     - hvy
-    - niboshi
     - toslunar
