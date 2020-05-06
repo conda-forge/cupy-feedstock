@@ -21,7 +21,7 @@ source:
   #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 1
+  number: 2
   # temporarily disable PyPy build (conda-forge/cupy-feedstock#43)
   skip: True  # [python_impl == "pypy"]
   skip: True  # [cuda_compiler_version in (undefined, "None")]
