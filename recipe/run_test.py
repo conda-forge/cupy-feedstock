@@ -23,10 +23,15 @@ except ImportError as e:
     print("No GPU available. Exiting without running CuPy's tests.")
     sys.exit(0)
 
-# Print CuPy runtime info
-cupy.show_config()
-
-# Run CuPy's test suite
-import py
-py.test.cmdline.main(["tests/cupy_tests"])
-py.test.cmdline.main(["tests/cupyx_tests"])
+## The tests below are commented out because the conda-forge docker images
+## now have libcuda.so, so "import cupy" would not fail, but tests would
+## fail on the Azure CI since there is no GPU. See the discussion in
+## https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090
+#
+## Print CuPy runtime info
+#cupy.show_config()
+#
+## Run CuPy's test suite
+#import py
+#py.test.cmdline.main(["tests/cupy_tests"])
+#py.test.cmdline.main(["tests/cupyx_tests"])
