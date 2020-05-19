@@ -14,11 +14,12 @@ assert os.path.isfile(os.path.join(cuda_path, 'lib/libcudart.so'))
 import pkgutil
 pkgutil.find_loader("cupy")
 
-# Try to import CuPy
+# Now that conda-forge docker images have libcuda.so, so "import cupy" would not fail.
+# However, tests would fail on the Azure CI since there is no GPU. See the discussion
+# in https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090
 import sys
+import cupy
 try:
-    import cupy
-    
     # Print CuPy runtime info
     # this line would fail if there is no GPU
     cupy.show_config()
@@ -27,12 +28,7 @@ except Exception as e:
     print("No GPU available. Exiting without running CuPy's tests.")
     sys.exit(0)
 
-## The tests below are commented out because the conda-forge docker images
-## now have libcuda.so, so "import cupy" would not fail, but tests would
-## fail on the Azure CI since there is no GPU. See the discussion in
-## https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090
-#
-## Run CuPy's test suite
-#import py
-#py.test.cmdline.main(["tests/cupy_tests"])
-#py.test.cmdline.main(["tests/cupyx_tests"])
+# Run CuPy's test suite
+import py
+py.test.cmdline.main(["tests/cupy_tests"])
+py.test.cmdline.main(["tests/cupyx_tests"])
