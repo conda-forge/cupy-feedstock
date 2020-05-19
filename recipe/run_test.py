@@ -18,8 +18,12 @@ pkgutil.find_loader("cupy")
 import sys
 try:
     import cupy
-except ImportError as e:
-    print('Got ImportError: \n%s' % str(e))
+    
+    # Print CuPy runtime info
+    # this line would fail if there is no GPU
+    cupy.show_config()
+except Exception as e:
+    print('Got an error: \n%s' % str(e))
     print("No GPU available. Exiting without running CuPy's tests.")
     sys.exit(0)
 
@@ -27,9 +31,6 @@ except ImportError as e:
 ## now have libcuda.so, so "import cupy" would not fail, but tests would
 ## fail on the Azure CI since there is no GPU. See the discussion in
 ## https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090
-#
-## Print CuPy runtime info
-#cupy.show_config()
 #
 ## Run CuPy's test suite
 #import py
