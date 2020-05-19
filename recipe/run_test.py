@@ -7,13 +7,6 @@ cuda_path = os.environ.get('CUDA_PATH')
 assert cuda_path is not None
 print("CUDA_PATH:", cuda_path)
 
-# Check CUDA libraries are available
-assert os.path.isfile(os.path.join(cuda_path, 'lib/libcudart.so'))
-
-# Check for CuPy (without importing)
-import pkgutil
-pkgutil.find_loader("cupy")
-
 # Now that conda-forge docker images have libcuda.so, so "import cupy" would not fail.
 # However, tests would fail on the Azure CI since there is no GPU. See the discussion
 # in https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090
