@@ -18,16 +18,13 @@ source:
   #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 2
+  number: 3
   # temporarily disable PyPy build (conda-forge/cupy-feedstock#43)
   skip: true  # [python_impl == "pypy"]
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
-    # CUDA 10.1 moves some headers to `/usr/include`
-    # So add that location last in the header search paths
-    - export CFLAGS="${CFLAGS} -I/usr/include"
-    - export CPPFLAGS="${CPPFLAGS} -I/usr/include"
-    - export CXXFLAGS="${CXXFLAGS} -I/usr/include"
+    # The issue of some CUDA headers being moved out of /usr/local/cuda/ since 10.1+
+    # is addressed in conda-forge/docker-images#134, so we do nothing in the recipe
     #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
     - {{ PYTHON }} -m pip install . -vv
 
