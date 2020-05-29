@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "7.4.0" %}
-{% set sha256 = "e8026947b1984d8bd7eda7292d332ee60a9aaa601e065a560c48aa40bfa1df55" %}
+{% set version = "7.5.0" %}
+{% set sha256 = "9356f9687db7dfb19baceadebbfc22929b9e199e9dbb23e7e9cc74b6ac780618" %}
 
 package:
   name: {{ name|lower }}
@@ -18,7 +18,7 @@ source:
   #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 3
+  number: 0
   # temporarily disable PyPy build (conda-forge/cupy-feedstock#43)
   skip: true  # [python_impl == "pypy"]
   skip: true  # [cuda_compiler_version in (undefined, "None")]
