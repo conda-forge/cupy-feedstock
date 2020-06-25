@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "7.5.0" %}
-{% set sha256 = "9356f9687db7dfb19baceadebbfc22929b9e199e9dbb23e7e9cc74b6ac780618" %}
+{% set version = "7.6.0" %}
+{% set sha256 = "f1679c62222a1506af903b5e338980a39b355c575d3cae8d9b2059ace7644330" %}
 
 package:
   name: {{ name|lower }}
@@ -21,9 +21,6 @@ build:
   number: 0
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
-    # The issue of some CUDA headers being moved out of /usr/local/cuda/ since 10.1+
-    # is addressed in conda-forge/docker-images#134, so we do nothing in the recipe
-    
     #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
     - {{ PYTHON }} -m pip install . -vv
 
