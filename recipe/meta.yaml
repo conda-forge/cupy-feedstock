@@ -22,7 +22,7 @@ build:
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
     #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
-    - {{ PYTHON }} setup.py build -j "$(nproc)" -vv
+    - {{ PYTHON }} setup.py build -j "${CPU_COUNT}" -vv
     - {{ PYTHON }} -m pip install . -vv
 
     # copy activate/deactivate scripts
