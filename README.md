@@ -1,7 +1,7 @@
 About cupy
 ==========
 
-Home: https://cupy.chainer.org/
+Home: https://cupy.dev/
 
 Package license: MIT
 
