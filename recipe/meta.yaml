@@ -69,11 +69,13 @@ test:
     - tests
 
 about:
-  home: https://cupy.chainer.org/
+  home: https://cupy.dev/
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: CuPy is an implementation of a NumPy-compatible multi-dimensional array on CUDA.
+  dev_url: https://github.com/cupy/cupy/
+  doc_url: https://docs.cupy.dev/en/stable/
 
 extra:
   recipe-maintainers:
