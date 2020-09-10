@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [[ $CUDA_PATH ]]; then
+if [[ -n ${CUDA_PATH:+x} ]]; then
     export CONDA_CUPY_CUDA_PATH=$CUDA_PATH
 fi
 
