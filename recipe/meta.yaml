@@ -1,28 +1,20 @@
 {% set name = "cupy" %}
 {% set version = "8.0.0" %}
-{% set sha256 = "92c3a576e28a903bb8fd1c1751daa38b542b2e9b5a32adf31b641327e54e25fb" %}
+{% set sha256 = "d1dcba5070dfa754445d010cdc952ff6b646d5f9bdcd7a63e8246e2472c3ddb8" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/cupy/cupy/archive/v{{ version }}.tar.gz
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
-
-  # CUB support has too many bugs, let us wait for a bit longer
-  ## 1. The CUB support has been extensively tested with v1.8.0, so we should pin it here
-  ## 2. This dependency should be removed once CuPy bundles CUB (cupy/cupy#2584)
-  #- url: https://github.com/NVlabs/cub/archive/v1.8.0.tar.gz
-  #  sha256: 025658f4c933cd2aa8cc88a559d013338d68de3fa639cc1f2b12cf61dc759667
-  #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
   number: 0
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
-    #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
-    - {{ PYTHON }} -m pip install . -vv
+    - {{ PYTHON }} -m pip install . --no-deps -vv
 
     # copy activate/deactivate scripts
     - mkdir -p "${PREFIX}/etc/conda/activate.d"
@@ -51,7 +43,7 @@ requirements:
     - python
     - setuptools
     - fastrlock >=0.3
-    - numpy >=1.9.0
+    - numpy >=1.15
     - six >=1.9.0
     # - cudnn  <-- added via run_export
     # - nccl   <-- added via run_export
