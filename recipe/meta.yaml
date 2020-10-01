@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "7.8.0" %}
-{% set sha256 = "d35b79e9d4f6f5b9069daa92a37c4574108dba80c2404b470934247e155080ce" %}
+{% set version = "8.0.0" %}
+{% set sha256 = "92c3a576e28a903bb8fd1c1751daa38b542b2e9b5a32adf31b641327e54e25fb" %}
 
 package:
   name: {{ name|lower }}
@@ -18,7 +18,7 @@ source:
   #  folder: cub_v1.8.0  # so the source code is in cupy/cub_v1.8.0
 
 build:
-  number: 1
+  number: 0
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
     #- export CUB_PATH=${PWD}/cub_v1.8.0  # TODO(leofang): remove this
