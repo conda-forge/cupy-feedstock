@@ -5,11 +5,13 @@ Home: https://cupy.dev/
 
 Package license: MIT
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cupy-feedstock/blob/master/LICENSE.txt)
 
 Summary: CuPy is an implementation of a NumPy-compatible multi-dimensional array on CUDA.
 
+Development: https://github.com/cupy/cupy/
 
+Documentation: https://docs.cupy.dev/en/stable/
 
 Current build status
 ====================
