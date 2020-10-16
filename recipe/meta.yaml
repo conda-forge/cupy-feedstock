@@ -11,7 +11,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 3
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
