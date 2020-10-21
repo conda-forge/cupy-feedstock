@@ -20,15 +20,18 @@ build:
     - export NVCC="/usr/local/cuda-11.0/bin/nvcc -ccbin ${CXX}"  # [cuda_compiler_version == '11.0']
     - export CFLAGS="${CFLAGS} -I$PWD/11.0/cudnn/8.0.3/include"  # [cuda_compiler_version == '11.0']
     - export LDFLAGS="${LDFLAGS} -L$PWD/11.0/cudnn/8.0.3/lib64"  # [cuda_compiler_version == '11.0']
-    - {{ PYTHON }} setup.py install --cupy-wheel-metadata ${RECIPE_DIR}/patches/_11.0_wheel.json -vv  # [cuda_compiler_version == '11.0']
 
-    - {{ PYTHON }} -m pip install . --no-deps -vv  # [cuda_compiler_version != '11.0']
+    - {{ PYTHON }} -m pip install . --no-deps -vv
 
     # copy activate/deactivate scripts
     - mkdir -p "${PREFIX}/etc/conda/activate.d"
     - cp "${RECIPE_DIR}/activate.sh" "${PREFIX}/etc/conda/activate.d/cupy_activate.sh"
     - mkdir -p "${PREFIX}/etc/conda/deactivate.d"
     - cp "${RECIPE_DIR}/deactivate.sh" "${PREFIX}/etc/conda/deactivate.d/cupy_deactivate.sh"
+
+    # Let CuPy know the cuDNN support is built, just need to download cuDNN if needed
+    - mkdir -p "${SP_DIR}/cupy/.data/"  # [cuda_compiler_version == '11.0']
+    - cp ${RECIPE_DIR}/patches/_11.0_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [cuda_compiler_version == '11.0']
   missing_dso_whitelist:
     - '*/libcuda.*'
 
