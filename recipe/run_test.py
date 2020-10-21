@@ -12,6 +12,13 @@ print("CUDA_PATH:", cuda_path)
 # in https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090
 import sys
 import cupy
+from cupy_backends.cuda.api.driver import get_build_version
+if get_build_version() in (11000,):
+    config_json = os.path.dirname(cupy.__file__) + '/.data/_wheel.json'
+    if not os.path.isfile(config_json):
+        raise RuntimeError('_wheel.json is not found in the package')
+    else:
+        print("_wheel.json is found:", config_json)
 try:
     # Print CuPy runtime info
     # this line would fail if there is no GPU
