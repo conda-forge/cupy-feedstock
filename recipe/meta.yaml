@@ -14,7 +14,15 @@ build:
   number: 3
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
-    - {{ PYTHON }} -m pip install . --no-deps -vv
+    # For CUDA 11.0
+    - {{ PYTHON }} cupyx/tools/install_library.py --library cudnn --cuda 11.0 --prefix .  # [cuda_compiler_version == '11.0']
+    - export CUDA_PATH=/usr/local/cuda-11.0   # [cuda_compiler_version == '11.0']
+    - export NVCC="/usr/local/cuda-11.0/bin/nvcc -ccbin ${CXX}"  # [cuda_compiler_version == '11.0']
+    - export CFLAGS="${CFLAGS} -I$PWD/11.0/cudnn/8.0.3/include"  # [cuda_compiler_version == '11.0']
+    - export LDFLAGS="${LDFLAGS} -L$PWD/11.0/cudnn/8.0.3/lib64"  # [cuda_compiler_version == '11.0']
+    - {{ PYTHON }} setup.py install --cupy-wheel-metadata ${RECIPE_DIR}/patches/_11.0_wheel.json -vv  # [cuda_compiler_version == '11.0']
+
+    - {{ PYTHON }} -m pip install . --no-deps -vv  # [cuda_compiler_version != '11.0']
 
     # copy activate/deactivate scripts
     - mkdir -p "${PREFIX}/etc/conda/activate.d"
