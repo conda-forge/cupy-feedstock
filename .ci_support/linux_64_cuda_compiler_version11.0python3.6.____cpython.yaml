@@ -12,8 +12,6 @@ cuda_compiler:
 - nvcc
 cuda_compiler_version:
 - '11.0'
-cudnn:
-- 7.6.5
 cxx_compiler:
 - gxx
 cxx_compiler_version:

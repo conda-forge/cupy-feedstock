@@ -36,7 +36,7 @@ requirements:
     - setuptools
     - cython >=0.24.0
     - fastrlock >=0.3
-    - cudnn  # [cuda_compiler_version != 11.0]  # workaround: cudnn is not yet available
+    - cudnn  # [cuda_compiler_version != '11.0']  # workaround: cudnn is not yet available
     - nccl
 
   run:
