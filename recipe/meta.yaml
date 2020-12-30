@@ -11,9 +11,14 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
+    # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
+    - export NVCC=$(which nvcc)         # [cuda_compiler_version == '11.0']
+    - export CUDA_PATH=/usr/local/cuda  # [cuda_compiler_version == '11.0']
+    - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"
+    
     - {{ PYTHON }} -m pip install . --no-deps -vv
 
     # copy activate/deactivate scripts
