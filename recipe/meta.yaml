@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "8.2.0" %}
-{% set sha256 = "8e4bc8428fb14309d73194e19bc4b47e1d6a330678a200e36d9d4b932f1be2e8" %}
+{% set version = "8.3.0" %}
+{% set sha256 = "db699fddfde7806445908cf6454c6f4985e7a9563b40405ddf97845d808c5f12" %}
 
 package:
   name: {{ name|lower }}
@@ -18,7 +18,7 @@ build:
     - export NVCC=$(which nvcc)         # [cuda_compiler_version == '11.0']
     - export CUDA_PATH=/usr/local/cuda  # [cuda_compiler_version == '11.0']
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"
-    
+
     - {{ PYTHON }} -m pip install . --no-deps -vv
 
     # copy activate/deactivate scripts
