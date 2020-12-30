@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "8.1.0" %}
-{% set sha256 = "4dfa4a0cd0a752d980347c816cab2169f0938c1d37275311810396dcf3c27912" %}
+{% set version = "8.2.0" %}
+{% set sha256 = "8e4bc8428fb14309d73194e19bc4b47e1d6a330678a200e36d9d4b932f1be2e8" %}
 
 package:
   name: {{ name|lower }}
@@ -11,7 +11,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 0
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
@@ -48,7 +48,7 @@ requirements:
     - python
     - setuptools
     - fastrlock >=0.3
-    - numpy >=1.15
+    - numpy >=1.16
     - six >=1.9.0
     # - cudnn  <-- added via run_export
     # - nccl   <-- added via run_export
