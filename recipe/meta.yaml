@@ -9,9 +9,12 @@ package:
 source:
   - git_url: https://github.com/cupy/cupy.git
     git_rev: v{{ version }}
+    patches:
+      # avoid need for external math_constants.h CUDA header
+      - 0001-always-use-the-local-definitions-in-math_constants.h.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...

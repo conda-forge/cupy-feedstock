@@ -1,0 +1,47 @@
+From c40cdc7eb25c8b65e6f749ff2479be7bfe75fa87 Mon Sep 17 00:00:00 2001
+From: Gregory Lee <grlee77@gmail.com>
+Date: Wed, 20 Jan 2021 18:42:45 -0500
+Subject: [PATCH] always use the local definitions in math_constants.h
+
+---
+ cupy/core/include/cupy/math_constants.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/cupy/core/include/cupy/math_constants.h b/cupy/core/include/cupy/math_constants.h
+index a39acebfb..493f6c14b 100644
+--- a/cupy/core/include/cupy/math_constants.h
++++ b/cupy/core/include/cupy/math_constants.h
+@@ -1,11 +1,11 @@
+ #ifndef CUPY_MATH_CONSTANTS_H
+ #define CUPY_MATH_CONSTANTS_H
+ 
+-#ifdef __CUDA_ARCH__
++// #ifdef __CUDA_ARCH__
+ 
+-#include <math_constants.h>
++// #include <math_constants.h>
+ 
+-#elif (defined(__HIP_DEVICE_COMPILE__) || defined(CUPY_USE_HIP))
++// #elif (defined(__HIP_DEVICE_COMPILE__) || defined(CUPY_USE_HIP))
+ 
+ /* single precision constants */
+ #define CUDART_INF_F            __int_as_float(0x7f800000)
+@@ -31,7 +31,7 @@
+ #define CUDART_LG2_F            0.301029996f
+ #define CUDART_LGE_F            0.434294482f
+ #define CUDART_LN2_F            0.693147181f
+-#define CUDART_LNT_F            2.302585093f 
++#define CUDART_LNT_F            2.302585093f
+ #define CUDART_LNPI_F           1.144729886f
+ #define CUDART_TWO_TO_M126_F    1.175494351e-38f
+ #define CUDART_TWO_TO_126_F     8.507059173e37f
+@@ -106,5 +106,5 @@
+ #define CUDART_TRIG_PLOSS       2147483648.0
+ #define CUDART_DBL2INT_CVT      6755399441055744.0
+ 
+-#endif
++// #endif
+ #endif  // CUPY_MATH_CONSTANTS_H
+-- 
+2.25.1
+
