@@ -10,11 +10,12 @@ source:
   - git_url: https://github.com/cupy/cupy.git
     git_rev: v{{ version }}
     patches:
+      # TODO(leofang): remove this patch in v9.0.0b2
       # avoid need for external math_constants.h CUDA header
       - 0001-always-use-the-local-definitions-in-math_constants.h.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [cuda_compiler_version in (undefined, "None")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
@@ -37,6 +38,7 @@ requirements:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
     - {{ compiler("cuda") }}
+    - sysroot_linux-64 2.17  # [linux64 and cdt_name == "cos7"]
 
   host:
     - python
@@ -46,6 +48,7 @@ requirements:
     - fastrlock >=0.3
     - cudnn
     - nccl
+    - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0") and cdt_name == "cos7"]
 
   run:
     - python
@@ -55,6 +58,11 @@ requirements:
     - six >=1.9.0
     # - cudnn  <-- added via run_export
     # - nccl   <-- added via run_export
+    # - cutensor  <-- added via run_export
+
+  run_constrained:
+    # Only GLIBC_2.17 or older symbols present
+    - __glibc >=2.17      # [linux64 and cdt_name == "cos7"]
 
 test:
   requires:
