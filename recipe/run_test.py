@@ -12,6 +12,16 @@ print("CUDA_PATH:", cuda_path)
 # in https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090
 import sys
 import cupy
+
+# Ensure CuPy picks up the correct CUDA_VERSION
+from cupy.cuda import driver
+ver = driver.get_build_version()
+cuda_ver = os.environ.get('cuda_compiler_version').split('.')
+cuda_ver = cuda_ver[0] * 1000 + cuda_ver[1] * 10
+if ver != cuda_ver:
+    raise ValueError('CUDA version {0} != cuda_compiler_version {1}'.format(
+        ver, cuda_ver))
+
 try:
     # Print CuPy runtime info
     # this line would fail if there is no GPU
