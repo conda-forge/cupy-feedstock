@@ -17,7 +17,7 @@ import cupy
 from cupy.cuda import driver
 ver = driver.get_build_version()
 cuda_ver = os.environ.get('cuda_compiler_version').split('.')
-cuda_ver = cuda_ver[0] * 1000 + cuda_ver[1] * 10
+cuda_ver = int(cuda_ver[0]) * 1000 + int(cuda_ver[1]) * 10
 if ver != cuda_ver:
     raise ValueError('CUDA version {0} != cuda_compiler_version {1}'.format(
         ver, cuda_ver))
