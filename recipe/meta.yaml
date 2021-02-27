@@ -44,7 +44,7 @@ requirements:
     - fastrlock >=0.3
     - cudnn
     - nccl
-    - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0", "11.1") and cdt_name == "cos7"]
+    - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0", "11.1", "11.2") and cdt_name == "cos7"]
 
   run:
     - python
