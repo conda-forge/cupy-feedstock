@@ -11,7 +11,7 @@ source:
     git_rev: v{{ version }}
 
 build:
-  number: 5
+  number: 4
   skip: true  # [win or not linux64 or cuda_compiler_version in (undefined, "None", "11.2")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
