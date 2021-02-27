@@ -11,8 +11,8 @@ source:
     git_rev: v{{ version }}
 
 build:
-  number: 4
-  skip: true  # [win or cuda_compiler_version in (undefined, "None")]
+  number: 5
+  skip: true  # [win or not linux64 or cuda_compiler_version in (undefined, "None", "11.2")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
     - export NVCC=$(which nvcc)
@@ -44,7 +44,7 @@ requirements:
     - fastrlock >=0.3
     - cudnn
     - nccl
-    - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0") and cdt_name == "cos7"]
+    - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0", "11.1") and cdt_name == "cos7"]
 
   run:
     - python

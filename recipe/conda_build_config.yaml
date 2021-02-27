@@ -8,6 +8,8 @@ docker_image:                                # [os.environ.get("BUILD_PLATFORM",
    - quay.io/condaforge/linux-anvil-cuda:10.1       # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
    - quay.io/condaforge/linux-anvil-cuda:10.2       # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
    - quay.io/condaforge/linux-anvil-cuda:11.0       # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
+   - quay.io/condaforge/linux-anvil-cuda:11.1       # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
+   - quay.io/condaforge/linux-anvil-cuda:11.2       # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
 
    # these two variants are needed for cuTENSOR support
    - quay.io/condaforge/linux-anvil-cos7-cuda:10.1  # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
@@ -31,6 +33,8 @@ cuda_compiler_version:
   - 10.1                       # [linux64]
   - 10.2                       # [linux64]
   - 11.0                       # [linux64]
+  - 11.1                       # [linux64]
+  - 11.2                       # [linux64]
 
   - 10.1                       # [linux64]
   - 10.2                       # [linux64]
@@ -42,6 +46,8 @@ cudnn:
   - 7                          # [linux64]
   - 7                          # [linux64]
   - 7                          # [linux64]
+  - 8                          # [linux64]
+  - 8                          # [linux64]
   - 8                          # [linux64]
 
   - 7                          # [linux64]
@@ -57,14 +63,8 @@ cdt_name:  # [linux]
   - cos6   # [linux64]
   - cos6   # [linux64]
   - cos7   # [linux64]
+  - cos7   # [linux64]
+  - cos7   # [linux64]
 
   - cos7   # [linux64]
   - cos7   # [linux64]
-cudnn:                                            # [linux64]
-  - undefined                                     # [linux64]
-cuda_compiler_version:                            # [linux64]
-  - None                                          # [linux64]
-docker_image:                                     # [linux64]
-  - quay.io/condaforge/linux-anvil-cos7-x86_64    # [linux64]
-cdt_name:                                         # [linux64]
-  - cos7                                          # [linux64]
