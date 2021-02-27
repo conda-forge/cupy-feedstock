@@ -42,7 +42,7 @@ requirements:
     - setuptools
     - cython >=0.24.0
     - fastrlock >=0.3
-    - cudnn <8.1
+    - cudnn <8.1  # [cuda_compiler_version != "11.1"]
     - nccl
     - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0", "11.1") and cdt_name == "cos7"]
 
