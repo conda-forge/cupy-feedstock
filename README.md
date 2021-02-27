@@ -324,6 +324,90 @@ Current build status
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.9.____cpython" alt="variant">
                 </a>
               </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.6.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.6.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.6.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.6.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.6.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.6.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.6.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.6.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.9.____cpython" alt="variant">
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -416,18 +500,16 @@ build distinct package versions.
 
 In order to produce a uniquely identifiable distribution:
  * If the version of a package **is not** being increased, please add or increase
-   the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string).
+   the [``build/number``](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-number-and-string).
  * If the version of a package **is** being increased, please remember to return
-   the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string)
+   the [``build/number``](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-number-and-string)
    back to 0.
 
 Feedstock Maintainers
 =====================
 
 * [@asi1024](https://github.com/asi1024/)
-* [@beam2d](https://github.com/beam2d/)
 * [@emcastillo](https://github.com/emcastillo/)
-* [@hvy](https://github.com/hvy/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@kmaehashi](https://github.com/kmaehashi/)
 * [@leofang](https://github.com/leofang/)
