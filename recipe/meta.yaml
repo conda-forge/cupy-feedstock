@@ -40,7 +40,7 @@ requirements:
     - python
     - pip
     - setuptools
-    - cython >=0.24.0
+    - cython >=0.29.22
     - fastrlock >=0.3
     - cudnn
     - nccl
@@ -50,7 +50,7 @@ requirements:
     - python
     - setuptools
     - fastrlock >=0.3
-    - numpy >=1.16
+    - numpy >=1.15
     # - cudnn  <-- added via run_export
     # - nccl   <-- added via run_export
     # - cutensor  <-- added via run_export
