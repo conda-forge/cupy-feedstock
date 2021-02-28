@@ -40,8 +40,8 @@ requirements:
     - python
     - pip
     - setuptools
-    - cython >=0.24.0
-    - fastrlock >=0.3
+    - cython >=0.29.22
+    - fastrlock >=0.5
     - cudnn
     - nccl
     - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0", "11.1", "11.2") and cdt_name == "cos7"]
@@ -49,8 +49,8 @@ requirements:
   run:
     - python
     - setuptools
-    - fastrlock >=0.3
-    - numpy >=1.16
+    - fastrlock >=0.5
+    - numpy >=1.17
     # - cudnn  <-- added via run_export
     # - nccl   <-- added via run_export
     # - cutensor  <-- added via run_export
