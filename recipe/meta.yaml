@@ -58,6 +58,8 @@ requirements:
   run_constrained:
     # Only GLIBC_2.17 or older symbols present
     - __glibc >=2.17      # [linux64 and cdt_name == "cos7"]
+    - scipy >=1.3
+    - optuna >=2
 
 test:
   requires:
