@@ -11,7 +11,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or not linux64 or cuda_compiler_version in (undefined, "None")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
@@ -40,8 +40,8 @@ requirements:
     - python
     - pip
     - setuptools
-    - cython >=0.24.0
-    - fastrlock >=0.3
+    - cython >=0.29.22,<3
+    - fastrlock >=0.5
     - cudnn
     - nccl
     - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0", "11.1", "11.2") and cdt_name == "cos7"]
@@ -49,9 +49,8 @@ requirements:
   run:
     - python
     - setuptools
-    - fastrlock >=0.3
-    - numpy >=1.16
-    - six >=1.9.0
+    - fastrlock >=0.5
+    - numpy >=1.17
     # - cudnn  <-- added via run_export
     # - nccl   <-- added via run_export
     # - cutensor  <-- added via run_export
@@ -59,6 +58,8 @@ requirements:
   run_constrained:
     # Only GLIBC_2.17 or older symbols present
     - __glibc >=2.17      # [linux64 and cdt_name == "cos7"]
+    - scipy >=1.4
+    - optuna >=2
 
 test:
   requires:
