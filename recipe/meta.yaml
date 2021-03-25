@@ -18,8 +18,8 @@ build:
     # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
     - export NVCC=$(which nvcc)                                                  # [linux64]
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux64]
-    - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "NVCC=%%f:\=\\")  # [win]
-    - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                            # [win]
+    - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
+    - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                                                          # [win]
 
     - {{ PYTHON }} -m pip install . --no-deps -vv
 
