@@ -22,6 +22,13 @@ if ver != cuda_ver:
     raise ValueError('CUDA version {0} != cuda_compiler_version {1}'.format(
         ver, cuda_ver))
 
+# check _wheel.json exists
+config_json = os.path.dirname(cupy.__file__) + '/.data/_wheel.json'
+if not os.path.isfile(config_json):
+    raise RuntimeError('_wheel.json is not found in the package')
+else:
+    print("_wheel.json is found:", config_json)
+
 try:
     # Print CuPy runtime info
     # this line would fail if there is no GPU
