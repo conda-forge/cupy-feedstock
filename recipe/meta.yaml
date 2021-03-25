@@ -36,7 +36,7 @@ build:
     - '*/libcuda.*'  # [linux64]
   ignore_run_exports_from:
     - cudnn
-    - nccl
+    - nccl  # [linux64]
     - cutensor
 
 requirements:
@@ -53,8 +53,8 @@ requirements:
     - cython >=0.29.22,<3
     - fastrlock >=0.3
     - cudnn
-    - nccl
-    - cutensor
+    - nccl  # [linux64]
+    - cutensor  # [cdt_name == "cos7"]
 
   run:
     - python
@@ -68,7 +68,7 @@ requirements:
     - scipy >=1.3
     - optuna >=2
     - {{ pin_compatible('cudnn') }}
-    - {{ pin_compatible('nccl') }}
+    - {{ pin_compatible('nccl') }}  # [linux64]
     - {{ pin_compatible('cutensor') }}
 
 test:
