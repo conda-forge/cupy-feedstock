@@ -22,6 +22,7 @@ build:
     - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                                                          # [win]
 
     - {{ PYTHON }} -m pip install . --no-deps -vv
+    - if errorlevel 1 exit 1  # [win]
 
     # copy activate/deactivate scripts
     - mkdir -p "${PREFIX}/etc/conda/activate.d"                                               # [linux64]
@@ -40,10 +41,11 @@ build:
     - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_compiler_version }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux64]
+    - "*/nvcuda.dll"  # [win]
   ignore_run_exports_from:
     - cudnn
     - nccl  # [linux64]
-    - cutensor
+    - cutensor  # [win or cdt_name == "cos7"]
 
 requirements:
   build:
