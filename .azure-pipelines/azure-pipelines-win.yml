@@ -8,125 +8,41 @@ jobs:
     vmImage: vs2017-win2016
   strategy:
     matrix:
-      win_64_cuda_compiler_version10.0cudnn7python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.0cudnn7python3.6.____cpython
+      win_64_cuda_compiler_version10.2python3.6.____cpython:
+        CONFIG: win_64_cuda_compiler_version10.2python3.6.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.0cudnn7python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.0cudnn7python3.7.____cpython
+      win_64_cuda_compiler_version10.2python3.7.____cpython:
+        CONFIG: win_64_cuda_compiler_version10.2python3.7.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.0cudnn7python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.0cudnn7python3.8.____cpython
+      win_64_cuda_compiler_version10.2python3.8.____cpython:
+        CONFIG: win_64_cuda_compiler_version10.2python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.0cudnn7python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.0cudnn7python3.9.____cpython
+      win_64_cuda_compiler_version10.2python3.9.____cpython:
+        CONFIG: win_64_cuda_compiler_version10.2python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.0cudnn8python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.0cudnn8python3.6.____cpython
+      win_64_cuda_compiler_version11.0python3.6.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.0python3.6.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.0cudnn8python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.0cudnn8python3.7.____cpython
+      win_64_cuda_compiler_version11.0python3.7.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.0python3.7.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.0cudnn8python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.0cudnn8python3.8.____cpython
+      win_64_cuda_compiler_version11.0python3.8.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.0python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.0cudnn8python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.0cudnn8python3.9.____cpython
+      win_64_cuda_compiler_version11.0python3.9.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.0python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.1cudnn7python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.1cudnn7python3.6.____cpython
+      win_64_cuda_compiler_version11.1python3.6.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.1python3.6.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.1cudnn7python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.1cudnn7python3.7.____cpython
+      win_64_cuda_compiler_version11.1python3.7.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.1python3.7.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.1cudnn7python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.1cudnn7python3.8.____cpython
+      win_64_cuda_compiler_version11.1python3.8.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.1python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.1cudnn7python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.1cudnn7python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.1cudnn8python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.1cudnn8python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.1cudnn8python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.1cudnn8python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.1cudnn8python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.1cudnn8python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.1cudnn8python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.1cudnn8python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.2cudnn7python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.2cudnn7python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.2cudnn7python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.2cudnn7python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.2cudnn7python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.2cudnn7python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.2cudnn7python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.2cudnn7python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.2cudnn8python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.2cudnn8python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.2cudnn8python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.2cudnn8python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.2cudnn8python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.2cudnn8python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version10.2cudnn8python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version10.2cudnn8python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.0cudnn7python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.0cudnn7python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.0cudnn7python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.0cudnn7python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.0cudnn7python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.0cudnn7python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.0cudnn7python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.0cudnn7python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.0cudnn8python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.0cudnn8python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.0cudnn8python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.0cudnn8python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.0cudnn8python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.0cudnn8python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.0cudnn8python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.0cudnn8python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.1cudnn7python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.1cudnn7python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.1cudnn7python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.1cudnn7python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.1cudnn7python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.1cudnn7python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.1cudnn7python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.1cudnn7python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.1cudnn8python3.6.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.1cudnn8python3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.1cudnn8python3.7.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.1cudnn8python3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.1cudnn8python3.8.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.1cudnn8python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compiler_version11.1cudnn8python3.9.____cpython:
-        CONFIG: win_64_cuda_compiler_version11.1cudnn8python3.9.____cpython
+      win_64_cuda_compiler_version11.1python3.9.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.1python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables:
