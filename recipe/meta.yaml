@@ -47,8 +47,6 @@ build:
     - "*/nvcuda.dll"  # [win]
   ignore_run_exports_from:
     - cudnn
-    - nccl  # [linux64]
-    - cutensor  # [win or cdt_name == "cos7"]
 
 requirements:
   build:
@@ -65,7 +63,7 @@ requirements:
     - fastrlock >=0.3
     - cudnn
     - nccl  # [linux64]
-    - cutensor  # [win or cdt_name == "cos7"]
+    - cutensor  # [(win and cuda_compiler_version not in ("10.0", "10.1")) or (linux64 and cdt_name == "cos7")]
 
   run:
     - python
@@ -79,8 +77,6 @@ requirements:
     - scipy >=1.3
     - optuna >=2
     - {{ pin_compatible('cudnn') }}
-    - {{ pin_compatible('nccl') }}  # [linux64]
-    - {{ pin_compatible('cutensor') }}
 
 test:
   requires:
