@@ -1,3 +1,4 @@
+@echo off
 if defined CONDA_BUILD_STATE (
     @echo on
 )
