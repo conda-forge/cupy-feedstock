@@ -1,6 +1,0 @@
-{
- "packaging": "conda",
- "cuda": "10.0",
- "cudnn": {"version": "", "filename": ""},
- "nccl": {"version": "", "filename": ""}
-}
