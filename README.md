@@ -11,7 +11,7 @@ Summary: CuPy is an implementation of a NumPy-compatible multi-dimensional array
 
 Development: https://github.com/cupy/cupy/
 
-Documentation: https://docs.cupy.dev/en/stable/
+Documentation: https://docs.cupy.dev/en/latest/
 
 Current build status
 ====================
