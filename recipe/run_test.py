@@ -30,7 +30,7 @@ try:
     import cupy
 except Exception as e:
     if sys.platform.startswith('win32'):
-        print("No driver available. Exiting...")
+        print("No driver available on Windows. Exiting...")
         sys.exit(0)
 
 # Ensure CuPy picks up the correct CUDA_VERSION

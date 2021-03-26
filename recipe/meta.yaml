@@ -101,7 +101,7 @@ about:
   license_file: LICENSE
   summary: CuPy is an implementation of a NumPy-compatible multi-dimensional array on CUDA.
   dev_url: https://github.com/cupy/cupy/
-  doc_url: https://docs.cupy.dev/en/stable/
+  doc_url: https://docs.cupy.dev/en/latest/
 
 extra:
   recipe-maintainers:

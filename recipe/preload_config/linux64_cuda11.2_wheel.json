@@ -1,7 +1,7 @@
 {
  "packaging": "conda",
  "cuda": "11.2",
- "cudnn": {"version": "", "filename": ""},
- "nccl": {"version": "", "filename": ""},
- "cutensor": {"version": "", "filename": ""}
+ "cudnn": {},
+ "nccl": {},
+ "cutensor": {}
 }
