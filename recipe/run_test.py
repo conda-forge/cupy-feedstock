@@ -1,5 +1,6 @@
 # Configure CuPy to use 1 GPU for testing
 import os
+import sys
 os.environ["CUPY_TEST_GPU_LIMIT"] = "1"
 
 # Check CUDA_PATH is set
@@ -7,11 +8,16 @@ cuda_path = os.environ.get('CUDA_PATH')
 assert cuda_path is not None
 print("CUDA_PATH:", cuda_path)
 
-# Now that conda-forge docker images have libcuda.so, so "import cupy" would not fail.
-# However, tests would fail on the Azure CI since there is no GPU. See the discussion
-# in https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090
-import sys
-import cupy
+# Now that conda-forge docker images have libcuda.so, so "import cupy" would not fail
+# on Linux. However, tests would fail on the Azure CI since there is no GPU. See the
+# discussion in https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090.
+# On Windows, this will fail because Windows has no driver stub.
+try:
+    import cupy
+except Exception as e:
+    if sys.platform.startswith('win32'):
+        print("No driver available on Windows. Exiting...")
+        sys.exit(0)
 
 # Ensure CuPy picks up the correct CUDA_VERSION
 from cupy.cuda import driver

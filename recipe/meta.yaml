@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "8.5.0" %}
-{% set sha256 = "fb3f8d3b3454beb249b9880502a45fe493c5a44efacc4c72914cbe1a5dbdf803" %}
+{% set version = "8.6.0" %}
+{% set sha256 = "f3ed02ba18e38b4f3ed2c324fa08967e6714f59357ccb0b28badd9572e77500b" %}
 
 package:
   name: {{ name|lower }}
@@ -9,25 +9,36 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      - win64_detect_conda.diff  # [win]
 
 build:
-  number: 1
-  skip: true  # [win or not linux64 or cuda_compiler_version in (undefined, "None")]
+  number: 0
+  # TODO(leofang): fix the Thrust compiling error (C3615) for Windows + CUDA 11.2
+  skip: true  # [(not win64 and not linux64) or cuda_compiler_version in (undefined, "None") or (win64 and cuda_compiler_version == "11.2")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
-    - export NVCC=$(which nvcc)
     # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
-    - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"
+    - export NVCC=$(which nvcc)                                                  # [linux64]
+    - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux64]
+    - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
+    - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                                                          # [win]
 
     - {{ PYTHON }} -m pip install . --no-deps -vv
+    - if errorlevel 1 exit 1  # [win]
 
     # copy activate/deactivate scripts
-    - mkdir -p "${PREFIX}/etc/conda/activate.d"
-    - cp "${RECIPE_DIR}/activate.sh" "${PREFIX}/etc/conda/activate.d/cupy_activate.sh"
-    - mkdir -p "${PREFIX}/etc/conda/deactivate.d"
-    - cp "${RECIPE_DIR}/deactivate.sh" "${PREFIX}/etc/conda/deactivate.d/cupy_deactivate.sh"
+    - mkdir -p "${PREFIX}/etc/conda/activate.d"                                               # [linux64]
+    - cp "${RECIPE_DIR}/activate.sh" "${PREFIX}/etc/conda/activate.d/cupy_activate.sh"        # [linux64]
+    - mkdir -p "${PREFIX}/etc/conda/deactivate.d"                                             # [linux64]
+    - cp "${RECIPE_DIR}/deactivate.sh" "${PREFIX}/etc/conda/deactivate.d/cupy_deactivate.sh"  # [linux64]
+    - if not exist %PREFIX%\etc\conda\activate.d mkdir %PREFIX%\etc\conda\activate.d          # [win]
+    - copy %RECIPE_DIR%\activate.bat %PREFIX%\etc\conda\activate.d\cupy_activate.bat          # [win]
+    - if not exist %PREFIX%\etc\conda\deactivate.d mkdir %PREFIX%\etc\conda\deactivate.d      # [win]
+    - copy %RECIPE_DIR%\deactivate.bat %PREFIX%\etc\conda\deactivate.d\cupy_deactivate.bat    # [win]
   missing_dso_whitelist:
-    - '*/libcuda.*'
+    - '*/libcuda.*'  # [linux64]
+    - "*/nvcuda.dll"  # [win]
 
 requirements:
   build:
@@ -43,8 +54,8 @@ requirements:
     - cython >=0.29.22,<3
     - fastrlock >=0.3
     - cudnn
-    - nccl
-    - cutensor  # [cuda_compiler_version in ("10.1", "10.2", "11.0", "11.1", "11.2") and cdt_name == "cos7"]
+    - nccl  # [linux64]
+    - cutensor  # [win or (linux64 and cdt_name == "cos7")]
 
   run:
     - python
