@@ -1,0 +1,6 @@
+{
+ "packaging": "conda",
+ "cuda": "9.2",
+ "cudnn": {},
+ "nccl": {}
+}
