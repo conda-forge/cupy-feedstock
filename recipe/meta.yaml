@@ -13,7 +13,7 @@ source:
       - win64_detect_conda.diff  # [win]
 
 build:
-  number: 0
+  number: 1
   # TODO(leofang): fix the Thrust compiling error (C3615) for Windows + CUDA 11.2
   skip: true  # [(not win64 and not linux64) or cuda_compiler_version in (undefined, "None") or (win64 and cuda_compiler_version == "11.2")]
   script:
