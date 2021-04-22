@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "8.6.0" %}
-{% set sha256 = "f3ed02ba18e38b4f3ed2c324fa08967e6714f59357ccb0b28badd9572e77500b" %}
+{% set version = "9.0.0" %}
+{% set sha256 = "4668f494da676d2f78cd96518bed830a4c8c8226904c4bcde9be6198704900f1" %}
 
 package:
   name: {{ name|lower }}
@@ -38,7 +38,7 @@ build:
     - copy %RECIPE_DIR%\deactivate.bat %PREFIX%\etc\conda\deactivate.d\cupy_deactivate.bat    # [win]
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux64]
-    - "*/nvcuda.dll"  # [win]
+    - '*/nvcuda.dll'  # [win]
 
 requirements:
   build:
