@@ -2,6 +2,14 @@
 {% set version = "9.0.0" %}
 {% set sha256 = "4668f494da676d2f78cd96518bed830a4c8c8226904c4bcde9be6198704900f1" %}
 
+{% if cuda_compiler_version in (None, "None", True, False) %}
+{% set cuda_major = 0 %}
+{% set cuda_minor = 0 %}
+{% else %}
+{% set cuda_major = environ.get("cuda_compiler_version").split(".")[0]|int %}
+{% set cuda_minor = environ.get("cuda_compiler_version").split(".")[1]|int %}
+{% endif %}
+
 package:
   name: {{ name|lower }}
   version: {{ version }}
@@ -20,6 +28,9 @@ build:
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux64]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                                                          # [win]
+    {% if cuda_major == 11 %}
+    - export CUSPARSELT_PATH=$PREFIX  # [linux64]
+    {% endif %}
 
     - {{ PYTHON }} -m pip install . --no-deps -vv
     - if errorlevel 1 exit 1  # [win]
@@ -46,6 +57,9 @@ build:
     - cudnn
     - nccl  # [linux64]
     - cutensor  # [win or cdt_name == "cos7"]
+    {% if cuda_major == 11 %}
+    - cusparselt
+    {% endif %}
 
 requirements:
   build:
@@ -63,6 +77,9 @@ requirements:
     - cudnn
     - nccl  # [linux64]
     - cutensor  # [win or cdt_name == "cos7"]
+    {% if cuda_major == 11 %}
+    - cusparselt
+    {% endif %}
 
   run:
     - python
@@ -78,6 +95,9 @@ requirements:
     - {{ pin_compatible('cudnn') }}
     - {{ pin_compatible('nccl') }}  # [linux64]
     - {{ pin_compatible('cutensor') }}
+    {% if cuda_major == 11 %}
+    - {{ pin_compatible('cusparselt') }}
+    {% endif %}
 
 test:
   requires:
