@@ -9,9 +9,6 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      - win64_detect_conda.diff  # [win]
-      - 5002.diff  # [win and cuda_compiler_version == "11.2"]
 
 build:
   number: 0
@@ -36,9 +33,19 @@ build:
     - copy %RECIPE_DIR%\activate.bat %PREFIX%\etc\conda\activate.d\cupy_activate.bat          # [win]
     - if not exist %PREFIX%\etc\conda\deactivate.d mkdir %PREFIX%\etc\conda\deactivate.d      # [win]
     - copy %RECIPE_DIR%\deactivate.bat %PREFIX%\etc\conda\deactivate.d\cupy_deactivate.bat    # [win]
+
+    # enable CuPy's preload mechanism
+    - mkdir -p "${SP_DIR}/cupy/.data/"                                                                                     # [linux64]
+    - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_compiler_version }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux64]
+    - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                           # [win]
+    - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_compiler_version }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux64]
     - '*/nvcuda.dll'  # [win]
+  ignore_run_exports_from:
+    - cudnn
+    - nccl  # [linux64]
+    - cutensor  # [win or cdt_name == "cos7"]
 
 requirements:
   build:
@@ -52,25 +59,25 @@ requirements:
     - pip
     - setuptools
     - cython >=0.29.22,<3
-    - fastrlock >=0.3
+    - fastrlock >=0.5
     - cudnn
     - nccl  # [linux64]
-    - cutensor  # [win or (linux64 and cdt_name == "cos7")]
+    - cutensor  # [win or cdt_name == "cos7"]
 
   run:
     - python
     - setuptools
-    - fastrlock >=0.3
-    - numpy >=1.16
-    # - cudnn  <-- added via run_export
-    # - nccl   <-- added via run_export
-    # - cutensor  <-- added via run_export
+    - fastrlock >=0.5
+    - numpy >=1.17
 
   run_constrained:
     # Only GLIBC_2.17 or older symbols present
     - __glibc >=2.17      # [linux64 and cdt_name == "cos7"]
-    - scipy >=1.3
+    - scipy >=1.4
     - optuna >=2
+    - {{ pin_compatible('cudnn') }}
+    - {{ pin_compatible('nccl') }}  # [linux64]
+    - {{ pin_compatible('cutensor') }}
 
 test:
   requires:
