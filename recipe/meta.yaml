@@ -33,9 +33,10 @@ build:
     {% if cuda_major == 11 %}
     - export CUSPARSELT_PATH=$PREFIX  # [linux64]
     {% endif %}
-    {% if cuda_major_minor >= (10, 1) %}
-    - export CUGRAPH_PATH=$PREFIX  # [linux64]
-    {% endif %}
+    # blocked by conda-forge/libcugraph-feedstock#10
+    #{% if cuda_major_minor >= (10, 1) %}
+    #- export CUGRAPH_PATH=$PREFIX  # [linux64]
+    #{% endif %}
 
     - {{ PYTHON }} -m pip install . --no-deps -vv
     - if errorlevel 1 exit 1  # [win]
@@ -65,9 +66,9 @@ build:
     {% if cuda_major == 11 %}
     - cusparselt  # [linux64]
     {% endif %}
-    {% if cuda_major_minor >= (10, 1) %}
-    - libcugraph  # [linux64]
-    {% endif %}
+    #{% if cuda_major_minor >= (10, 1) %}
+    #- libcugraph  # [linux64]
+    #{% endif %}
 
 requirements:
   build:
@@ -88,9 +89,9 @@ requirements:
     {% if cuda_major == 11 %}
     - cusparselt  # [linux64]
     {% endif %}
-    {% if cuda_major_minor >= (10, 1) %}
-    - libcugraph  # [linux64]
-    {% endif %}
+    #{% if cuda_major_minor >= (10, 1) %}
+    #- libcugraph  # [linux64]
+    #{% endif %}
 
   run:
     - python
@@ -109,9 +110,9 @@ requirements:
     {% if cuda_major == 11 %}
     - {{ pin_compatible('cusparselt') }}  # [linux64]
     {% endif %}
-    {% if cuda_major_minor >= (10, 1) %}
-    - {{ pin_compatible('libcugraph') }}  # [linux64]
-    {% endif %}
+    #{% if cuda_major_minor >= (10, 1) %}
+    #- {{ pin_compatible('libcugraph') }}  # [linux64]
+    #{% endif %}
 
 test:
   requires:
