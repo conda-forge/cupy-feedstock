@@ -67,6 +67,7 @@ build:
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
     - libcugraph  # [linux64]
+    - librmm  # [linux64]  # libcugraph -> librmm -> (spdlog, thrust)
     {% endif %}
 
 requirements:
