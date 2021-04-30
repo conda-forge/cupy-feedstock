@@ -67,7 +67,12 @@ build:
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
     - libcugraph  # [linux64]
-    - librmm  # [linux64]  # libcugraph -> librmm -> (spdlog, thrust)
+    {% endif %}
+  ignore_run_exports:
+    {% if cuda_major_minor >= (10, 1) %}
+    # libcugraph -> librmm -> (spdlog, thrust)
+    - spdlog  # [linux64]
+    - thrust  # [linux64]
     {% endif %}
 
 requirements:
