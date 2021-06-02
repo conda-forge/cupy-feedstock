@@ -21,58 +21,58 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 0
-  skip: true  # [(not win64 and not linux64) or cuda_compiler_version in (undefined, "None")]
+  number: 1
+  skip: true  # [(not win64 and not linux) or cuda_compiler_version in (undefined, "None")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
     # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
-    - export NVCC=$(which nvcc)                                                  # [linux64]
-    - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux64]
+    - export NVCC=$(which nvcc)                                                  # [linux]
+    - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                                                          # [win]
     {% if cuda_major == 11 %}
-    - export CUSPARSELT_PATH=$PREFIX  # [linux64]
+    - export CUSPARSELT_PATH=$PREFIX  # [linux]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
-    - export CUGRAPH_PATH=$PREFIX  # [linux64]
+    - export CUGRAPH_PATH=$PREFIX  # [linux]
     {% endif %}
 
     - {{ PYTHON }} -m pip install . --no-deps -vv
     - if errorlevel 1 exit 1  # [win]
 
     # copy activate/deactivate scripts
-    - mkdir -p "${PREFIX}/etc/conda/activate.d"                                               # [linux64]
-    - cp "${RECIPE_DIR}/activate.sh" "${PREFIX}/etc/conda/activate.d/cupy_activate.sh"        # [linux64]
-    - mkdir -p "${PREFIX}/etc/conda/deactivate.d"                                             # [linux64]
-    - cp "${RECIPE_DIR}/deactivate.sh" "${PREFIX}/etc/conda/deactivate.d/cupy_deactivate.sh"  # [linux64]
+    - mkdir -p "${PREFIX}/etc/conda/activate.d"                                               # [linux]
+    - cp "${RECIPE_DIR}/activate.sh" "${PREFIX}/etc/conda/activate.d/cupy_activate.sh"        # [linux]
+    - mkdir -p "${PREFIX}/etc/conda/deactivate.d"                                             # [linux]
+    - cp "${RECIPE_DIR}/deactivate.sh" "${PREFIX}/etc/conda/deactivate.d/cupy_deactivate.sh"  # [linux]
     - if not exist %PREFIX%\etc\conda\activate.d mkdir %PREFIX%\etc\conda\activate.d          # [win]
     - copy %RECIPE_DIR%\activate.bat %PREFIX%\etc\conda\activate.d\cupy_activate.bat          # [win]
     - if not exist %PREFIX%\etc\conda\deactivate.d mkdir %PREFIX%\etc\conda\deactivate.d      # [win]
     - copy %RECIPE_DIR%\deactivate.bat %PREFIX%\etc\conda\deactivate.d\cupy_deactivate.bat    # [win]
 
     # enable CuPy's preload mechanism
-    - mkdir -p "${SP_DIR}/cupy/.data/"                                                                                     # [linux64]
-    - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_compiler_version }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux64]
+    - mkdir -p "${SP_DIR}/cupy/.data/"                                                                                     # [linux]
+    - cp ${RECIPE_DIR}/preload_config/linux_cuda{{ cuda_compiler_version }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
     - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                           # [win]
     - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_compiler_version }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
   missing_dso_whitelist:
-    - '*/libcuda.*'  # [linux64]
+    - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
   ignore_run_exports_from:
     - cudnn
-    - nccl  # [linux64]
+    - nccl  # [linux]
     - cutensor  # [win or cdt_name == "cos7"]
     {% if cuda_major == 11 %}
-    - cusparselt  # [linux64]
+    - cusparselt  # [linux]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
-    - libcugraph  # [linux64]
+    - libcugraph  # [linux]
     {% endif %}
   ignore_run_exports:
     {% if cuda_major_minor >= (10, 1) %}
     # libcugraph -> librmm -> (spdlog, thrust)
-    - spdlog  # [linux64]
-    - thrust  # [linux64]
+    - spdlog  # [linux]
+    - thrust  # [linux]
     {% endif %}
 
 requirements:
@@ -80,7 +80,7 @@ requirements:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
     - {{ compiler("cuda") }}
-    - sysroot_linux-64 2.17  # [linux64 and cdt_name == "cos7"]
+    - sysroot_linux-64 2.17  # [linux and cdt_name == "cos7"]
 
   host:
     - python
@@ -89,13 +89,13 @@ requirements:
     - cython >=0.29.22,<3
     - fastrlock >=0.5
     - cudnn
-    - nccl  # [linux64]
+    - nccl  # [linux]
     - cutensor  # [win or cdt_name == "cos7"]
     {% if cuda_major == 11 %}
-    - cusparselt  # [linux64]
+    - cusparselt  # [linux]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
-    - libcugraph  # [linux64]
+    - libcugraph  # [linux]
     {% endif %}
 
   run:
@@ -106,17 +106,17 @@ requirements:
 
   run_constrained:
     # Only GLIBC_2.17 or older symbols present
-    - __glibc >=2.17      # [linux64 and cdt_name == "cos7"]
+    - __glibc >=2.17      # [linux and cdt_name == "cos7"]
     - scipy >=1.4
     - optuna >=2
     - {{ pin_compatible('cudnn') }}
-    - {{ pin_compatible('nccl') }}  # [linux64]
+    - {{ pin_compatible('nccl') }}  # [linux]
     - {{ pin_compatible('cutensor') }}
     {% if cuda_major == 11 %}
-    - {{ pin_compatible('cusparselt') }}  # [linux64]
+    - {{ pin_compatible('cusparselt') }}  # [linux]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
-    - {{ pin_compatible('libcugraph') }}  # [linux64]
+    - {{ pin_compatible('libcugraph') }}  # [linux]
     {% endif %}
 
 test:
