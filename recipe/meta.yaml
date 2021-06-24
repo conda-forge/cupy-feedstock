@@ -109,7 +109,7 @@ requirements:
     - __glibc >=2.17      # [linux and cdt_name == "cos7"]
     - scipy >=1.4
     - optuna >=2
-    - {{ pin_compatible('cudnn') }}
+    - {{ pin_compatible('cudnn') }}  # [linux64]  # TODO(leofang): support ppc64le
     - {{ pin_compatible('nccl') }}  # [linux64]
     - {{ pin_compatible('cutensor') }}
     {% if cuda_major == 11 %}
