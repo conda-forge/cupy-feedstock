@@ -59,7 +59,7 @@ build:
     - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
   ignore_run_exports_from:
-    - cudnn
+    - cudnn  # [linux64]  # TODO(leofang): support ppc64le
     - nccl  # [linux64]
     - cutensor  # [win or cdt_name == "cos7"]
     {% if cuda_major == 11 %}
@@ -88,7 +88,7 @@ requirements:
     - setuptools
     - cython >=0.29.22,<3
     - fastrlock >=0.5
-    - cudnn
+    - cudnn  # [linux64]  # TODO(leofang): support ppc64le
     - nccl  # [linux64]
     - cutensor  # [win or cdt_name == "cos7"]
     {% if cuda_major == 11 %}
