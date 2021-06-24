@@ -59,10 +59,7 @@ cudnn:
   - 8                          # [linux64 or win]
   - 8                          # [linux64 or win]
   - 8                          # [linux64 or win]
-  
-  # TODO: fix this once https://github.com/conda-forge/cudnn-feedstock/issues/18 is fixed
-  # We put a dummy number here to avoid a solver bug (can't put undefined!);
-  # the support of cudnn is disabled in meta.yaml
+
   - 8                          # [ppc64le]
 
 cdt_name:  # [linux]
