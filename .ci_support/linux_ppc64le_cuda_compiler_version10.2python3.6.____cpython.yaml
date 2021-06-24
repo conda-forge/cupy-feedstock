@@ -22,6 +22,8 @@ cxx_compiler_version:
 - '8'
 docker_image:
 - quay.io/condaforge/linux-anvil-ppc64le-cuda:10.2
+nccl:
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -33,7 +35,6 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - cudnn
-  - cuda_compiler_version
+- - cuda_compiler_version
   - cdt_name
   - docker_image

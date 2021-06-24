@@ -60,7 +60,7 @@ build:
     - '*/nvcuda.dll'  # [win]
   ignore_run_exports_from:
     - cudnn  # [linux64]  # TODO(leofang): support ppc64le
-    - nccl  # [linux64]
+    - nccl  # [linux]
     - cutensor  # [win or cdt_name == "cos7"]
     {% if cuda_major == 11 %}
     - cusparselt  # [linux64]
@@ -89,7 +89,7 @@ requirements:
     - cython >=0.29.22,<3
     - fastrlock >=0.5
     - cudnn  # [linux64]  # TODO(leofang): support ppc64le
-    - nccl  # [linux64]
+    - nccl  # [linux]
     - cutensor  # [win or cdt_name == "cos7"]
     {% if cuda_major == 11 %}
     - cusparselt  # [linux64]
@@ -110,7 +110,7 @@ requirements:
     - scipy >=1.4
     - optuna >=2
     - {{ pin_compatible('cudnn') }}  # [linux64]  # TODO(leofang): support ppc64le
-    - {{ pin_compatible('nccl') }}  # [linux64]
+    - {{ pin_compatible('nccl') }}  # [linux]
     - {{ pin_compatible('cutensor') }}
     {% if cuda_major == 11 %}
     - {{ pin_compatible('cusparselt') }}  # [linux64]

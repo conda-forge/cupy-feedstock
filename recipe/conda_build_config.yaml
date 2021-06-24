@@ -7,7 +7,7 @@
 #   docker_image
 
 zip_keys:
-  - - cudnn                   # [linux64 or ppc64le]
+  - - cudnn                   # [linux64]
     - cuda_compiler_version   # [linux64 or ppc64le]
     - cdt_name                # [linux64 or ppc64le]
     - docker_image            # [linux64 and os.environ.get("BUILD_PLATFORM") == "linux-64"]
@@ -65,8 +65,7 @@ cudnn:
 
 cdt_name:  # [linux]
   - cos6   # [linux64]
-  - cos7   # [linux64]
-  - cos7   # [linux and ppc64le]
+  - cos7   # [linux64 or ppc64le]
 
   - cos6   # [linux64]
   - cos6   # [linux64]
