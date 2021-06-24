@@ -39,6 +39,9 @@ build:
     {% if cuda_major_minor >= (10, 1) %}
     - export CUGRAPH_PATH=$PREFIX  # [linux64]
     {% endif %}
+    
+    # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
+    - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
 
     - {{ PYTHON }} -m pip install . --no-deps -vv
     - if errorlevel 1 exit 1  # [win]
