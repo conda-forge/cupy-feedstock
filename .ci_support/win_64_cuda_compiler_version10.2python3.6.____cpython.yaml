@@ -8,8 +8,6 @@ cuda_compiler:
 - nvcc
 cuda_compiler_version:
 - '10.2'
-cudnn:
-- '8'
 cutensor:
 - '1'
 cxx_compiler:
