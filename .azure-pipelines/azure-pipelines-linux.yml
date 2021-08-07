@@ -148,6 +148,7 @@ jobs:
         CONFIG: linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
+    maxParallel: 34
   timeoutInMinutes: 360
 
   steps:
