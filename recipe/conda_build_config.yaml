@@ -41,7 +41,7 @@ cxx_compiler_version:   # [linux]
   - 8                   # [ppc64le]
 
 cuda_compiler:   # [linux64 or win or ppc64le]
-  - cuda-nvcc    # [linux64 or win or ppc64le]
+  - nvcc         # [linux64 or win or ppc64le]
 
 cuda_compiler_version:
   - None                       # [linux64]
