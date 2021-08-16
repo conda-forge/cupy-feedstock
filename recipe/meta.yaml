@@ -104,6 +104,7 @@ requirements:
     {% endif %}
     - cuda-cudart
     - cuda-nvrtc
+    - cuda-nvprof  # for cuda_profiler_api.h
     - libcublas
     - libcufft
     - libcurand
