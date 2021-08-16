@@ -5,3 +5,4 @@ bot:
   abi_migration_branches:
     - rc
 idle_timeout_minutes: 60
+build_with_mambabuild: True
