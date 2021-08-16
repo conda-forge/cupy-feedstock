@@ -1,13 +1,13 @@
 c_compiler:
 - vs2017
 channel_sources:
-- conda-forge,defaults
+- nvidia,conda-forge,defaults
 channel_targets:
 - conda-forge main
 cuda_compiler:
-- nvcc
+- cuda-nvcc
 cuda_compiler_version:
-- '11.0'
+- '11.3'
 cudnn:
 - '8'
 cutensor:

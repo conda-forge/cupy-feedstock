@@ -6,6 +6,9 @@
 #   cdt_name
 #   docker_image
 
+channel_sources:
+  - nvidia,conda-forge,defaults
+
 zip_keys:
   - - cudnn                   # [linux64 or ppc64le]
     - cuda_compiler_version   # [linux64 or ppc64le]
@@ -27,6 +30,8 @@ docker_image:                                    # [os.environ.get("BUILD_PLATFO
    - quay.io/condaforge/linux-anvil-cuda:11.2       # [linux64 and os.environ.get("BUILD_PLATFORM") == "linux-64"]
    
    - quay.io/condaforge/linux-anvil-ppc64le-cuda:10.2   # [ppc64le and os.environ.get("BUILD_PLATFORM") == "linux-ppc64le"]
+   - quay.io/condaforge/linux-anvil-cos7-x86_64     # [linux64 and os.environ.get("BUILD_PLATFORM") == "linux-64"]
+   - quay.io/condaforge/linux-anvil-ppc64le         # [ppc64le and os.environ.get("BUILD_PLATFORM") == "linux-ppc64le"]
 
 c_compiler_version:     # [linux]
   - 7                   # [linux64 or aarch64]
@@ -36,7 +41,7 @@ cxx_compiler_version:   # [linux]
   - 8                   # [ppc64le]
 
 cuda_compiler:   # [linux64 or win or ppc64le]
-  - nvcc         # [linux64 or win or ppc64le]
+  - cuda-nvcc    # [linux64 or win or ppc64le]
 
 cuda_compiler_version:
   - None                       # [linux64]
@@ -48,6 +53,7 @@ cuda_compiler_version:
   - 11.0                       # [linux64 or win]
   - 11.1                       # [linux64 or win]
   - 11.2                       # [linux64 or win]
+  - 11.3                       # [linux64 or win or ppc64le]
 
 cudnn:
   - undefined                  # [linux64]
@@ -59,6 +65,7 @@ cudnn:
   - 8                          # [linux64 or win]
   - 8                          # [linux64 or win]
   - 8                          # [linux64 or win]
+  - 8                          # [linux64 or win or ppc64le]
 
   - 8                          # [ppc64le]
 
@@ -73,5 +80,6 @@ cdt_name:  # [linux]
   - cos7   # [linux64]
   - cos7   # [linux64]
   - cos7   # [linux64]
+  - cos7   # [linux64 or ppc64le]
   
   - cos7   # [ppc64le]

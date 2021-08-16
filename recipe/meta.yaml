@@ -21,8 +21,8 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 0
-  skip: true  # [(not win64 and not linux64 and not ppc64le) or cuda_compiler_version in (undefined, "None")]
+  number: 1
+  skip: true  # [(not win64 and not linux64 and not ppc64le) or cuda_compiler_version != "11.3"]
   script_env:
     # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
     - CUDA_HOME  # [ppc64le]
@@ -84,7 +84,7 @@ requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
-    - {{ compiler("cuda") }}
+    - cuda-nvcc
     - sysroot_linux-64 2.17  # [linux and cdt_name == "cos7"]
 
   host:
@@ -102,6 +102,13 @@ requirements:
     {% if cuda_major_minor >= (10, 1) %}
     - libcugraph  # [linux64]
     {% endif %}
+    - cuda-cudart
+    - cuda-nvrtc
+    - libcublas
+    - libcufft
+    - libcurand
+    - libcusolver
+    - libcusparse
 
   run:
     - python

@@ -5,13 +5,13 @@ c_compiler_version:
 cdt_name:
 - cos7
 channel_sources:
-- conda-forge,defaults
+- nvidia,conda-forge,defaults
 channel_targets:
 - conda-forge main
 cuda_compiler:
-- nvcc
+- cuda-nvcc
 cuda_compiler_version:
-- '11.0'
+- '11.3'
 cudnn:
 - '8'
 cutensor:
@@ -21,7 +21,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '7'
 docker_image:
-- quay.io/condaforge/linux-anvil-cuda:11.0
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 nccl:
 - '2'
 pin_run_as_build:
