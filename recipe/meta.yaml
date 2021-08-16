@@ -23,14 +23,17 @@ source:
 build:
   number: 1
   skip: true  # [(not win64 and not linux64 and not ppc64le) or cuda_compiler_version != "11.3" or py != 39]
-  script_env:
-    # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
-    - CUDA_HOME  # [ppc64le]
+#  script_env:
+#    # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
+#    - CUDA_HOME  # [ppc64le]
   script:
-    # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
-    # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
+#    # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
+#    # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
+    - export CFLAGS="$CFLAGS -L${PREFIX}/lib/stubs"                              # [linux]
     - export NVCC=$(which nvcc)                                                  # [linux]
+    - export CUDA_PATH=$PREFIX                                                   # [linux]
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
+    - call set "CUDA_PATH=%PREFIX%"                                                                            # [win]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                                                          # [win]
     {% if cuda_major == 11 %}
