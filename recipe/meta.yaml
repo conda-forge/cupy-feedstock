@@ -109,6 +109,7 @@ requirements:
     - cuda-cudart
     - cuda-nvrtc
     - cuda-nvprof  # for cuda_profiler_api.h
+    - cuda-thrust
     - libcublas
     - libcufft
     - libcurand
