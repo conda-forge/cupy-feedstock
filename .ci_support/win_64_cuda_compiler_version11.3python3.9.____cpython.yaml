@@ -4,12 +4,10 @@ channel_sources:
 - nvidia,conda-forge,defaults
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- cuda-nvcc
 cuda_compiler_version:
 - '11.3'
-cudnn:
-- '8'
-cutensor:
-- '1'
 cxx_compiler:
 - vs2017
 pin_run_as_build:
