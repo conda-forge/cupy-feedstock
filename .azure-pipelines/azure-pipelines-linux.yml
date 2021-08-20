@@ -12,10 +12,6 @@ jobs:
         CONFIG: linux_64_cdt_namecos7cuda_compiler_version11.3python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_cuda_compiler_version11.3python3.9.____cpython:
-        CONFIG: linux_ppc64le_cuda_compiler_version11.3python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
   timeoutInMinutes: 360
 
   steps:
