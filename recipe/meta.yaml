@@ -30,7 +30,7 @@ build:
 #    # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
 #    # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
     - export CFLAGS="$CFLAGS -L${PREFIX}/lib/stubs"                              # [linux]
-    - export NVCC="$(which nvcc) -ccbin $CXX                                     # [linux]
+    - export NVCC="$(which nvcc) -ccbin $CXX"                                    # [linux]
     - export CUDA_PATH=$PREFIX                                                   # [linux]
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - call set "CUDA_PATH=%PREFIX%"                                                                            # [win]
