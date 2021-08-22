@@ -87,7 +87,7 @@ requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
-    - cuda-nvcc
+    #- cuda-nvcc
     - sysroot_linux-64 2.17  # [linux and cdt_name == "cos7"]
 
   host:
