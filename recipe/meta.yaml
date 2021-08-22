@@ -60,9 +60,9 @@ build:
 
     # enable CuPy's preload mechanism
     - mkdir -p "${SP_DIR}/cupy/.data/"                                                                                     # [linux]
-    - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_compiler_version }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
+    - cp ${RECIPE_DIR}/preload_config/linux64_cuda11.2_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
     - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                           # [win]
-    - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_compiler_version }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
+    - copy %RECIPE_DIR%\preload_config\win64_cuda11.2_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
