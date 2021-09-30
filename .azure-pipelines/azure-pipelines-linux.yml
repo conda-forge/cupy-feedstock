@@ -228,67 +228,7 @@ jobs:
         CONFIG: linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:10.2
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.6.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.7.____73_pypy:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.7.____73_pypy
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.7.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.8.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.9.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.6.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.7.____73_pypy:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.7.____73_pypy
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.7.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.8.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.9.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.6.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.6.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.7.____73_pypy:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.7.____73_pypy
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.7.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.7.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.8.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
-      linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.9.____cpython:
-        CONFIG: linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
-    maxParallel: 41
+    maxParallel: 39
   timeoutInMinutes: 360
 
   steps:

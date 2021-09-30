@@ -22,7 +22,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [(not win64 and not linux64 and not ppc64le and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
+  skip: true  # [(not win64 and not linux64 and (ppc64le and cuda_compiler_version != "10.2") and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
   script_env:
     # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
     - CUDA_HOME  # [ppc64le or aarch64]
