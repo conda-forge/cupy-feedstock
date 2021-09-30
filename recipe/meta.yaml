@@ -25,7 +25,7 @@ build:
   skip: true  # [(not win64 and not linux64 and not ppc64le and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
   script_env:
     # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
-    - CUDA_HOME  # [ppc64le]
+    - CUDA_HOME  # [ppc64le or aarch64]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
     # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
