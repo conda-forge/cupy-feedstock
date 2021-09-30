@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "9.4.0" %}
-{% set sha256 = "4402bd33a051e82f6888dab088a8d657714ca6d1e945b513dcc513a95a435bd5" %}
+{% set version = "9.5.0" %}
+{% set sha256 = "2e85c3ac476c80c78ce94cae8786cc82a615fc4d1b0d380f16b9665d2cc5d187" %}
 
 {% if cuda_compiler_version in (None, "None", True, False) %}
 {% set cuda_major = 0 %}
