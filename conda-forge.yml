@@ -1,7 +1,8 @@
 conda_forge_output_validation: true
 provider:
   linux_ppc64le: azure
+  linux_aarch64: azure
 bot:
   abi_migration_branches:
     - rc
-idle_timeout_minutes: 60
+idle_timeout_minutes: 120

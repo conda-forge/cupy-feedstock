@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "9.4.0" %}
-{% set sha256 = "4402bd33a051e82f6888dab088a8d657714ca6d1e945b513dcc513a95a435bd5" %}
+{% set version = "9.5.0" %}
+{% set sha256 = "2e85c3ac476c80c78ce94cae8786cc82a615fc4d1b0d380f16b9665d2cc5d187" %}
 
 {% if cuda_compiler_version in (None, "None", True, False) %}
 {% set cuda_major = 0 %}
@@ -22,10 +22,10 @@ source:
 
 build:
   number: 0
-  skip: true  # [(not win64 and not linux64 and not ppc64le) or cuda_compiler_version in (undefined, "None")]
+  skip: true  # [(not win64 and not linux64 and (ppc64le and cuda_compiler_version != "10.2") and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
   script_env:
-    # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
-    - CUDA_HOME  # [ppc64le]
+    # for some reason /usr/local/cuda is not added to $PATH in the docker image
+    - CUDA_HOME  # [ppc64le or aarch64]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
     # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
@@ -33,8 +33,8 @@ build:
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                                                          # [win]
-    {% if cuda_major == 11 %}
-    - export CUSPARSELT_PATH=$PREFIX  # [linux64]
+    {% if cuda_major_minor >= (11, 2) %}
+    - export CUSPARSELT_PATH=$PREFIX  # [linux64 or win]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
     - export CUGRAPH_PATH=$PREFIX  # [linux64]
@@ -64,11 +64,11 @@ build:
     - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
   ignore_run_exports_from:
-    - cudnn
-    - nccl  # [linux]
+    - cudnn  # [not aarch64 or (ppc64le and cuda_major < 11)]
+    - nccl  # [linux64 or (ppc64le and cuda_major < 11)]
     - cutensor  # [win or cdt_name == "cos7"]
-    {% if cuda_major == 11 %}
-    - cusparselt  # [linux64]
+    {% if cuda_major_minor >= (11, 2) %}
+    - cusparselt  # [linux64 or win]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
     - libcugraph  # [linux64]
@@ -93,11 +93,11 @@ requirements:
     - setuptools
     - cython >=0.29.22,<3
     - fastrlock >=0.5
-    - cudnn
-    - nccl  # [linux]
+    - cudnn  # [not aarch64 or (ppc64le and cuda_major < 11)]
+    - nccl  # [linux64 or (ppc64le and cuda_major < 11)]
     - cutensor  # [win or cdt_name == "cos7"]
-    {% if cuda_major == 11 %}
-    - cusparselt  # [linux64]
+    {% if cuda_major_minor >= (11, 2) %}
+    - cusparselt 0.1.*  # [linux64 or win]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
     - libcugraph  # [linux64]
@@ -114,11 +114,11 @@ requirements:
     - __glibc >=2.17      # [linux and cdt_name == "cos7"]
     - scipy >=1.4
     - optuna >=2
-    - {{ pin_compatible('cudnn') }}
-    - {{ pin_compatible('nccl') }}  # [linux]
+    - {{ pin_compatible('cudnn') }}  # [not aarch64 or (ppc64le and cuda_major < 11)]
+    - {{ pin_compatible('nccl') }}  # [linux64 or (ppc64le and cuda_major < 11)]
     - {{ pin_compatible('cutensor', lower_bound='1.3') }}
-    {% if cuda_major == 11 %}
-    - {{ pin_compatible('cusparselt') }}  # [linux64]
+    {% if cuda_major_minor >= (11, 2) %}
+    - {{ pin_compatible('cusparselt', max_pin='x.x') }}  # [linux64 or win]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
     - {{ pin_compatible('libcugraph') }}  # [linux64]
