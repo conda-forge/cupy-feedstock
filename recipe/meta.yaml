@@ -21,7 +21,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [(not win64 and not linux64 and not ppc64le) or cuda_compiler_version in (undefined, "None")]
   script_env:
     # for some reason /usr/local/cuda is not added to $PATH in ppc64le's docker image
