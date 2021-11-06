@@ -7,7 +7,7 @@ language: generic
 
 matrix:
   include:
-    - env: CONFIG=linux_ppc64le_cuda_compiler_version10.2cudnn8python3.6.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le-cuda:10.2
+    - env: CONFIG=linux_ppc64le_cuda_compiler_version10.2cudnn8python3.10.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le-cuda:10.2
       os: linux
       arch: ppc64le
       dist: focal
@@ -36,6 +36,7 @@ script:
   - export CI=travis
   - export GIT_BRANCH="$TRAVIS_BRANCH"
   - export FEEDSTOCK_NAME=$(basename ${TRAVIS_REPO_SLUG})
+  - if [[ "${TRAVIS_PULL_REQUEST:-}" == "false" ]]; then export IS_PR_BUILD="False"; else export IS_PR_BUILD="True"; fi
 
 
-  - if [[ ${PLATFORM} =~ .*linux.* ]]; then travis_wait 60 ./.scripts/run_docker_build.sh; fi
+  - if [[ ${PLATFORM} =~ .*linux.* ]]; then travis_wait 60 CONDA_FORGE_DOCKER_RUN_ARGS=--network=host ./.scripts/run_docker_build.sh; fi
