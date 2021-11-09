@@ -123,7 +123,7 @@ requirements:
     - {{ pin_compatible('cusparselt', max_pin='x.x') }}  # [linux64 or win]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
-    - {{ pin_compatible('libcugraph') }}  # [linux64]
+    - libcugraph >=0.19.0  # [linux64]
     {% endif %}
 
 test:
