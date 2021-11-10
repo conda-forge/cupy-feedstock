@@ -31,283 +31,640 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_python3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_python3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_python3.7.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.7.____73_pypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_python3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.7.____73_pypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_python3.8.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_python3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_python3.9.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos7cuda_compiler_versionNonepython3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos7cuda_compiler_versionNonepython3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version10.0cudnn7python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos7cuda_compiler_versionNonepython3.7.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos7cuda_compiler_versionNonepython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos7cuda_compiler_versionNonepython3.8.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.7.____73_pypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos7cuda_compiler_versionNonepython3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.7.____73_pypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos7cuda_compiler_versionNonepython3.9.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos7cuda_compiler_versionNonepython3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.0python3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.0python3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.0python3.7.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.0python3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_version9.2cudnn7python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.0python3.8.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.0python3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.0python3.9.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.7.____73_pypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.0python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.7.____73_pypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.1python3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.1python3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.1python3.7.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.1python3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.1python3.8.____cpython</td>
+              <td>linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.1python3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos6cuda_compiler_versionNonecudnnundefinedpython3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.1python3.9.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.1python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.2python3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.7.____73_pypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.2python3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.7.____73_pypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.2python3.7.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.2python3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.2python3.8.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.2python3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_cdt_namecos8cuda_compiler_version11.2python3.9.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cdt_namecos8cuda_compiler_version11.2python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.1cudnn8python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.7.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.7.____73_pypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.7.____73_pypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.8.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.9.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos7cuda_compiler_version10.2cudnn8python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version10.2cudnn8python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.7.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.8.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.7.____73_pypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.7.____73_pypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.9.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.7.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.0cudnn8python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.8.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.9.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.7.____73_pypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.0cudnnundefinedpython3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.7.____73_pypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.7.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.8.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.1cudnn8python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.9.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.10.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.1cudnnundefinedpython3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.7.____73_pypy</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.7.____73_pypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.7.____73_pypy" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.7.____73_pypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.7.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.7.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.8.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.8.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.9.____cpython</td>
+              <td>linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cdt_namecos8cuda_compiler_version11.2cudnnundefinedpython3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_version11.2cudnn8python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_64_cdt_namecos7cuda_compiler_versionNonecudnnundefinedpython3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.0python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.0python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.0python3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.0python3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.0python3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.0python3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.0python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.0python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.0python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.0python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.1python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.1python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.1python3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.1python3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.1python3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.1python3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.1python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.1python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.1python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.1python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.2python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.2python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.2python3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.2python3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.2python3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.2python3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.2python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.2python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version11.2python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_version11.2python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_versionNonepython3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_versionNonepython3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_versionNonepython3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_versionNonepython3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_versionNonepython3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_versionNonepython3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_versionNonepython3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_versionNonepython3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_versionNonepython3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_cuda_compiler_versionNonepython3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version10.2cudnn8python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version10.2cudnn8python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version10.2cudnn8python3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version10.2cudnn8python3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version10.2cudnn8python3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version10.2cudnn8python3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version10.2cudnn8python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version10.2cudnn8python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version10.2cudnn8python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version10.2cudnn8python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.0cudnnundefinedpython3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.1cudnnundefinedpython3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_version11.2cudnnundefinedpython3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.7.____73_pypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.7.____73_pypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.7.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.7.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_cuda_compiler_versionNonecudnnundefinedpython3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=osx&configuration=osx_64_python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -339,6 +696,13 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>win_64_cuda_compiler_version10.2python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=win&configuration=win_64_cuda_compiler_version10.2python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>win_64_cuda_compiler_version10.2python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
@@ -357,6 +721,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=win&configuration=win_64_cuda_compiler_version10.2python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_cuda_compiler_version11.0python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=win&configuration=win_64_cuda_compiler_version11.0python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -381,6 +752,13 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>win_64_cuda_compiler_version11.1python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=win&configuration=win_64_cuda_compiler_version11.1python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>win_64_cuda_compiler_version11.1python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
@@ -399,6 +777,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=win&configuration=win_64_cuda_compiler_version11.1python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_cuda_compiler_version11.2python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=master&jobName=win&configuration=win_64_cuda_compiler_version11.2python3.10.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
