@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "9.5.0" %}
-{% set sha256 = "2e85c3ac476c80c78ce94cae8786cc82a615fc4d1b0d380f16b9665d2cc5d187" %}
+{% set version = "9.6.0" %}
+{% set sha256 = "22469ea1ad51ffbb4af2b139ed0820ac5d0b78f1265b2a095ed5e5d5299aab91" %}
 
 {% if cuda_compiler_version in (None, "None", True, False) %}
 {% set cuda_major = 0 %}
@@ -19,11 +19,9 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      - PR_5993.patch
 
 build:
-  number: 1
+  number: 0
   skip: true  # [(not win64 and not linux64 and (ppc64le and cuda_compiler_version != "10.2") and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
   script_env:
     # for some reason /usr/local/cuda is not added to $PATH in the docker image
@@ -123,7 +121,7 @@ requirements:
     - {{ pin_compatible('cusparselt', max_pin='x.x') }}  # [linux64 or win]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
-    - {{ pin_compatible('libcugraph') }}  # [linux64]
+    - libcugraph >=0.19.0  # [linux64]
     {% endif %}
 
 test:
