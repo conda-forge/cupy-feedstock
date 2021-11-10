@@ -28,12 +28,10 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  spdlog:
-    max_pin: x.x
 python:
 - 3.8.* *_cpython
 spdlog:
-- '1.8'
+- '1.9'
 target_platform:
 - linux-ppc64le
 zip_keys:

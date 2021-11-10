@@ -1,7 +1,5 @@
 BUILD:
 - aarch64-conda_cos7-linux-gnu
-arm_variant_type:
-- sbsa
 c_compiler:
 - gcc
 c_compiler_version:
@@ -18,6 +16,8 @@ cuda_compiler:
 - nvcc
 cuda_compiler_version:
 - '11.1'
+cutensor:
+- '1'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -28,12 +28,10 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  spdlog:
-    max_pin: x.x
 python:
 - 3.9.* *_cpython
 spdlog:
-- '1.8'
+- '1.9'
 target_platform:
 - linux-aarch64
 zip_keys:

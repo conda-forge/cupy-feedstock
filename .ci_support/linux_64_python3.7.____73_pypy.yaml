@@ -11,9 +11,9 @@ channel_targets:
 cuda_compiler:
 - nvcc
 cuda_compiler_version:
-- '10.1'
+- None
 cudnn:
-- '8'
+- undefined
 cutensor:
 - '1'
 cxx_compiler:
@@ -21,19 +21,17 @@ cxx_compiler:
 cxx_compiler_version:
 - '7'
 docker_image:
-- quay.io/condaforge/linux-anvil-cos7-cuda:10.1
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 nccl:
 - '2'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  spdlog:
-    max_pin: x.x
 python:
-- 3.9.* *_cpython
+- 3.7.* *_73_pypy
 spdlog:
-- '1.8'
+- '1.9'
 target_platform:
 - linux-64
 zip_keys:
