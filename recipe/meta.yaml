@@ -19,13 +19,10 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      - PR_5993.patch
 
 build:
   number: 0
-  ? skip__###conda-selector###__(not win64 and not linux64 and (ppc64le and cuda_compiler_version != "10.2") and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")
-  : true
+  skip: true  # [(not win64 and not linux64 and (ppc64le and cuda_compiler_version != "10.2") and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
   script_env:
     # for some reason /usr/local/cuda is not added to $PATH in the docker image
     - CUDA_HOME  # [ppc64le or aarch64]
