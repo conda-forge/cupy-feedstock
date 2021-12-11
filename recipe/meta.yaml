@@ -129,7 +129,8 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: NumPy & SciPy for GPU
+  summary: |
+    CuPy: NumPy & SciPy for GPU
   dev_url: https://github.com/cupy/cupy/
   doc_url: https://docs.cupy.dev/en/stable/
 

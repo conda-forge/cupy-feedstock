@@ -7,7 +7,8 @@ Package license: MIT
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cupy-feedstock/blob/master/LICENSE.txt)
 
-Summary: NumPy & SciPy for GPU
+Summary: CuPy: NumPy & SciPy for GPU
+
 
 Development: https://github.com/cupy/cupy/
 
