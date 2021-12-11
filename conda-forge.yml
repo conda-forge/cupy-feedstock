@@ -1,8 +1,9 @@
 conda_forge_output_validation: true
+os_version:
+  linux_64: cos7
+  linux_aarch64: cos7
+  linux_ppc64le: cos7
 provider:
   linux_ppc64le: azure
   linux_aarch64: azure
-bot:
-  abi_migration_branches:
-    - rc
 idle_timeout_minutes: 120
