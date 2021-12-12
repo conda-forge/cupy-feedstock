@@ -88,7 +88,7 @@ requirements:
     - nccl >=2.8  # [linux64 or (ppc64le and cuda_major < 11)]
     - cutensor  # [win or cdt_name == "cos7"]
     {% if cuda_major_minor >= (11, 2) %}
-    - cusparselt !=0.2.0  # [linux64 or aarch64 or win]
+    - cusparselt !=0.2.0  # [linux64 or win]
     {% endif %}
     {% if cuda_major_minor >= (10, 1) %}
     - libcugraph  # [linux64]
@@ -119,7 +119,6 @@ test:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
     - {{ compiler("cuda") }}  # tests need nvcc
-    #- scipy >=1.0,<1.1  <-- cause error
 
   source_files:
     - tests
