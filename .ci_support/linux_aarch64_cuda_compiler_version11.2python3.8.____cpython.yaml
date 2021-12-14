@@ -32,13 +32,11 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - 3.8.* *_cpython
-spdlog:
-- '1.9'
 target_platform:
 - linux-aarch64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - cuda_compiler_version
+  - cuda_compiler_version
   - cdt_name
   - docker_image
