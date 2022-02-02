@@ -51,7 +51,7 @@ except Exception as e:
     print("No GPU available. Exiting without running CuPy's tests.")
     sys.exit(0)
 
-# Run CuPy's test suite
-import py
-py.test.cmdline.main(["tests/cupy_tests"])
-py.test.cmdline.main(["tests/cupyx_tests"])
+## Run CuPy's test suite
+#import py
+#py.test.cmdline.main(["tests/cupy_tests"])
+#py.test.cmdline.main(["tests/cupyx_tests"])
