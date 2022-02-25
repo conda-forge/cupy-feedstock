@@ -19,6 +19,9 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      # fix Windows build, see cupy/cupy#6510
+      - 6510.patch  # [win]
 
 build:
   number: 0
