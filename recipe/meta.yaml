@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "10.1.0" %}
-{% set sha256 = "ad28e7311b2023391f2278b7649828decdd9d9599848e18845eb4ab1b2d01936" %}
+{% set version = "10.2.0" %}
+{% set sha256 = "e68bef03be9018eb0e9d5ced31f0e02deae4b399c9aca474f2b2dcf80ae6580f" %}
 
 {% if cuda_compiler_version in (None, "None", True, False) %}
 {% set cuda_major = 0 %}
@@ -19,9 +19,12 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      # fix Windows build, see cupy/cupy#6510
+      - 6510.patch  # [win]
 
 build:
-  number: 1
+  number: 0
   skip: true  # [(not win64 and not linux and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
   script_env:
     # for some reason /usr/local/cuda is not added to $PATH in the docker image
