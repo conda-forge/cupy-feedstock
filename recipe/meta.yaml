@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "10.3.0" %}
-{% set sha256 = "c1d59c7c6a9d243bef941f90fed493629ecf825a293df5ff500c71546b0379f7" %}
+{% set version = "10.3.1" %}
+{% set sha256 = "73c04e288d40594fb337c96196246eb39e4f50082f166f93971293a189fb8d67" %}
 
 {% if cuda_compiler_version in (None, "None", True, False) %}
 {% set cuda_major = 0 %}
@@ -23,9 +23,6 @@ source:
 build:
   number: 0
   skip: true  # [(not win64 and not linux and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
-  script_env:
-    # for some reason /usr/local/cuda is not added to $PATH in the docker image
-    - CUDA_HOME  # [ppc64le or aarch64]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
     # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
