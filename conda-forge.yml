@@ -4,8 +4,8 @@ os_version:
   linux_aarch64: cos7
   linux_ppc64le: cos7
 provider:
-  linux_ppc64le: azure
-  linux_aarch64: azure
+  linux_ppc64le: default
+  linux_aarch64: default
 idle_timeout_minutes: 120
 github:
   branch_name: main
