@@ -87,7 +87,7 @@ requirements:
     - nccl >=2.8  # [linux]
     - cutensor
     {% if cuda_major_minor >= (11, 2) %}
-    - cusparselt !=0.2.0.*  # [linux64 or win]
+    - cusparselt 0.2.0.*  # [linux64 or win]
     {% endif %}
 
   run:
