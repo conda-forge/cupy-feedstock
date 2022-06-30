@@ -29,7 +29,8 @@ build:
     - export NVCC=$(which nvcc)                                                  # [linux]
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
-    - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                                                          # [win]
+    - for /f "tokens=* usebackq" %%f in (`where cl.exe`) do (set "dummy=%%f" && call set "CXX=%%dummy:\=\\%%") # [win]
+    - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%, msvc is %CXX%"                                           # [win]
     {% if cuda_major_minor >= (11, 2) %}
     - export CUSPARSELT_PATH=$PREFIX  # [linux64 or win]
     {% endif %}
