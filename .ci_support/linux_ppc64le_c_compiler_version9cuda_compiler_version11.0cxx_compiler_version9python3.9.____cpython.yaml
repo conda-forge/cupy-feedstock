@@ -13,7 +13,7 @@ cuda_compiler:
 cuda_compiler_version:
 - '11.0'
 cudnn:
-- undefined
+- '8'
 cutensor:
 - '1'
 cxx_compiler:
