@@ -228,7 +228,7 @@ jobs:
         CONFIG: linux_ppc64le_c_compiler_version9cuda_compiler_version11.2cxx_compiler_version9python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
-    maxParallel: 50
+    maxParallel: 39
   timeoutInMinutes: 360
 
   steps:
