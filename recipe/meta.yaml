@@ -30,7 +30,7 @@ build:
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
-    #- set "NVCC=%NVCC% --use-local-env"  # [win64]
+    - set "NVCC=%NVCC% --use-local-env"  # [win64]
     - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"  # [win]
     {% if cuda_major_minor >= (11, 2) %}
     - export CUSPARSELT_PATH=$PREFIX  # [linux64 or win]
@@ -91,6 +91,7 @@ requirements:
     {% if cuda_major_minor >= (11, 2) %}
     - cusparselt 0.2.0.*  # [linux64 or win]
     {% endif %}
+    - vs2015_runtime !=14.29.30339  # [win]
 
   run:
     - python
