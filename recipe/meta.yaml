@@ -91,7 +91,6 @@ requirements:
     {% if cuda_major_minor >= (11, 2) %}
     - cusparselt 0.2.0.*  # [linux64 or win]
     {% endif %}
-    - vs2015_runtime !=14.29.30339  # [win]
 
   run:
     - python
