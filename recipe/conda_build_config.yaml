@@ -54,3 +54,8 @@ cdt_name:  # [linux]
   - cos7   # [ppc64le]
   - cos7   # [aarch64]
   - cos7   # [aarch64]
+
+c_compiler:                    # [win]
+  - vs2017                     # [win]
+cxx_compiler:                  # [win]
+  - vs2017                     # [win]
