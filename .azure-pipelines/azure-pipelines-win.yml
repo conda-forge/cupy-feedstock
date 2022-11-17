@@ -11,6 +11,9 @@ jobs:
       win_64_cuda_compiler_version10.2cudnn7python3.10.____cpython:
         CONFIG: win_64_cuda_compiler_version10.2cudnn7python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
+      win_64_cuda_compiler_version10.2cudnn7python3.11.____cpython:
+        CONFIG: win_64_cuda_compiler_version10.2cudnn7python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
       win_64_cuda_compiler_version10.2cudnn7python3.8.____cpython:
         CONFIG: win_64_cuda_compiler_version10.2cudnn7python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -19,6 +22,9 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       win_64_cuda_compiler_version11.0cudnn8python3.10.____cpython:
         CONFIG: win_64_cuda_compiler_version11.0cudnn8python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_cuda_compiler_version11.0cudnn8python3.11.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.0cudnn8python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
       win_64_cuda_compiler_version11.0cudnn8python3.8.____cpython:
         CONFIG: win_64_cuda_compiler_version11.0cudnn8python3.8.____cpython
@@ -29,6 +35,9 @@ jobs:
       win_64_cuda_compiler_version11.1cudnn8python3.10.____cpython:
         CONFIG: win_64_cuda_compiler_version11.1cudnn8python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
+      win_64_cuda_compiler_version11.1cudnn8python3.11.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.1cudnn8python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
       win_64_cuda_compiler_version11.1cudnn8python3.8.____cpython:
         CONFIG: win_64_cuda_compiler_version11.1cudnn8python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -37,6 +46,9 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       win_64_cuda_compiler_version11.2cudnn8python3.10.____cpython:
         CONFIG: win_64_cuda_compiler_version11.2cudnn8python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_cuda_compiler_version11.2cudnn8python3.11.____cpython:
+        CONFIG: win_64_cuda_compiler_version11.2cudnn8python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
       win_64_cuda_compiler_version11.2cudnn8python3.8.____cpython:
         CONFIG: win_64_cuda_compiler_version11.2cudnn8python3.8.____cpython
