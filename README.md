@@ -1,11 +1,11 @@
-About cupy
-==========
+About cupy-feedstock
+====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cupy-feedstock/blob/main/LICENSE.txt)
 
 Home: https://cupy.dev/
 
 Package license: MIT
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cupy-feedstock/blob/main/LICENSE.txt)
 
 Summary: CuPy: NumPy & SciPy for GPU
 
