@@ -85,9 +85,9 @@ requirements:
     - setuptools
     - cython >=0.29.22,<3
     - fastrlock >=0.5
-    - cudnn
+    - cudnn >=7.6
     - nccl >=2.8  # [linux]
-    - cutensor
+    - cutensor >=1.4
     {% if cuda_major_minor >= (11, 2) %}
     - cusparselt 0.2.0.*  # [linux64 or win]
     {% endif %}
@@ -95,13 +95,13 @@ requirements:
   run:
     - python
     - {{ pin_compatible('fastrlock', max_pin='x.x') }}
-    - numpy >=1.18
+    - numpy >=1.21
 
   run_constrained:
     # Only GLIBC_2.17 or older symbols present
     - __glibc >=2.17      # [linux]
-    - scipy >=1.4
-    - optuna >=2
+    - scipy >=1.7
+    - optuna >=3
     - {{ pin_compatible('cudnn') }}
     - {{ pin_compatible('nccl') }}  # [linux]
     - {{ pin_compatible('cutensor', lower_bound='1.3') }}
