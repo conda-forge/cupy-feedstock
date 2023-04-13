@@ -7,6 +7,9 @@ os_version:
   linux_64: cos7
   linux_aarch64: cos7
   linux_ppc64le: cos7
+build_platform:
+  linux_ppc64le: linux64
+  linux_aarch64: linux64
 provider:
   linux_aarch64: azure
   linux_ppc64le: azure
