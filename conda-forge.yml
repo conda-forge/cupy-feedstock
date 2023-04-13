@@ -15,4 +15,4 @@ provider:
   linux_ppc64le: azure
 conda_build:
   pkg_format: '2'
-test_on_native_only: true
+test: native
