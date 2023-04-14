@@ -1,0 +1,126 @@
+diff --git a/install/cupy_builder/_features.py b/install/cupy_builder/_features.py
+index d12de78c3..77c29a954 100644
+--- a/install/cupy_builder/_features.py
++++ b/install/cupy_builder/_features.py
+@@ -478,6 +478,7 @@ class CUDA_cuda(Feature):
+             ''', include_dirs=settings['include_dirs'])  # type: ignore[no-untyped-call] # NOQA
+         except Exception as e:
+             utils.print_warning('Cannot check CUDA version', str(e))
++            raise
+             return False
+ 
+         self._version = int(out)
+diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
+index 8023e46ad..a9f746d0d 100644
+--- a/install/cupy_builder/cupy_setup_build.py
++++ b/install/cupy_builder/cupy_setup_build.py
+@@ -294,16 +294,41 @@ def make_extensions(ctx: Context, compiler, use_cython):
+         # deprecated since ROCm 4.2.0
+         settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
+ 
+-    available_modules = []
+-    if no_cuda:
+-        available_modules = [m['name'] for m in MODULES]
+-    else:
+-        available_modules, settings = preconfigure_modules(
+-            ctx, MODULES, compiler, settings)
+-        required_modules = get_required_modules(MODULES)
+-        if not (set(required_modules) <= set(available_modules)):
+-            raise Exception('Your CUDA environment is invalid. '
+-                            'Please check above error log.')
++    try:
++        build_compiler = compiler
++        cc = os.environ['CC']
++        #ar = os.environ['AR']
++        cflags = os.environ['CFLAGS']
++        ldflags = os.environ['LDFLAGS']
++        if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
++            # If cross-compiling, we need build_and_run() to use the compiler
++            # on the build platform.
++            os.environ['CC'] = os.environ['CC_FOR_BUILD']
++            os.environ['CFLAGS'] = ''
++            os.environ['LDFLAGS'] = ''
++            #os.environ['AR'] = 'x86_64-conda-linux-gnu-ar'
++            compiler = ccompiler.new_compiler()
++            sysconfig.customize_compiler(compiler)
++            print(f"{compiler.compiler_so=}")
++            print(f"{compiler.linker_so=}")
++            print(f"{compiler.linker_exe=}")
++
++        available_modules = []
++        if no_cuda:
++            available_modules = [m['name'] for m in MODULES]
++        else:
++            available_modules, settings = preconfigure_modules(
++                ctx, MODULES, compiler, settings)
++            required_modules = get_required_modules(MODULES)
++            if not (set(required_modules) <= set(available_modules)):
++                raise Exception('Your CUDA environment is invalid. '
++                                'Please check above error log.')
++    finally:
++        compiler = build_compiler
++        os.environ['CC'] = cc
++        os.environ['CFLAGS'] = cflags
++        os.environ['LDFLAGS'] = ldflags
++        #os.environ['AR'] = ar
+ 
+     ret = []
+     for module in MODULES:
+diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
+index d0317e324..41ed5c3a5 100644
+--- a/install/cupy_builder/install_build.py
++++ b/install/cupy_builder/install_build.py
+@@ -305,6 +305,7 @@ def check_hip_version(compiler, settings):
+ 
+     except Exception as e:
+         utils.print_warning('Cannot check HIP version', str(e))
++        raise
+         return False
+ 
+     _hip_version = int(out)
+@@ -357,6 +358,7 @@ def check_compute_capabilities(compiler, settings):
+         _compute_capabilities = set([int(o) for o in out.split()])
+     except Exception as e:
+         utils.print_warning('Cannot check compute capability\n{0}'.format(e))
++        raise
+         return False
+ 
+     return True
+@@ -381,6 +383,7 @@ def check_thrust_version(compiler, settings):
+         ''', include_dirs=settings['include_dirs'])
+     except Exception as e:
+         utils.print_warning('Cannot check Thrust version\n{0}'.format(e))
++        raise
+         return False
+ 
+     _thrust_version = int(out)
+@@ -413,6 +416,7 @@ def check_cudnn_version(compiler, settings):
+ 
+     except Exception as e:
+         utils.print_warning('Cannot check cuDNN version\n{0}'.format(e))
++        raise
+         return False
+ 
+     _cudnn_version = int(out)
+@@ -469,6 +473,7 @@ def check_nccl_version(compiler, settings):
+ 
+     except Exception as e:
+         utils.print_warning('Cannot include NCCL\n{0}'.format(e))
++        raise
+         return False
+ 
+     _nccl_version = int(out)
+@@ -717,6 +722,13 @@ def build_shlib(compiler, source, libraries=(),
+ def build_and_run(compiler, source, libraries=(),
+                   include_dirs=(), library_dirs=(), define_macros=None,
+                   extra_compile_args=()):
++    if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
++        # If we're cross compiling, we need to generate stub files that are
++        # executable in the build environment, not the target environment.
++        # This assumes, however, that the build/host environments see the same
++        # CUDA Toolkit.
++        extra_compile_args = extra_compile_args + ('-march=native',)
++
+     with _tempdir() as temp_dir:
+         fname = os.path.join(temp_dir, 'a.cpp')
+         with open(fname, 'w') as f:
