@@ -11,10 +11,18 @@ index d12de78c3..77c29a954 100644
  
          self._version = int(out)
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index 8023e46ad..a9f746d0d 100644
+index 8023e46ad..7956beee9 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
-@@ -294,16 +294,41 @@ def make_extensions(ctx: Context, compiler, use_cython):
+@@ -1,6 +1,7 @@
+ # mypy: ignore-errors
+ 
+ import copy
++import distutils
+ from distutils import ccompiler
+ from distutils import sysconfig
+ import os
+@@ -294,16 +295,40 @@ def make_extensions(ctx: Context, compiler, use_cython):
          # deprecated since ROCm 4.2.0
          settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
  
@@ -30,22 +38,24 @@ index 8023e46ad..a9f746d0d 100644
 -                            'Please check above error log.')
 +    try:
 +        build_compiler = compiler
-+        cc = os.environ['CC']
-+        #ar = os.environ['AR']
-+        cflags = os.environ['CFLAGS']
-+        ldflags = os.environ['LDFLAGS']
++        os.symlink(f'{os.environ["BUILD_PREFIX"]}/x86_64-conda-linux-gnu/bin/x86_64-conda-linux-gnu-ld',
++                   f'{os.environ["BUILD_PREFIX"]}/bin/ld')
++        distutils.log.set_verbosity(1)
 +        if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
 +            # If cross-compiling, we need build_and_run() to use the compiler
-+            # on the build platform.
-+            os.environ['CC'] = os.environ['CC_FOR_BUILD']
-+            os.environ['CFLAGS'] = ''
-+            os.environ['LDFLAGS'] = ''
-+            #os.environ['AR'] = 'x86_64-conda-linux-gnu-ar'
++            # on the build platform to generate stub files that are executable
++            # in the build environment, not the target environment.
 +            compiler = ccompiler.new_compiler()
-+            sysconfig.customize_compiler(compiler)
-+            print(f"{compiler.compiler_so=}")
-+            print(f"{compiler.linker_so=}")
-+            print(f"{compiler.linker_exe=}")
++            compiler.compiler = [os.environ['CC_FOR_BUILD'],]
++            compiler.compiler_cxx = [os.environ['CXX_FOR_BUILD'],]
++            compiler.compiler_so = [os.environ['CC_FOR_BUILD'],]
++            compiler.linker_exe = [os.environ['CC_FOR_BUILD'], f'-B{os.environ["BUILD_PREFIX"]}/bin']
++            compiler.linker_so = [os.environ['CC_FOR_BUILD'], f'-B{os.environ["BUILD_PREFIX"]}/bin', '-shared']
++            #print(f"{compiler.compiler=}")
++            #print(f"{compiler.compiler_cxx=}")
++            #print(f"{compiler.compiler_so=}")
++            #print(f"{compiler.linker_exe=}")
++            #print(f"{compiler.linker_so=}")
 +
 +        available_modules = []
 +        if no_cuda:
@@ -59,15 +69,12 @@ index 8023e46ad..a9f746d0d 100644
 +                                'Please check above error log.')
 +    finally:
 +        compiler = build_compiler
-+        os.environ['CC'] = cc
-+        os.environ['CFLAGS'] = cflags
-+        os.environ['LDFLAGS'] = ldflags
-+        #os.environ['AR'] = ar
++        os.remove(f'{os.environ["BUILD_PREFIX"]}/bin/ld')
  
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..41ed5c3a5 100644
+index d0317e324..dd13c37c4 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -305,6 +305,7 @@ def check_hip_version(compiler, settings):
@@ -78,7 +85,13 @@ index d0317e324..41ed5c3a5 100644
          return False
  
      _hip_version = int(out)
-@@ -357,6 +358,7 @@ def check_compute_capabilities(compiler, settings):
+@@ -353,10 +354,12 @@ def check_compute_capabilities(compiler, settings):
+             compiler, src,
+             include_dirs=settings['include_dirs'],
+             libraries=('cudart',),
+-            library_dirs=settings['library_dirs'])
++            library_dirs=settings['library_dirs'] + [
++                f'os.environ["CONDA_BUILD_SYSROOT"]/lib/',] if os.environ.get('CONDA_BUILD_CROSS_COMPILATION') else [],)
          _compute_capabilities = set([int(o) for o in out.split()])
      except Exception as e:
          utils.print_warning('Cannot check compute capability\n{0}'.format(e))
@@ -86,7 +99,7 @@ index d0317e324..41ed5c3a5 100644
          return False
  
      return True
-@@ -381,6 +383,7 @@ def check_thrust_version(compiler, settings):
+@@ -381,6 +384,7 @@ def check_thrust_version(compiler, settings):
          ''', include_dirs=settings['include_dirs'])
      except Exception as e:
          utils.print_warning('Cannot check Thrust version\n{0}'.format(e))
@@ -94,7 +107,7 @@ index d0317e324..41ed5c3a5 100644
          return False
  
      _thrust_version = int(out)
-@@ -413,6 +416,7 @@ def check_cudnn_version(compiler, settings):
+@@ -413,6 +417,7 @@ def check_cudnn_version(compiler, settings):
  
      except Exception as e:
          utils.print_warning('Cannot check cuDNN version\n{0}'.format(e))
@@ -102,7 +115,7 @@ index d0317e324..41ed5c3a5 100644
          return False
  
      _cudnn_version = int(out)
-@@ -469,6 +473,7 @@ def check_nccl_version(compiler, settings):
+@@ -469,6 +474,7 @@ def check_nccl_version(compiler, settings):
  
      except Exception as e:
          utils.print_warning('Cannot include NCCL\n{0}'.format(e))
@@ -110,7 +123,7 @@ index d0317e324..41ed5c3a5 100644
          return False
  
      _nccl_version = int(out)
-@@ -717,6 +722,13 @@ def build_shlib(compiler, source, libraries=(),
+@@ -717,6 +723,13 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):
