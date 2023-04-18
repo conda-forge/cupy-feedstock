@@ -94,10 +94,9 @@ requirements:
     - cusparselt 0.2.0.*  # [linux64 or win]
     {% endif %}
     # TODO: clean up
-    #- cuda-nvcc  # for crt/host_defines.h
-    - cuda-cudart
-    - cuda-nvrtc
-    - cuda-profiler-api  # for cuda_profiler_api.h
+    - cuda-cudart-dev
+    - cuda-nvrtc-dev
+    - cuda-profiler-api
     - cuda-cccl
     - libcublas-dev
     - libcufft-dev
