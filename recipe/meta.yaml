@@ -94,6 +94,7 @@ requirements:
     - cusparselt 0.2.0.*  # [linux64 or win]
     {% endif %}
     # TODO: clean up
+    - cuda-driver-dev
     - cuda-cudart-dev
     - cuda-nvrtc-dev
     - cuda-profiler-api
