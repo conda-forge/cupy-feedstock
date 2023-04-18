@@ -21,12 +21,11 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 0
-  skip: true  # [(not win64 and not linux and not (aarch64 and arm_variant_type == "sbsa")) or cuda_compiler_version in (undefined, "None")]
+  number: 1
+  skip: true  # [not linux64]  # TODO: turn on other platforms once cuda-nvcc is ready
   script:
-    # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
-    # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
     - export NVCC=$(which nvcc)                                                  # [linux]
+    - export CUDA_PATH=$PREFIX                                                   # [linux]
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
@@ -76,7 +75,7 @@ requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
-    - {{ compiler("cuda") }}
+    #- {{ compiler("cuda") }}
     - sysroot_linux-64 2.17  # [linux64]
 
   host:
@@ -91,6 +90,17 @@ requirements:
     {% if cuda_major_minor >= (11, 2) %}
     - cusparselt 0.2.0.*  # [linux64 or win]
     {% endif %}
+    # TODO: clean up
+    #- cuda-nvcc  # for crt/host_defines.h
+    - cuda-cudart
+    - cuda-nvrtc
+    - cuda-profiler-api  # for cuda_profiler_api.h
+    - cuda-cccl
+    - libcublas-dev
+    - libcufft-dev
+    - libcurand-dev
+    - libcusolver-dev
+    - libcusparse-dev
 
   run:
     - python
@@ -112,9 +122,6 @@ requirements:
 test:
   requires:
     - pytest
-    - {{ compiler("c") }}
-    - {{ compiler("cxx") }}
-    - {{ compiler("cuda") }}  # tests need nvcc
 
   source_files:
     - tests
