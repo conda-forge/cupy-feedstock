@@ -1,5 +1,5 @@
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..fa7c0477b 100644
+index d0317e324..314c6d0f1 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -692,6 +692,14 @@ def get_cusparselt_version(formatted=False):
@@ -10,8 +10,8 @@ index d0317e324..fa7c0477b 100644
 +                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include',
 +                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/include']  # TODO: generalize for different host archs
 +    library_dirs = list(library_dirs) + [f'{os.environ["BUILD_PREFIX"]}/lib',
-+                                         f'{os.environ["BUILD_PREFIX"]}/lib/stubs',
 +                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib',
++                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib/stubs',
 +                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/lib']  # TODO: cannot use host lib if cross-compiling
 +
      with _tempdir() as temp_dir:
@@ -25,8 +25,8 @@ index d0317e324..fa7c0477b 100644
 +                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include',
 +                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/include']  # TODO: generalize for different host archs
 +    library_dirs = list(library_dirs) + [f'{os.environ["BUILD_PREFIX"]}/lib',
-+                                         f'{os.environ["BUILD_PREFIX"]}/lib/stubs',
 +                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib',
++                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib/stubs',
 +                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/lib']  # TODO: cannot use host lib if cross-compiling
 +
      with _tempdir() as temp_dir:
