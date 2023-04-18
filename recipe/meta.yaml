@@ -97,6 +97,7 @@ requirements:
     - cuda-driver-dev
     - cuda-cudart-dev
     - cuda-nvrtc-dev
+    - cuda-nvtx-dev
     - cuda-profiler-api
     - cuda-cccl
     - libcublas-dev
