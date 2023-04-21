@@ -30,6 +30,7 @@ build:
     - export CUDA_PATH=$PREFIX                                                   # [linux]
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - export CFLAGS="$CFLAGS -I$PREFIX/targets/x86_64-linux/include -I$BUILD_PREFIX/targets/x86_64-linux/include -L$PREFIX/targets/x86_64-linux/lib/stubs"  # [linux64]
+    #- nvcc --verbose $RECIPE_DIR/test_curand.cu -o test_curand  # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
     - set "NVCC=%NVCC% --use-local-env"  # [win64]
@@ -100,7 +101,7 @@ requirements:
     - cuda-nvrtc-dev
     - cuda-nvtx-dev
     - cuda-profiler-api
-    - cuda-cccl
+    #- cuda-cccl
     - libcublas-dev
     - libcufft-dev
     - libcurand-dev

@@ -1,15 +1,12 @@
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..a6f515db1 100644
+index d0317e324..a63c70681 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
-@@ -692,6 +692,15 @@ def get_cusparselt_version(formatted=False):
+@@ -692,6 +692,12 @@ def get_cusparselt_version(formatted=False):
  def build_shlib(compiler, source, libraries=(),
                  include_dirs=(), library_dirs=(), define_macros=None,
                  extra_compile_args=()):
-+    include_dirs = list(include_dirs) + [f'{os.environ["PREFIX"]}/targets/x86_64-linux/include',  # TODO: generalize for different host archs
-+                                         f'{os.environ["BUILD_PREFIX"]}/include',
-+                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include',
-+                                         ]
++    include_dirs = list(include_dirs)# + [f'{os.environ["PREFIX"]}/targets/x86_64-linux/include',]  # TODO: generalize for different host archs
 +    library_dirs = list(library_dirs) + [f'{os.environ["BUILD_PREFIX"]}/lib',
 +                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib',
 +                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/lib/stubs',
@@ -18,14 +15,11 @@ index d0317e324..a6f515db1 100644
      with _tempdir() as temp_dir:
          fname = os.path.join(temp_dir, 'a.cpp')
          with open(fname, 'w') as f:
-@@ -717,6 +726,15 @@ def build_shlib(compiler, source, libraries=(),
+@@ -717,6 +723,12 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):
-+    include_dirs = list(include_dirs) + [f'{os.environ["PREFIX"]}/targets/x86_64-linux/include',  # TODO: generalize for different host archs
-+                                         f'{os.environ["BUILD_PREFIX"]}/include',
-+                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include',
-+                                         ]
++    include_dirs = list(include_dirs)# + [f'{os.environ["PREFIX"]}/targets/x86_64-linux/include',]  # TODO: generalize for different host archs
 +    library_dirs = list(library_dirs) + [f'{os.environ["BUILD_PREFIX"]}/lib',
 +                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib',
 +                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/lib/stubs',
