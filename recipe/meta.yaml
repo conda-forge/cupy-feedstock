@@ -128,7 +128,8 @@ requirements:
 
 test:
   requires:
-    - pytest
+    # - pytest
+    - cuda-driver-dev  # need the libcuda stub for import test
 
   source_files:
     - tests

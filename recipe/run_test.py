@@ -1,4 +1,5 @@
 # Configure CuPy to use 1 GPU for testing
+import ctypes
 import os
 import site
 import sys
@@ -22,10 +23,11 @@ for cp in pypaths:
 else:
     raise RuntimeError('_wheel.json is not found in the package')
 
-# Now that conda-forge docker images have libcuda.so, so "import cupy" would not fail
-# on Linux. However, tests would fail on the Azure CI since there is no GPU. See the
-# discussion in https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090.
-# On Windows, this will fail because Windows has no driver stub.
+# dlopen the driver stub so that CuPy can be imported later
+# Note: This would make the actual tests fail on GPU CI!
+stub = ctypes.CDLL(f"{os.environ['PREFIX']}/targets/x86_64-linux/lib/stubs/libcuda.so")
+
+# TODO: do we not ship a stub on Windows?
 try:
     import cupy
 except Exception as e:
