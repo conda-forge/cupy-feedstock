@@ -27,9 +27,11 @@ build:
   skip: true  # [not linux64]  # TODO: turn on other platforms once cuda-nvcc is ready
   script:
     - export NVCC="$(which nvcc) -I$PREFIX/targets/x86_64-linux/include"         # [linux]
-    - export CUDA_PATH=$PREFIX                                                   # [linux]
+    - export CUDA_PATH=$PREFIX/targets/x86_64-linux                              # [linux64]
+    - export CUDA_PATH=$PREFIX/targets/aarch64-linux                             # [aarch64]
+    - export CUDA_PATH=$PREFIX/targets/ppc64le-linux                             # [ppc64le]
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
-    - export CFLAGS="$CFLAGS -I$PREFIX/targets/x86_64-linux/include -I$BUILD_PREFIX/targets/x86_64-linux/include -L$PREFIX/targets/x86_64-linux/lib/stubs"  # [linux64]
+    - export CFLAGS="$CFLAGS -I$CUDA_PATH/include -I$BUILD_PREFIX/targets/x86_64-linux/include -L$CUDA_PATH/lib/stubs"  # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
     - set "NVCC=%NVCC% --use-local-env"  # [win64]
@@ -100,7 +102,7 @@ requirements:
     - cuda-nvrtc-dev
     - cuda-nvtx-dev
     - cuda-profiler-api
-    - cuda-cccl
+    - cuda-cccl_{{ target_platform }}
     - libcublas-dev
     - libcufft-dev
     - libcurand-dev
