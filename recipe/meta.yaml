@@ -24,7 +24,7 @@ source:
 
 build:
   number: 1
-  skip: true  # [not linux64]  # TODO: turn on other platforms once cuda-nvcc is ready
+  skip: true  # [not linux64 or cuda_compiler_version == "None"]  # TODO: turn on other platforms once cuda-nvcc is ready
   script:
     - export NVCC="$(which nvcc) -I$PREFIX/targets/x86_64-linux/include"         # [linux]
     - export CUDA_PATH=$PREFIX/targets/x86_64-linux                              # [linux64]
