@@ -5,11 +5,11 @@ github:
 idle_timeout_minutes: 120
 os_version:
   linux_64: cos7
-  linux_aarch64: cos7
-  linux_ppc64le: cos7
-provider:
-  linux_aarch64: azure
-  linux_ppc64le: azure
+#  linux_aarch64: cos7
+#  linux_ppc64le: cos7
+#provider:
+#  linux_aarch64: azure
+#  linux_ppc64le: azure
 conda_build:
   pkg_format: '2'
 bot:
