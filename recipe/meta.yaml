@@ -20,7 +20,7 @@ source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     patches:
-      - support_new_cuda_layout.diff  # [linux]
+      - support_new_cuda_layout.diff  # [linux and cuda_compiler_version == "12.0"]
 
 build:
   number: 1
