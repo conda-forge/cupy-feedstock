@@ -26,12 +26,20 @@ build:
   number: 1
   skip: true  # [not linux64 or cuda_compiler_version == "None"]  # TODO: turn on other platforms once cuda-nvcc is ready
   script:
+    {% if cuda_major_minor < (12, 0) %}
+    # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
+    # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
+    - export NVCC=$(which nvcc)    
+    {% else %}
     - export NVCC="$(which nvcc) -I$PREFIX/targets/x86_64-linux/include"         # [linux]
     - export CUDA_PATH=$PREFIX/targets/x86_64-linux                              # [linux64]
     - export CUDA_PATH=$PREFIX/targets/aarch64-linux                             # [aarch64]
     - export CUDA_PATH=$PREFIX/targets/ppc64le-linux                             # [ppc64le]
+    {% endif %}
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
+    {% if cuda_major_minor == (12, 0) %}
     - export CFLAGS="$CFLAGS -I$CUDA_PATH/include -I$BUILD_PREFIX/targets/x86_64-linux/include -L$CUDA_PATH/lib/stubs"  # [linux]
+    {% endif %}
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
     - set "NVCC=%NVCC% --use-local-env"  # [win64]
