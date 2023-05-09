@@ -38,11 +38,9 @@ build:
     {% else %}
     - export CUDA_PATH=$PREFIX/targets/{{ target_name }}                                                    # [linux]
     - export NVCC="$BUILD_PREFIX/targets/{{ target_name }}/bin/nvcc -I$CUDA_PATH/include -L$CUDA_PATH/lib"  # [linux]
-    {% endif %}
-    - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
-    {% if cuda_major_minor == (12, 0) %}
     - export CFLAGS="$CFLAGS -I$PREFIX/include -I$CUDA_PATH/include -I$BUILD_PREFIX/targets/{{ target_name }}/include -L$PREFIX/lib -L$CUDA_PATH/lib/stubs"  # [linux and build_platform == target_platform]
     {% endif %}
+    - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
     - set "NVCC=%NVCC% --use-local-env"  # [win64]
