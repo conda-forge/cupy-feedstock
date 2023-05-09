@@ -48,18 +48,20 @@ index 8023e46ad..66fc86ab2 100644
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..bc79aa330 100644
+index d0317e324..5a694b409 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
-@@ -1,6 +1,7 @@
+@@ -1,7 +1,9 @@
  # mypy: ignore-errors
  
  import contextlib
 +import logging
  import os
++import platform
  import re
  import shlex
-@@ -16,6 +17,8 @@ from cupy_builder import _environment
+ import shutil
+@@ -16,6 +18,8 @@ from cupy_builder import _environment
  from cupy_builder._context import Context
  
  
@@ -68,19 +70,31 @@ index d0317e324..bc79aa330 100644
  PLATFORM_LINUX = sys.platform.startswith('linux')
  PLATFORM_WIN32 = sys.platform.startswith('win32')
  
-@@ -692,6 +695,20 @@ def get_cusparselt_version(formatted=False):
+@@ -689,9 +693,32 @@ def get_cusparselt_version(formatted=False):
+     return _cusparselt_version
+ 
+ 
++def get_target_name():
++    # TODO: support windows
++    plat = platform.processor()
++    if plat == "aarch64":
++        return "sbsa-linux"
++    else:
++        return f"{plat}-linux"
++
++
  def build_shlib(compiler, source, libraries=(),
                  include_dirs=(), library_dirs=(), define_macros=None,
                  extra_compile_args=()):
 +    include_dirs = [f'{os.environ["BUILD_PREFIX"]}/include',
-+                    f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include',
-+                    # TODO: generalize for different host archs
-+                    f'{os.environ["PREFIX"]}/targets/x86_64-linux/include'] \
++                    f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include',  # for cross compilation
++                    f'{os.environ["BUILD_PREFIX"]}/targets/{get_target_name()}-linux/include',
++                    f'{os.environ["PREFIX"]}/targets/{get_target_name()}-linux/include'] \
 +                   + list(include_dirs)
 +    library_dirs = list(library_dirs) + [f'{os.environ["BUILD_PREFIX"]}/lib',
-+                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib',
-+                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/lib/stubs',
-+                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/lib']
++                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib',  # for cross compilation
++                                         f'{os.environ["PREFIX"]}/targets/{get_target_name()}-linux/lib/stubs',
++                                         f'{os.environ["PREFIX"]}/targets/{get_target_name()}-linux/lib']
 +    if os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
 +        # also look for $PREFIX (for optional dependencies)
 +        include_dirs.append(f'{os.environ["PREFIX"]}/include')
@@ -89,19 +103,19 @@ index d0317e324..bc79aa330 100644
      with _tempdir() as temp_dir:
          fname = os.path.join(temp_dir, 'a.cpp')
          with open(fname, 'w') as f:
-@@ -717,6 +734,20 @@ def build_shlib(compiler, source, libraries=(),
+@@ -717,6 +744,20 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):
 +    include_dirs = [f'{os.environ["BUILD_PREFIX"]}/include',
-+                    f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include',
-+                    # TODO: generalize for different host archs
-+                    f'{os.environ["PREFIX"]}/targets/x86_64-linux/include'] \
++                    f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include',  # for cross compilation
++                    f'{os.environ["BUILD_PREFIX"]}/targets/{get_target_name()}-linux/include',
++                    f'{os.environ["PREFIX"]}/targets/{get_target_name()}-linux/include'] \
 +                   + list(include_dirs)
 +    library_dirs = list(library_dirs) + [f'{os.environ["BUILD_PREFIX"]}/lib',
-+                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib',
-+                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/lib/stubs',
-+                                         f'{os.environ["PREFIX"]}/targets/x86_64-linux/lib']
++                                         f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib',  # for cross compilation
++                                         f'{os.environ["PREFIX"]}/targets/{get_target_name()}-linux/lib/stubs',
++                                         f'{os.environ["PREFIX"]}/targets/{get_target_name()}-linux/lib']
 +    if os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
 +        # also look for $PREFIX (for optional dependencies)
 +        include_dirs.append(f'{os.environ["PREFIX"]}/include')
