@@ -31,7 +31,8 @@ build:
     # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
     - export NVCC=$(which nvcc)    
     {% else %}
-    - export NVCC="$(which nvcc) -I$PREFIX/targets/x86_64-linux/include"         # [linux]
+    #- export NVCC="$(which nvcc) -I$PREFIX/targets/x86_64-linux/include"         # [linux]
+    - export NVCC="$(which nvcc)"                                                # [linux]
     - export CUDA_PATH=$PREFIX/targets/x86_64-linux                              # [linux64]
     - export CUDA_PATH=$PREFIX/targets/aarch64-linux                             # [aarch64]
     - export CUDA_PATH=$PREFIX/targets/ppc64le-linux                             # [ppc64le]
