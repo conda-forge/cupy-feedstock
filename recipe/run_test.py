@@ -26,7 +26,7 @@ else:
 # dlopen the driver stub so that CuPy can be imported later
 # Note: This would make the actual tests fail on GPU CI!
 try:
-    stub = ctypes.CDLL(f"{os.environ['PREFIX']}/targets/x86_64-linux/lib/stubs/libcuda.so")
+    stub = ctypes.CDLL(f"{os.environ['CUDA_PATH']}/lib/stubs/libcuda.so")
 except:
     pass  # do nothing, it's pre-CUDA 12
 
