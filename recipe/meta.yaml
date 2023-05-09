@@ -82,7 +82,7 @@ build:
     - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
   ignore_run_exports:
-    - cudnn
+    - cudnn  # [not (aarch64 and cuda_compiler_version == "12.0")]
     # TODO: wait for NCCL to catch up
     {% if cuda_major_minor < (12, 0) %}
     - nccl  # [linux]
@@ -106,7 +106,8 @@ requirements:
     - setuptools
     - cython >=0.29.22,<3
     - fastrlock >=0.5
-    - cudnn >=7.6
+    # see https://github.com/conda-forge/cudnn-feedstock/issues/58
+    - cudnn >=8  # [not (aarch64 and cuda_compiler_version == "12.0")]
     # TODO: wait for NCCL to catch up
     {% if cuda_major_minor < (12, 0) %}
     - nccl >=2.8  # [linux]
@@ -129,10 +130,7 @@ requirements:
     - libcusolver-dev
     - libcusparse-dev
     {% endif %}
-    # fix weird conflicts for aarch64/ppc64le (12.0.0 vs 12.0.*)
-    {% if cuda_compiler_version is defined and cuda_major_minor > (0, 0) %}
-    - cuda-version {{ cuda_compiler_version + ".*" }}
-    {% endif %}
+    - cuda-version {{ cuda_compiler_version }}
 
   run:
     - python
@@ -151,7 +149,7 @@ requirements:
     - __glibc >=2.17      # [linux]
     - scipy >=1.7
     - optuna >=3
-    - {{ pin_compatible('cudnn') }}
+    - {{ pin_compatible('cudnn') }}  # [not (aarch64 and cuda_compiler_version == "12.0")]
     # TODO: wait for NCCL to catch up
     {% if cuda_major_minor < (12, 0) %}
     - {{ pin_compatible('nccl') }}  # [linux]
