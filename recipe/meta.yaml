@@ -2,6 +2,11 @@
 {% set version = "12.0.0" %}
 {% set sha256 = "61ddbbef73d50d606bd5087570645f3c91ec9176c2566784c1d486d6a3404545" %}
 
+{% set target_name = "x86_64-linux" %}  # [linux64]
+{% set target_name = "ppc64le-linux" %}  # [ppc64le]
+{% set target_name = "sbsa-linux" %}  # [aarch64]
+{% set target_name = "x64" %}  # [win]
+
 {% if cuda_compiler_version in (None, "None", True, False) %}
 {% set cuda_major = 0 %}
 {% set cuda_minor = 0 %}
@@ -32,14 +37,13 @@ build:
     - export NVCC=$(which nvcc)    
     {% else %}
     #- export NVCC="$(which nvcc) -I$PREFIX/targets/x86_64-linux/include"         # [linux]
-    - export NVCC="$(which nvcc)"                                                # [linux]
-    - export CUDA_PATH=$PREFIX/targets/x86_64-linux                              # [linux64]
-    - export CUDA_PATH=$PREFIX/targets/aarch64-linux                             # [aarch64]
-    - export CUDA_PATH=$PREFIX/targets/ppc64le-linux                             # [ppc64le]
+    #- export NVCC="$(which nvcc)"                                                # [linux]
+    - export NVCC="$BUILD_PREFIX/targets/{{ target_name }}/bin/nvcc -I$PREFIX/targets/{{ target_name }}/include -L$PREFIX/targets/{{ target_name }}/lib"  # [linux]
+    - export CUDA_PATH=$PREFIX/targets/{{ target_name }}  # [linux]
     {% endif %}
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     {% if cuda_major_minor == (12, 0) %}
-    - export CFLAGS="$CFLAGS -I$CUDA_PATH/include -I$BUILD_PREFIX/targets/x86_64-linux/include -L$CUDA_PATH/lib/stubs"  # [linux]
+    - export CFLAGS="$CFLAGS -I$PREFIX/include -I$CUDA_PATH/include -I$BUILD_PREFIX/targets/x86_64-linux/include -L$PREFIX/lib -L$CUDA_PATH/lib/stubs"  # [linux]
     {% endif %}
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
@@ -106,8 +110,8 @@ requirements:
     # TODO: wait for NCCL to catch up
     {% if cuda_major_minor < (12, 0) %}
     - nccl >=2.8  # [linux]
-    - cutensor >=1.4,<2
     {% endif %}
+    - cutensor >=1.4,<2
     {% if cuda_major_minor == (11, 2) %}
     - cusparselt 0.2.0.*  # [linux64 or win]
     {% endif %}
@@ -125,7 +129,10 @@ requirements:
     - libcusolver-dev
     - libcusparse-dev
     {% endif %}
-    - cuda-version {{ cuda_compiler_version }}
+    # fix weird conflicts for aarch64/ppc64le (12.0.0 vs 12.0.*)
+    {% if cuda_major_minor > (0, 0) %}
+    - cuda-version {{ cuda_compiler_version + ".*" }}
+    {% endif %}
 
   run:
     - python
