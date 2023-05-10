@@ -1,9 +1,18 @@
 # Configure CuPy to use 1 GPU for testing
 import ctypes
 import os
+import platform
 import site
 import sys
 os.environ["CUPY_TEST_GPU_LIMIT"] = "1"
+
+def get_target_name():
+    plat = platform.processor()
+    if plat == "aarch64":
+        out = "sbsa-linux"
+    else:
+        out = f"{plat}-linux"
+    return out
 
 # Check CUDA_PATH is set
 cuda_path = os.environ.get('CUDA_PATH')
@@ -25,10 +34,13 @@ else:
 
 # dlopen the driver stub so that CuPy can be imported later
 # Note: This would make the actual tests fail on GPU CI!
-try:
-    stub = ctypes.CDLL(f"{os.environ['CUDA_PATH']}/lib/stubs/libcuda.so")
-except:
-    pass  # do nothing, it's pre-CUDA 12
+if sys.platform.startswith('linux'):
+    try:
+        stub = f"{os.environ['PREFIX']}/targets/{get_target_name()}/lib/stubs/libcuda.so"
+        stub = ctypes.CDLL(stub)
+    except:
+        print(f"{stub=} was not loaded")
+        pass  # do nothing, it's pre-CUDA 12
 
 # TODO: do we not ship a stub on Windows?
 try:
@@ -37,6 +49,9 @@ except Exception as e:
     if sys.platform.startswith('win32'):
         print("No driver available on Windows. Exiting...")
         sys.exit(0)
+else:
+    print("import ok")
+    sys.exit(0)
 
 # Ensure CuPy picks up the correct CUDA_VERSION
 from cupy.cuda import driver
