@@ -8,6 +8,7 @@ os_version:
   linux_aarch64: cos7
   linux_ppc64le: cos7
 build_platform:
+   linux_aarch64: linux_aarch64
    linux_ppc64le: linux_64
 provider:
   linux_aarch64: default 
