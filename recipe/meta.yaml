@@ -29,7 +29,9 @@ source:
 
 build:
   number: 1
-  skip: true  # [not linux or cuda_compiler_version == "None"]  # TODO: turn on other platforms once cuda-nvcc is ready
+  # TODO: turn on win64 + CUDA 12 once it's ready
+  # TODO: turn on aarch64 + CUDA 12 once glibc 2.28 is ready
+  skip: true  # [not linux or cuda_compiler_version == "None" or (cuda_compiler_version == "12.0" and not linux64)]
   script:
     {% if cuda_major_minor < (12, 0) %}
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
