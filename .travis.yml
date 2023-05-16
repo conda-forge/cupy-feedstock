@@ -7,22 +7,22 @@ language: generic
 
 matrix:
   include:
-    - env: CONFIG=linux_aarch64_cuda_compilernvcccuda_compiler_version11.2python3.10.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-aarch64 DOCKER_IMAGE=quay.io/condaforge/linux-anvil-aarch64
+    - env: CONFIG=linux_aarch64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cudnn8cxx_compiler_version10python3.10.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-aarch64 DOCKER_IMAGE=quay.io/condaforge/linux-anvil-aarch64-cuda:11.2
       os: linux
       arch: arm64
       dist: focal
 
-    - env: CONFIG=linux_aarch64_cuda_compilernvcccuda_compiler_version11.2python3.11.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-aarch64 DOCKER_IMAGE=quay.io/condaforge/linux-anvil-aarch64
+    - env: CONFIG=linux_aarch64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cudnn8cxx_compiler_version10python3.11.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-aarch64 DOCKER_IMAGE=quay.io/condaforge/linux-anvil-aarch64-cuda:11.2
       os: linux
       arch: arm64
       dist: focal
 
-    - env: CONFIG=linux_aarch64_cuda_compilernvcccuda_compiler_version11.2python3.8.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-aarch64 DOCKER_IMAGE=quay.io/condaforge/linux-anvil-aarch64
+    - env: CONFIG=linux_aarch64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cudnn8cxx_compiler_version10python3.8.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-aarch64 DOCKER_IMAGE=quay.io/condaforge/linux-anvil-aarch64-cuda:11.2
       os: linux
       arch: arm64
       dist: focal
 
-    - env: CONFIG=linux_aarch64_cuda_compilernvcccuda_compiler_version11.2python3.9.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-aarch64 DOCKER_IMAGE=quay.io/condaforge/linux-anvil-aarch64
+    - env: CONFIG=linux_aarch64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cudnn8cxx_compiler_version10python3.9.____cpython UPLOAD_PACKAGES=True PLATFORM=linux-aarch64 DOCKER_IMAGE=quay.io/condaforge/linux-anvil-aarch64-cuda:11.2
       os: linux
       arch: arm64
       dist: focal
