@@ -50,7 +50,7 @@ index 8023e46ad..6f2ca0b28 100644
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..11e90f039 100644
+index d0317e324..42c70b9e6 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -1,7 +1,9 @@
@@ -72,7 +72,7 @@ index d0317e324..11e90f039 100644
  PLATFORM_LINUX = sys.platform.startswith('linux')
  PLATFORM_WIN32 = sys.platform.startswith('win32')
  
-@@ -689,9 +693,55 @@ def get_cusparselt_version(formatted=False):
+@@ -689,9 +693,59 @@ def get_cusparselt_version(formatted=False):
      return _cusparselt_version
  
  
@@ -102,10 +102,14 @@ index d0317e324..11e90f039 100644
 +        # executable in the build environment, not the target environment.
 +        # This assumes, however, that the build/host environments see the same
 +        # CUDA Toolkit.
-+        include_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include')  # CUDA 12
-+        library_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib')      # CUDA 12
-+        include_dirs.append('/usr/local/cuda/include')                                        # CUDA 11
-+        library_dirs.append('/usr/local/cuda/lib64/stubs')                                    # CUDA 11
++        if os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
++            include_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include')
++            library_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib')
++            library_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/lib/stubs')
++        elif os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('11'):
++            include_dirs.append('/usr/local/cuda/include')
++            library_dirs.append('/usr/local/cuda/lib64/stubs')
++
 +        # for optional dependencies
 +        include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/include')
 +        library_dirs.append(f'{os.environ["BUILD_PREFIX"]}/lib')
@@ -128,7 +132,7 @@ index d0317e324..11e90f039 100644
      with _tempdir() as temp_dir:
          fname = os.path.join(temp_dir, 'a.cpp')
          with open(fname, 'w') as f:
-@@ -717,6 +767,8 @@ def build_shlib(compiler, source, libraries=(),
+@@ -717,6 +771,8 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):
