@@ -40,8 +40,6 @@ build:
     {% if cuda_major_minor == (12, 0) %}
     - export CUPY_NUM_BUILD_JOBS=1                                               # [aarch64 and (build_platform == target_platform)]
     - export CUDA_PATH=$PREFIX/targets/{{ target_name }}                         # [linux]
-    - export CFLAGS="$CFLAGS -I$BUILD_PREFIX/targets/{{ target_name }}/include"  # [linux]
-    - export CFLAGS="$CFLAGS -L$CUDA_PATH/lib/stubs"                             # [linux]
     - export CUPY_NVCC_GENERATE_CODE="$CUPY_NVCC_GENERATE_CODE;arch=compute_90,code=sm_90;arch=compute_90,code=sm_90a"  # [aarch64]
     {% endif %}
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
