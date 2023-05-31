@@ -2,12 +2,12 @@ migrator_ts: 1683090168
 __migrator:
   kind:
     version
-  use_local: true  # TODO: Remove this line after completing testing
   migration_number:
     1
   build_number:
     1
-  paused: false
+  # Pausing to start on CUDA 12.0 `x86_64` migrator first
+  paused: true
   override_cbc_keys:
     - cuda_compiler_stub
   operation: key_add
@@ -33,11 +33,11 @@ cuda_compiler:                 # [ppc64le or aarch64]
 cuda_compiler_version:         # [ppc64le or aarch64]
   - 12.0                       # [ppc64le or aarch64]
 
-cudnn:                  # [ppc64le or aarch64]
-  - 8                   # [ppc64le or aarch64]
+cudnn:                         # [ppc64le or aarch64]
+  - 8                          # [ppc64le or aarch64]
 
-cdt_name:  # [ppc64le or aarch64]
-  - cos7   # [ppc64le or aarch64]
+cdt_name:                      # [ppc64le or aarch64]
+  - cos7                       # [ppc64le or aarch64]
 
 docker_image:                                           # [os.environ.get("BUILD_PLATFORM", "").startswith("linux") and (ppc64le or aarch64)]
    # case: native compilation (build == target)
