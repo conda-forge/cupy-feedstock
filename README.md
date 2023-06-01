@@ -18,14 +18,7 @@ Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://app.travis-ci.com/conda-forge/cupy-feedstock">
-        <img alt="linux" src="https://img.shields.io/travis/com/conda-forge/cupy-feedstock/main.svg?label=Linux">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -481,7 +474,4 @@ Feedstock Maintainers
 * [@kmaehashi](https://github.com/kmaehashi/)
 * [@leofang](https://github.com/leofang/)
 * [@toslunar](https://github.com/toslunar/)
-
-
-<!-- dummy commit to enable rerendering -->
 
