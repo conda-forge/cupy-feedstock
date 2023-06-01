@@ -1,0 +1,143 @@
+diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
+index 8023e46ad..6f2ca0b28 100644
+--- a/install/cupy_builder/cupy_setup_build.py
++++ b/install/cupy_builder/cupy_setup_build.py
+@@ -294,16 +294,36 @@ def make_extensions(ctx: Context, compiler, use_cython):
+         # deprecated since ROCm 4.2.0
+         settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
+ 
+-    available_modules = []
+-    if no_cuda:
+-        available_modules = [m['name'] for m in MODULES]
+-    else:
+-        available_modules, settings = preconfigure_modules(
+-            ctx, MODULES, compiler, settings)
+-        required_modules = get_required_modules(MODULES)
+-        if not (set(required_modules) <= set(available_modules)):
+-            raise Exception('Your CUDA environment is invalid. '
+-                            'Please check above error log.')
++    try:
++        host_compiler = compiler
++        if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
++            os.symlink(f'{os.environ["BUILD_PREFIX"]}/x86_64-conda-linux-gnu/bin/x86_64-conda-linux-gnu-ld',
++                       f'{os.environ["BUILD_PREFIX"]}/bin/ld')
++        if os.environ.get('CONDA_BUILD_CROSS_COMPILATION') or os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
++            # If cross-compiling, we need build_and_run() & build_shlib() to use the compiler
++            # on the build platform to generate stub files that are executable in the build
++            # environment, not the target environment.
++            compiler = ccompiler.new_compiler()
++            compiler.compiler = [os.environ['CC_FOR_BUILD'],]
++            compiler.compiler_cxx = [os.environ['CXX_FOR_BUILD'],]
++            compiler.compiler_so = [os.environ['CC_FOR_BUILD'],]
++            compiler.linker_exe = [os.environ['CC_FOR_BUILD'], f'-B{os.environ["BUILD_PREFIX"]}/bin']
++            compiler.linker_so = [os.environ['CC_FOR_BUILD'], f'-B{os.environ["BUILD_PREFIX"]}/bin', '-shared']
++
++        available_modules = []
++        if no_cuda:
++            available_modules = [m['name'] for m in MODULES]
++        else:
++            available_modules, settings = preconfigure_modules(
++                ctx, MODULES, compiler, settings)
++            required_modules = get_required_modules(MODULES)
++            if not (set(required_modules) <= set(available_modules)):
++                raise Exception('Your CUDA environment is invalid. '
++                                'Please check above error log.')
++    finally:
++        compiler = host_compiler
++        if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
++            os.remove(f'{os.environ["BUILD_PREFIX"]}/bin/ld')
+ 
+     ret = []
+     for module in MODULES:
+diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
+index d0317e324..42c70b9e6 100644
+--- a/install/cupy_builder/install_build.py
++++ b/install/cupy_builder/install_build.py
+@@ -1,7 +1,9 @@
+ # mypy: ignore-errors
+ 
+ import contextlib
++import logging
+ import os
++import platform
+ import re
+ import shlex
+ import shutil
+@@ -16,6 +18,8 @@ from cupy_builder import _environment
+ from cupy_builder._context import Context
+ 
+ 
++logging.basicConfig(level=logging.DEBUG)
++
+ PLATFORM_LINUX = sys.platform.startswith('linux')
+ PLATFORM_WIN32 = sys.platform.startswith('win32')
+ 
+@@ -689,9 +693,59 @@ def get_cusparselt_version(formatted=False):
+     return _cusparselt_version
+ 
+ 
++def conda_get_target_name():
++    out = None
++    if PLATFORM_LINUX:
++        plat = platform.processor()
++        if plat == "aarch64":
++            out = "sbsa-linux"
++        else:
++            out = f"{plat}-linux"
++    else:
++        raise NotImplementedError
++    logging.debug(f"{out=}")
++    return out
++
++
++def conda_update_dirs(include_dirs, library_dirs):
++    # Note: These hacks are needed for the dependency detection stage to function,
++    # because we create a fresh compiler instance that does not honor CFLAGS etc set
++    # in the conda-build environment.
++    include_dirs = list(include_dirs)
++    library_dirs = list(library_dirs)
++
++    if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
++        # If we're cross compiling, we need to generate stub files that are
++        # executable in the build environment, not the target environment.
++        # This assumes, however, that the build/host environments see the same
++        # CUDA Toolkit.
++        if os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
++            include_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include')
++            library_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib')
++            library_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/lib/stubs')
++        elif os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('11'):
++            include_dirs.append('/usr/local/cuda/include')
++            library_dirs.append('/usr/local/cuda/lib64/stubs')
++
++        # for optional dependencies
++        include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/include')
++        library_dirs.append(f'{os.environ["BUILD_PREFIX"]}/lib')
++
++    if os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
++        include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/targets/{conda_get_target_name()}/include')  # for crt headers
++        library_dirs.append(f'{os.environ["PREFIX"]}/lib/stubs')
++        # for optional dependencies
++        include_dirs.append(f'{os.environ["PREFIX"]}/include')
++        library_dirs.append(f'{os.environ["PREFIX"]}/lib')
++
++    return include_dirs, library_dirs
++
++
+ def build_shlib(compiler, source, libraries=(),
+                 include_dirs=(), library_dirs=(), define_macros=None,
+                 extra_compile_args=()):
++    include_dirs, library_dirs = conda_update_dirs(include_dirs, library_dirs)
++
+     with _tempdir() as temp_dir:
+         fname = os.path.join(temp_dir, 'a.cpp')
+         with open(fname, 'w') as f:
+@@ -717,6 +771,8 @@ def build_shlib(compiler, source, libraries=(),
+ def build_and_run(compiler, source, libraries=(),
+                   include_dirs=(), library_dirs=(), define_macros=None,
+                   extra_compile_args=()):
++    include_dirs, library_dirs = conda_update_dirs(include_dirs, library_dirs)
++
+     with _tempdir() as temp_dir:
+         fname = os.path.join(temp_dir, 'a.cpp')
+         with open(fname, 'w') as f:
