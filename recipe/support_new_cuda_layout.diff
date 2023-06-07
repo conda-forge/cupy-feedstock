@@ -1,5 +1,5 @@
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index 8023e46ad..dbd87ad46 100644
+index 8023e46ad..0a75aef4d 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
 @@ -5,6 +5,7 @@ from distutils import ccompiler
@@ -10,7 +10,7 @@ index 8023e46ad..dbd87ad46 100644
  import sys
  
  import setuptools
-@@ -294,16 +295,44 @@ def make_extensions(ctx: Context, compiler, use_cython):
+@@ -294,16 +295,52 @@ def make_extensions(ctx: Context, compiler, use_cython):
          # deprecated since ROCm 4.2.0
          settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
  
@@ -57,16 +57,24 @@ index 8023e46ad..dbd87ad46 100644
 +            # Hack: when cross compiling we're duplicating the dependencies,
 +            # leading to various errors due to lack of disk space. As we no
 +            # longer need the optional dependencies in build after this point,
-+            # let's remove the largest package from build.
++            # let's remove the large packages from build.
 +            out = subprocess.run(
 +                ['conda', 'remove', '-p', os.environ['BUILD_PREFIX'], '-y',
 +                 '-v', 'cudnn'], env=os.environ)
++            out.check_returncode()
++            out = subprocess.run(
++                ['conda', 'remove', '-p', os.environ['BUILD_PREFIX'], '-y',
++                 '-v', 'nccl'], env=os.environ)
++            out.check_returncode()
++            out = subprocess.run(
++                ['conda', 'remove', '-p', os.environ['BUILD_PREFIX'], '-y',
++                 '-v', 'cutensor'], env=os.environ)
 +            out.check_returncode()
  
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..d73647eec 100644
+index d0317e324..759d27157 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -1,7 +1,9 @@
@@ -89,17 +97,7 @@ index d0317e324..d73647eec 100644
  PLATFORM_LINUX = sys.platform.startswith('linux')
  PLATFORM_WIN32 = sys.platform.startswith('win32')
  
-@@ -252,7 +257,8 @@ def _get_compiler_base_options(compiler_path):
-         proc = subprocess.Popen(
-             compiler_path + ['-o', test_out_path, test_cu_path],
-             stdout=subprocess.PIPE,
--            stderr=subprocess.PIPE)
-+            stderr=subprocess.PIPE,
-+            env=os.environ)
-         stdoutdata, stderrdata = proc.communicate()
-         stderrlines = stderrdata.split(b'\n')
-         if proc.returncode != 0:
-@@ -689,9 +695,59 @@ def get_cusparselt_version(formatted=False):
+@@ -689,9 +694,59 @@ def get_cusparselt_version(formatted=False):
      return _cusparselt_version
  
  
@@ -159,7 +157,7 @@ index d0317e324..d73647eec 100644
      with _tempdir() as temp_dir:
          fname = os.path.join(temp_dir, 'a.cpp')
          with open(fname, 'w') as f:
-@@ -717,6 +773,8 @@ def build_shlib(compiler, source, libraries=(),
+@@ -717,6 +772,8 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):
