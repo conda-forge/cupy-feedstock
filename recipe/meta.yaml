@@ -34,6 +34,7 @@ build:
   skip: true  # [cuda_compiler_version == "None" or (cuda_compiler_version == "12.0" and not linux64)]
   script:
     # When cross compiling we hit OOM (including "no space on device" in /tmp) very easily
+    - mkdir -p $SRC_DIR/tmp                                                      # [build_platform != target_platform]
     - export TMPDIR=$SRC_DIR/tmp                                                 # [build_platform != target_platform]
     - export TMP=$TMPDIR                                                         # [build_platform != target_platform]
     - export TEMP=$TMPDIR                                                        # [build_platform != target_platform]
