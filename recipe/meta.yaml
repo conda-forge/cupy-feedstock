@@ -60,9 +60,7 @@ build:
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
     - set "NVCC=%NVCC% --use-local-env"  # [win64]
     - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"  # [win]
-    {% if cuda_major_minor == (11, 2) %}
-    - export CUSPARSELT_PATH=$PREFIX  # [linux64 or win]
-    {% endif %}
+    - export CUSPARSELT_PATH=$PREFIX                                             # [(linux64 or win) and cuda_compiler_version == "11.2"]
     # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
     - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
 
