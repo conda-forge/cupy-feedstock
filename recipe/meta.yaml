@@ -26,6 +26,7 @@ source:
     sha256: {{ sha256 }}
     patches:
       - support_new_cuda_layout.diff  # [(linux and cuda_compiler_version == "12.0") or (build_platform != target_platform)]
+      - support_nvtx3_win.diff        # [win64]
 
 build:
   number: 4
@@ -135,6 +136,7 @@ requirements:
     - cython >=0.29.22,<3
     - fastrlock >=0.5
     - cuda-version {{ cuda_compiler_version }}
+    - nvtx-c  # [win64]
     # TODO: clean up
     {% if cuda_major_minor == (12, 0) %}
     - cuda-driver-dev
