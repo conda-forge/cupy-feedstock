@@ -51,7 +51,7 @@ build:
     - export CUPY_NVCC_GENERATE_CODE="$CUPY_NVCC_GENERATE_CODE;arch=compute_90,code=compute_90"                         # [aarch64 or ppc64le]
     {% else %}
     # need to include PTX code for JIT'ing
-    - export CUPY_NVCC_GENERATE_CODE="$CUPY_NVCC_GENERATE_CODE;arch=compute_80,code=compute_80"                         # [aarch64 or ppc64le]   
+    - export CUPY_NVCC_GENERATE_CODE="$CUPY_NVCC_GENERATE_CODE;arch=compute_80,code=compute_80"                         # [aarch64 or ppc64le]
     {% endif %}
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
