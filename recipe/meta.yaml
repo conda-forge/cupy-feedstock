@@ -81,6 +81,9 @@ build:
     - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_compiler_version }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
     - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_compiler_version }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
     {% endif %}
+
+    # cupy/cupy#7578
+    - if not exist %SP_DIR%\cupy\.data\_depends.json exit 1  # [win]
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
