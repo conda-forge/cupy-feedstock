@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "12.0.0" %}
-{% set sha256 = "61ddbbef73d50d606bd5087570645f3c91ec9176c2566784c1d486d6a3404545" %}
+{% set version = "12.1.0" %}
+{% set sha256 = "f6d31989cdb2d96581da12822e28b102f29e254427195c2017eac327869b7320" %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -29,7 +29,7 @@ source:
       - support_nvtx3_win.diff        # [win64]
 
 build:
-  number: 4
+  number: 0
   # TODO: turn on win64 + CUDA 12 once it's ready
   # TODO: turn on aarch64 + CUDA 12 once glibc 2.28 is ready
   skip: true  # [cuda_compiler_version == "None" or (cuda_compiler_version == "12.0" and not linux64)]
@@ -81,6 +81,9 @@ build:
     - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_compiler_version }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
     - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_compiler_version }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
     {% endif %}
+
+    # cupy/cupy#7578
+    - if not exist %SP_DIR%\cupy\.data\_depends.json exit 1  # [win]
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
