@@ -1,3 +1,5 @@
+azure:
+  free_disk_space: true
 conda_forge_output_validation: true
 github:
   branch_name: main
