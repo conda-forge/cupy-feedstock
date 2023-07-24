@@ -7,7 +7,7 @@ channel_targets:
 cuda_compiler:
 - nvcc
 cuda_compiler_version:
-- '11.1'
+- '11.2'
 cudnn:
 - '8'
 cutensor:
@@ -23,6 +23,5 @@ python:
 target_platform:
 - win-64
 zip_keys:
-- - cudnn
-  - cuda_compiler
+- - cuda_compiler
   - cuda_compiler_version
