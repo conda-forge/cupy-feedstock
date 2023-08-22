@@ -1,5 +1,5 @@
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index 8023e46ad..0a75aef4d 100644
+index 8023e46ad..4349ebe05 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
 @@ -5,6 +5,7 @@ from distutils import ccompiler
@@ -10,7 +10,7 @@ index 8023e46ad..0a75aef4d 100644
  import sys
  
  import setuptools
-@@ -294,16 +295,52 @@ def make_extensions(ctx: Context, compiler, use_cython):
+@@ -294,16 +295,36 @@ def make_extensions(ctx: Context, compiler, use_cython):
          # deprecated since ROCm 4.2.0
          settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
  
@@ -54,22 +54,6 @@ index 8023e46ad..0a75aef4d 100644
 +        compiler = host_compiler
 +        if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
 +            os.remove(f'{os.environ["BUILD_PREFIX"]}/bin/ld')
-+            # Hack: when cross compiling we're duplicating the dependencies,
-+            # leading to various errors due to lack of disk space. As we no
-+            # longer need the optional dependencies in build after this point,
-+            # let's remove the large packages from build.
-+            out = subprocess.run(
-+                ['conda', 'remove', '-p', os.environ['BUILD_PREFIX'], '-y',
-+                 '-v', 'cudnn'], env=os.environ)
-+            out.check_returncode()
-+            out = subprocess.run(
-+                ['conda', 'remove', '-p', os.environ['BUILD_PREFIX'], '-y',
-+                 '-v', 'nccl'], env=os.environ)
-+            out.check_returncode()
-+            out = subprocess.run(
-+                ['conda', 'remove', '-p', os.environ['BUILD_PREFIX'], '-y',
-+                 '-v', 'cutensor'], env=os.environ)
-+            out.check_returncode()
  
      ret = []
      for module in MODULES:
