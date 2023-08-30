@@ -1,5 +1,10 @@
 azure:
   free_disk_space: true
+build_platform:
+  linux_aarch64: linux_64
+  linux_ppc64le: linux_64
+conda_build:
+  pkg_format: '2'
 conda_forge_output_validation: true
 github:
   branch_name: main
@@ -9,12 +14,7 @@ os_version:
   linux_64: cos7
   linux_aarch64: cos7
   linux_ppc64le: cos7
-build_platform:
-   linux_aarch64: linux_64
-   linux_ppc64le: linux_64
 provider:
-  linux_aarch64: azure 
+  linux_aarch64: azure
   linux_ppc64le: azure
 test: native
-conda_build:
-  pkg_format: '2'
