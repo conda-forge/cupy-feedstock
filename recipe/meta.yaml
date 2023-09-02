@@ -40,11 +40,6 @@ build:
     - export CUPY_NUM_BUILD_JOBS=1                                               # [(aarch64 or ppc64le) and (build_platform == target_platform)]
     - export CUDA_PATH=$PREFIX/targets/{{ target_name }}                         # [linux]
     {% endif %}
-    # To reduce the chance of hitting OOM
-    - export CUPY_NVCC_GENERATE_CODE="arch=compute_60,code=sm_60;arch=compute_70,code=sm_70;arch=compute_80,code=sm_80"  # [aarch64 or ppc64le]
-    # need to include PTX code for JIT'ing, both CTK 11.8/12.0 supports Hopper
-    - export CUPY_NVCC_GENERATE_CODE="$CUPY_NVCC_GENERATE_CODE;arch=compute_90,code=sm_90;arch=compute_90,code=sm_90a"   # [aarch64 or ppc64le]
-    - export CUPY_NVCC_GENERATE_CODE="$CUPY_NVCC_GENERATE_CODE;arch=compute_90,code=compute_90"                          # [aarch64 or ppc64le]
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
     # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
