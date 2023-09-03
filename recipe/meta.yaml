@@ -49,6 +49,8 @@ build:
     # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
     - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
 
+    - dir ""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\"  # [win64 and (cuda_compiler_version or "").startswith("11")]
+    - dir ""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include\"  # [win64 and (cuda_compiler_version or "").startswith("11")]
     - {{ PYTHON }} -m pip install . --no-deps -vv
     - if errorlevel 1 exit 1  # [win]
 
