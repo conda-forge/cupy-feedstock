@@ -59,10 +59,10 @@ build:
     - copy %RECIPE_DIR%\deactivate.bat %PREFIX%\etc\conda\deactivate.d\cupy_deactivate.bat    # [win]
 
     # enable CuPy's preload mechanism
-    - mkdir -p "${SP_DIR}/cupy/.data/"                                                            # [linux]
-    - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                  # [win]
-    - cp ${RECIPE_DIR}/preload_config/linux64_cuda11_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
-    - copy %RECIPE_DIR%\preload_config\win64_cuda11_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
+    - mkdir -p "${SP_DIR}/cupy/.data/"                                                                          # [linux]
+    - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_major }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
+    - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                # [win]    
+    - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_major }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
 
     # cupy/cupy#7578
     - if not exist %SP_DIR%\cupy\.data\_depends.json exit 1  # [win]
