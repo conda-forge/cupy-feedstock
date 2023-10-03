@@ -1,6 +1,6 @@
 {
  "packaging": "conda",
- "cuda": "11.1",
+ "cuda": "12.x",
  "cudnn": {},
  "cutensor": {}
 }
