@@ -69,9 +69,9 @@ build:
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
+  ignore_run_exports_from:
+    - {{ compiler('cuda') }}
   ignore_run_exports:
-    # the driver requirement is explicitly overwritten below
-    - __cuda
     # optional dependencies
     - cudnn       # [not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12"))]
     - nccl        # [linux]
@@ -141,8 +141,9 @@ requirements:
     - python
     - {{ pin_compatible('fastrlock', max_pin='x.x') }}
     - numpy >=1.21,<2
-    - cuda-version >={{ cuda_major }}.0,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("12")]
+    - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
     - cuda-version >={{ cuda_major }}.2,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("11")]
+    - cuda-version >={{ cuda_major }}.0,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("12")]
 
   run_constrained:
     # Only GLIBC_2.17 or older symbols present
