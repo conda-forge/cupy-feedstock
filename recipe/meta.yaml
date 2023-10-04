@@ -25,7 +25,7 @@ source:
       - support_nvtx3_win.diff        # [win64]
 
 build:
-  number: 2
+  number: 3
   # TODO: turn on win64 + CUDA 12 once it's ready
   skip: true  # [cuda_compiler_version not in ("11.8", "12.0") or (cuda_compiler_version == "12.0" and win64)]
   script:
@@ -69,6 +69,8 @@ build:
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux]
     - '*/nvcuda.dll'  # [win]
+  ignore_run_exports_from:
+    - {{ compiler('cuda') }}
   ignore_run_exports:
     # optional dependencies
     - cudnn       # [not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12"))]
@@ -139,14 +141,17 @@ requirements:
     - python
     - {{ pin_compatible('fastrlock', max_pin='x.x') }}
     - numpy >=1.21,<2
-    - cuda-version >={{ cuda_major }}.0,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("12")]
+    - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
     - cuda-version >={{ cuda_major }}.2,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("11")]
+    - cuda-version >={{ cuda_major }}.0,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("12")]
 
   run_constrained:
     # Only GLIBC_2.17 or older symbols present
     - __glibc >=2.17  # [linux]
     - scipy >=1.7,<2
     - optuna >=3,<4
+    - __cuda >=11.2  # [(cuda_compiler_version or "").startswith("11")]
+    - __cuda >=12.0  # [(cuda_compiler_version or "").startswith("12")]
     # TODO: Waiting for `aarch64` & `ppc64le` CUDA 12 support
     - {{ pin_compatible('cudnn') }}                        # [not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12"))]
     - {{ pin_compatible('nccl') }}                         # [linux]
