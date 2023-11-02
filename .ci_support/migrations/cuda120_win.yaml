@@ -1,4 +1,4 @@
-migrator_ts: 1682985063
+migrator_ts: 1698938079
 __migrator:
   kind:
     version
@@ -7,6 +7,7 @@ __migrator:
   build_number:
     1
   paused: false
+  use_local: true
   override_cbc_keys:
     - cuda_compiler_stub
   operation: key_add
