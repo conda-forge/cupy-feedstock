@@ -89,7 +89,7 @@ requirements:
     - cython >=0.29.22,<3                   # [build_platform != target_platform]
     # TODO: clean up
     {% if cuda_major >= 12 %}
-    - cuda-driver-dev                       # [build_platform != target_platform]
+    - cuda-driver-dev                       # [linux annd build_platform != target_platform]
     - cuda-cudart-dev                       # [build_platform != target_platform]
     - cuda-nvrtc-dev                        # [build_platform != target_platform]
     - cuda-nvtx-dev                         # [build_platform != target_platform]
@@ -117,7 +117,7 @@ requirements:
     - nvtx-c  # [win64]
     # TODO: clean up
     {% if cuda_major >= 12 %}
-    - cuda-driver-dev
+    - cuda-driver-dev  # [linux]
     - cuda-cudart-dev
     - cuda-nvrtc-dev
     - cuda-nvtx-dev
@@ -160,7 +160,7 @@ requirements:
 test:
   requires:
     # need the libcuda stub for import test
-    - cuda-driver-dev  # [(cuda_compiler_version or "").startswith("12")]
+    - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
 
   source_files:
     - tests
