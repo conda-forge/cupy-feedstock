@@ -89,7 +89,7 @@ requirements:
     - cython >=0.29.22,<3                   # [build_platform != target_platform]
     # TODO: clean up
     {% if cuda_major >= 12 %}
-    - cuda-driver-dev                       # [linux annd build_platform != target_platform]
+    - cuda-driver-dev                       # [linux and build_platform != target_platform]
     - cuda-cudart-dev                       # [build_platform != target_platform]
     - cuda-nvrtc-dev                        # [build_platform != target_platform]
     - cuda-nvtx-dev                         # [build_platform != target_platform]
