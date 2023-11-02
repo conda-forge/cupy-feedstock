@@ -19,8 +19,8 @@ __migrator:
     for overview and technical details.
     Please feel free to raise any issues encountered there. Thank you! :pray:
 
-cuda_compiler:                 # [win64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - cuda-nvcc                  # [win64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+cuda_compiler:                 # [win and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+  - cuda-nvcc                  # [win and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
 
-cuda_compiler_version:         # [win64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 12.0                       # [win64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+cuda_compiler_version:         # [win and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+  - 12.0                       # [win and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
