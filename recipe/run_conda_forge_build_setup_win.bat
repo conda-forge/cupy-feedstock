@@ -91,7 +91,7 @@ for %%i in ("%~dp0.") do set "SCRIPT_DIR=%%~fi"
 <cuda.version set /p CUDA_VERSION=
 del cuda.version
 if not "%CUDA_VERSION%" == "None" (
-    if "%CUDA_VERSION%" == "12.*" (
+    if "%CUDA_VERSION:~0,2%" == "12" (
         :: Don't call install_cuda, as we'll get CUDA packages from CF
         set "CUDA_PATH="
         :: Export CONDA_OVERRIDE_CUDA to allow __cuda to be detected on CI systems without GPUs
