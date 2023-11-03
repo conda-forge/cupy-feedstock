@@ -1,5 +1,5 @@
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index 8023e46ad..a3908659f 100644
+index 8023e46ad..d8b95d218 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
 @@ -3,8 +3,10 @@
@@ -29,10 +29,10 @@ index 8023e46ad..a3908659f 100644
 -                            'Please check above error log.')
 +    try:
 +        host_compiler = compiler
-+        if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
++        if int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION', 0)) == 1:
 +            os.symlink(f'{os.environ["BUILD_PREFIX"]}/x86_64-conda-linux-gnu/bin/x86_64-conda-linux-gnu-ld',
 +                       f'{os.environ["BUILD_PREFIX"]}/bin/ld')
-+        if os.environ.get('CONDA_BUILD_CROSS_COMPILATION') or os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
++        if int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION'), 0) == 1 or os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
 +            # If cross-compiling, we need build_and_run() & build_shlib() to use the compiler
 +            # on the build platform to generate stub files that are executable in the build
 +            # environment, not the target environment.a
@@ -64,7 +64,7 @@ index 8023e46ad..a3908659f 100644
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..d8a576e4e 100644
+index d0317e324..1759277d5 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -1,7 +1,9 @@
@@ -114,7 +114,7 @@ index d0317e324..d8a576e4e 100644
 +    include_dirs = list(include_dirs)
 +    library_dirs = list(library_dirs)
 +
-+    if os.environ.get('CONDA_BUILD_CROSS_COMPILATION'):
++    if int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION', 0) == 1:
 +        # If we're cross compiling, we need to generate stub files that are
 +        # executable in the build environment, not the target environment.
 +        # This assumes, however, that the build/host environments see the same
