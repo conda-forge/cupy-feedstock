@@ -94,8 +94,9 @@ if not "%CUDA_VERSION%" == "None" (
     if "%CUDA_VERSION:~0,2%" == "12" (
         :: Don't call install_cuda, as we'll get CUDA packages from CF
         set "CUDA_PATH="
+        set "CONDA_OVERRIDE_CUDA=%CUDA_VERSION%"
         :: Export CONDA_OVERRIDE_CUDA to allow __cuda to be detected on CI systems without GPUs
-        echo set "CONDA_OVERRIDE_CUDA=%CUDA_VERSION%" >> "%CONDA_PREFIX%\etc\conda\activate.d\conda-forge-ci-setup-activate.bat"
+        echo set "CONDA_OVERRIDE_CUDA=%CONDA_OVERRIDE_CUDA%" >> "%CONDA_PREFIX%\etc\conda\activate.d\conda-forge-ci-setup-activate.bat"
     ) else (
         call "%SCRIPT_DIR%\install_cuda.bat" %CUDA_VERSION%
         if errorlevel 1 (
@@ -105,8 +106,8 @@ if not "%CUDA_VERSION%" == "None" (
         :: We succeeded! Export paths
         set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%CUDA_VERSION%"
         set "PATH=%PATH%;%CUDA_PATH%\bin"
+        set "CONDA_OVERRIDE_CUDA=%CUDA_VERSION%"
     )
-    set "CONDA_OVERRIDE_CUDA=%CUDA_VERSION%"
 )
 :: /CUDA
 
