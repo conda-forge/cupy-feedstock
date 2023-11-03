@@ -1,5 +1,5 @@
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index 8023e46ad..4349ebe05 100644
+index 8023e46ad..c610ee66b 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
 @@ -5,6 +5,7 @@ from distutils import ccompiler
@@ -10,7 +10,7 @@ index 8023e46ad..4349ebe05 100644
  import sys
  
  import setuptools
-@@ -294,16 +295,36 @@ def make_extensions(ctx: Context, compiler, use_cython):
+@@ -294,16 +295,38 @@ def make_extensions(ctx: Context, compiler, use_cython):
          # deprecated since ROCm 4.2.0
          settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
  
@@ -34,11 +34,13 @@ index 8023e46ad..4349ebe05 100644
 +            # on the build platform to generate stub files that are executable in the build
 +            # environment, not the target environment.
 +            compiler = ccompiler.new_compiler()
-+            compiler.compiler = [os.environ['CC_FOR_BUILD'],]
-+            compiler.compiler_cxx = [os.environ['CXX_FOR_BUILD'],]
-+            compiler.compiler_so = [os.environ['CC_FOR_BUILD'],]
-+            compiler.linker_exe = [os.environ['CC_FOR_BUILD'], f'-B{os.environ["BUILD_PREFIX"]}/bin']
-+            compiler.linker_so = [os.environ['CC_FOR_BUILD'], f'-B{os.environ["BUILD_PREFIX"]}/bin', '-shared']
++            cc = os.environ['CC_FOR_BUILD'] if PLATFORM_LINUX else os.environ['CC']
++            cxx = os.environ['CXX_FOR_BUILD'] if PLATFORM_LINUX else os.environ['CXX']
++            compiler.compiler = [cc,]
++            compiler.compiler_cxx = [cxx,]
++            compiler.compiler_so = [cc,]
++            compiler.linker_exe = [cc, f'-B{os.environ["BUILD_PREFIX"]}/bin']
++            compiler.linker_so = [cc, f'-B{os.environ["BUILD_PREFIX"]}/bin', '-shared']
 +
 +        available_modules = []
 +        if no_cuda:
@@ -58,7 +60,7 @@ index 8023e46ad..4349ebe05 100644
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..7f78f318c 100644
+index d0317e324..7fde1911d 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -1,7 +1,9 @@
@@ -133,7 +135,7 @@ index d0317e324..7f78f318c 100644
 +            include_dirs.append(f'{os.environ["PREFIX"]}/include')
 +            library_dirs.append(f'{os.environ["PREFIX"]}/lib')
 +        else:
-+            include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/Library/include/targets/{conda_get_target_name()}/include')  # for CCCL headers
++            include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/Library/include/targets/{conda_get_target_name()}')  # for CCCL headers
 +            # there seems to be no stubs for windows
 +            # for optional dependencies
 +            include_dirs.append(f'{os.environ["LIBRARY_INC"]}')  # seems to be $PREFIX/Library/include
