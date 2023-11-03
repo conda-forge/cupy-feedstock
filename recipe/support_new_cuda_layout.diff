@@ -64,7 +64,7 @@ index 8023e46ad..b7db924cb 100644
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..68803a77e 100644
+index d0317e324..29371598b 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -1,7 +1,9 @@
@@ -87,7 +87,7 @@ index d0317e324..68803a77e 100644
  PLATFORM_LINUX = sys.platform.startswith('linux')
  PLATFORM_WIN32 = sys.platform.startswith('win32')
  
-@@ -186,6 +191,10 @@ def get_compiler_setting(ctx: Context, use_hip):
+@@ -186,8 +191,13 @@ def get_compiler_setting(ctx: Context, use_hip):
          cuda_cub_path = os.path.join(rocm_path, 'include', 'hipcub')
          if not os.path.exists(cuda_cub_path):
              cuda_cub_path = None
@@ -97,8 +97,11 @@ index d0317e324..68803a77e 100644
 +            cuda_cub_path = None
      else:
          cuda_cub_path = None
++    logging.debug(f"{cuda_cub_path=}")
      global _cub_path
-@@ -689,9 +698,70 @@ def get_cusparselt_version(formatted=False):
+     if cuda_cub_path:
+         _cub_path = cuda_cub_path
+@@ -689,9 +699,70 @@ def get_cusparselt_version(formatted=False):
      return _cusparselt_version
  
  
@@ -169,7 +172,7 @@ index d0317e324..68803a77e 100644
      with _tempdir() as temp_dir:
          fname = os.path.join(temp_dir, 'a.cpp')
          with open(fname, 'w') as f:
-@@ -717,6 +787,9 @@ def build_shlib(compiler, source, libraries=(),
+@@ -717,6 +788,9 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):
