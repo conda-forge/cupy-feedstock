@@ -137,8 +137,8 @@ index d0317e324..a2632f3b2 100644
 +            include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/Library/include')
 +            # there seems to be no stubs for windows
 +            # for optional dependencies
-+            include_dirs.append(f'{os.environ["LIBRARY_INC"]')  # seems to be $PREFIX/Library/include
-+            library_dirs.append(f'{os.environ["LIBRARY_LIB"]')  # seems to be $PREFIX/Library/lib
++            include_dirs.append(f'{os.environ["LIBRARY_INC"]}')  # seems to be $PREFIX/Library/include
++            library_dirs.append(f'{os.environ["LIBRARY_LIB"]}')  # seems to be $PREFIX/Library/lib
 +
 +    return include_dirs, library_dirs
 +
