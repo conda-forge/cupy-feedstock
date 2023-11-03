@@ -1,5 +1,5 @@
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index 8023e46ad..c610ee66b 100644
+index 8023e46ad..010351d05 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
 @@ -5,6 +5,7 @@ from distutils import ccompiler
@@ -10,7 +10,7 @@ index 8023e46ad..c610ee66b 100644
  import sys
  
  import setuptools
-@@ -294,16 +295,38 @@ def make_extensions(ctx: Context, compiler, use_cython):
+@@ -294,16 +295,39 @@ def make_extensions(ctx: Context, compiler, use_cython):
          # deprecated since ROCm 4.2.0
          settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
  
@@ -33,6 +33,7 @@ index 8023e46ad..c610ee66b 100644
 +            # If cross-compiling, we need build_and_run() & build_shlib() to use the compiler
 +            # on the build platform to generate stub files that are executable in the build
 +            # environment, not the target environment.
++            print("creating a new compiler instance...")
 +            compiler = ccompiler.new_compiler()
 +            cc = os.environ['CC_FOR_BUILD'] if PLATFORM_LINUX else os.environ['CC']
 +            cxx = os.environ['CXX_FOR_BUILD'] if PLATFORM_LINUX else os.environ['CXX']
@@ -60,7 +61,7 @@ index 8023e46ad..c610ee66b 100644
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..7fde1911d 100644
+index d0317e324..f20766bd8 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -1,7 +1,9 @@
@@ -83,7 +84,7 @@ index d0317e324..7fde1911d 100644
  PLATFORM_LINUX = sys.platform.startswith('linux')
  PLATFORM_WIN32 = sys.platform.startswith('win32')
  
-@@ -689,9 +694,68 @@ def get_cusparselt_version(formatted=False):
+@@ -689,9 +694,70 @@ def get_cusparselt_version(formatted=False):
      return _cusparselt_version
  
  
@@ -136,6 +137,7 @@ index d0317e324..7fde1911d 100644
 +            library_dirs.append(f'{os.environ["PREFIX"]}/lib')
 +        else:
 +            include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/Library/include/targets/{conda_get_target_name()}')  # for CCCL headers
++            include_dirs.append(f'{os.environ["LIBRARY_INC"]}/targets/{conda_get_target_name()}')  # for CCCL headers
 +            # there seems to be no stubs for windows
 +            # for optional dependencies
 +            include_dirs.append(f'{os.environ["LIBRARY_INC"]}')  # seems to be $PREFIX/Library/include
@@ -148,11 +150,12 @@ index d0317e324..7fde1911d 100644
                  include_dirs=(), library_dirs=(), define_macros=None,
                  extra_compile_args=()):
 +    include_dirs, library_dirs = conda_update_dirs(include_dirs, library_dirs)
++    print(include_dirs)
 +
      with _tempdir() as temp_dir:
          fname = os.path.join(temp_dir, 'a.cpp')
          with open(fname, 'w') as f:
-@@ -717,6 +781,8 @@ def build_shlib(compiler, source, libraries=(),
+@@ -717,6 +783,8 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):
