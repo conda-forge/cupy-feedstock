@@ -91,7 +91,7 @@ for %%i in ("%~dp0.") do set "SCRIPT_DIR=%%~fi"
 <cuda.version set /p CUDA_VERSION=
 del cuda.version
 if not "%CUDA_VERSION%" == "None" (
-    for /f "delims=. usebackq" %%f in ("%CUDA_VERSION%") do (set /a "CUDA_MAJOR_VERSION=%%f")
+    for /f "tokens=1 delims=. usebackq" %%f in ("%CUDA_VERSION%") do (set /a "CUDA_MAJOR_VERSION=%%f")
     echo "CUDA_MAJOR_VERSION is %CUDA_MAJOR_VERSION%"
     if %CUDA_MAJOR_VERSION% geq 12 (
         :: Don't call install_cuda, as we'll get CUDA packages from CF
