@@ -34,18 +34,6 @@ build:
     {% if cuda_major >= 12 %}
     - export CUPY_NUM_BUILD_JOBS=1                                               # [(aarch64 or ppc64le) and (build_platform == target_platform)]
     - export CUDA_PATH=$PREFIX/targets/{{ target_name }}                         # [linux]
-    - set CUDA_CFLAGS="/I%BUILD_PREFIX%\\Library\\include\\targets\\x64"  # [win]
-    - set _CL_="%_CL_% %CUDA_CFLAGS%"  # [win]
-    #- set "CUDA_PATH=%LIBRARY_PREFIX%"                                           # [win]
-    #- echo "CONDA_OVERRIDE_CUDA is %CONDA_OVERRIDE_CUDA%"  # [win]
-    #- dir "%BUILD_PREFIX%\\Library\\include"  # [win]
-    #- dir "%BUILD_PREFIX%\\Library\\include\\targets"  # [win]
-    #- dir "%BUILD_PREFIX%\\Library\\include\\targets\\x64"  # [win]
-    #- dir "%BUILD_PREFIX%\\Library\\include\\targets\\x64\\include"  # [win]
-    #- dir "%LIBRARY_INC%"  # [win]
-    #- dir "%LIBRARY_INC%\\targets"  # [win]
-    #- dir "%LIBRARY_INC%\\targets\\x64"  # [win]
-    #- dir "%LIBRARY_INC%\\targets\\x64\\include"  # [win]
     {% endif %}
     - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
     - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
