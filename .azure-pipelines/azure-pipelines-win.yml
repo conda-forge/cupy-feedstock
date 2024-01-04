@@ -14,6 +14,9 @@ jobs:
       win_64_cuda_compilercuda-nvcccuda_compiler_version12.0python3.11.____cpython:
         CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.0python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.0python3.12.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.0python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
       win_64_cuda_compilercuda-nvcccuda_compiler_version12.0python3.8.____cpython:
         CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.0python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -25,6 +28,9 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       win_64_cuda_compilernvcccuda_compiler_version11.8python3.11.____cpython:
         CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_cuda_compilernvcccuda_compiler_version11.8python3.12.____cpython:
+        CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
       win_64_cuda_compilernvcccuda_compiler_version11.8python3.8.____cpython:
         CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.8.____cpython
