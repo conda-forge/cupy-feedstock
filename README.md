@@ -391,6 +391,3 @@ Feedstock Maintainers
 * [@leofang](https://github.com/leofang/)
 * [@toslunar](https://github.com/toslunar/)
 
-
-<!-- dummy commit to enable rerendering -->
-
