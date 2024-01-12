@@ -105,7 +105,7 @@ requirements:
     - cudnn >=8.0.*,<9                      # [build_platform != target_platform and (not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12")))]
     - nccl >=2.8,<3                         # [build_platform != target_platform]
     - cutensor >=1.4,<2                     # [build_platform != target_platform]
-    - cusparselt 0.2.0.*                    # [build_platform != target_platform and (linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
+    - cusparselt ~=0.2.0                    # [build_platform != target_platform and (linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
 
   host:
     - python
@@ -134,7 +134,7 @@ requirements:
     - cudnn >=8.0.*,<9    # [not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12"))]
     - nccl >=2.8,<3       # [linux]
     - cutensor >=1.4,<2
-    - cusparselt 0.2.0.*  # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
+    - cusparselt ~=0.2.0  # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
 
   run:
     - python
