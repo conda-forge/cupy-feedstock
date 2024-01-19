@@ -27,8 +27,7 @@ source:
 
 build:
   number: {{ build_num }}
-  skip: true  # [py < 39 or cuda_compiler_version not in ("11.8", "12.0")]
-
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.0")]
 
 outputs:
 
@@ -36,6 +35,7 @@ outputs:
     version: {{ version }}
     build:
       number: {{ build_num }}
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.0")]
     requirements:
       build:
       host:
@@ -52,11 +52,24 @@ outputs:
     test:
       imports:
         - cupy  # dummy
+    about:
+      home: https://cupy.dev/
+      license: MIT
+      license_family: MIT
+      license_file: LICENSE
+      summary: |
+        CuPy: NumPy & SciPy for GPU
+      description: |
+        This is the CuPy core package without any dependencies on the CUDA libraries, suitable for
+        deployment under resource constraint. You need to install the needed dependencies explicitly.
+      dev_url: https://github.com/cupy/cupy/
+      doc_url: https://docs.cupy.dev/en/stable/    
 
   - name: cupy-core
     version: {{ version }}
     build:
       number: {{ build_num }}
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.0")]
       script:
         # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
         # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
@@ -209,6 +222,18 @@ outputs:
         - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
       source_files:
         - tests
+    about:
+      home: https://cupy.dev/
+      license: MIT
+      license_family: MIT
+      license_file: LICENSE
+      summary: |
+        CuPy: NumPy & SciPy for GPU
+      description: |
+        This is the CuPy core package without any dependencies on the CUDA libraries, suitable for
+        deployment under resource constraint. You need to install the needed dependencies explicitly.
+      dev_url: https://github.com/cupy/cupy/
+      doc_url: https://docs.cupy.dev/en/stable/
 
 about:
   home: https://cupy.dev/
