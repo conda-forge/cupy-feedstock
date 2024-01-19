@@ -26,7 +26,7 @@ source:
 
 build:
   number: 2
-  skip: true  # [cuda_compiler_version not in ("11.8", "12.0")]
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.0")]
   script:
     # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
     # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
