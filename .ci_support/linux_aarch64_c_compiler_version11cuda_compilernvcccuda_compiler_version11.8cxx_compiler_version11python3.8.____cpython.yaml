@@ -19,7 +19,7 @@ cuda_compiler_version:
 cudnn:
 - '8'
 cutensor:
-- '1'
+- '2'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
