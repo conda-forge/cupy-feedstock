@@ -23,7 +23,6 @@ source:
     sha256: {{ sha256 }}
     patches:
       - support_new_cuda_layout.diff  # [((linux or win64) and (cuda_compiler_version or "").startswith("12")) or (build_platform != target_platform)]
-      - support_nvtx3_win.diff        # [win64]
 
 build:
   number: {{ build_num }}
