@@ -116,6 +116,7 @@ outputs:
         {% if cuda_major >= 12 %}
         - cuda-driver-dev  # [linux]
         - cuda-cudart-dev
+        - cuda-cudart-static
         - cuda-nvrtc-dev
         - cuda-nvtx-dev
         - cuda-profiler-api
@@ -173,6 +174,7 @@ outputs:
         {% if cuda_major >= 12 %}
         - cuda-driver-dev  # [linux]
         - cuda-cudart-dev
+        - cuda-cudart-static
         - cuda-nvrtc-dev
         - cuda-nvtx-dev
         - cuda-profiler-api
