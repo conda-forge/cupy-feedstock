@@ -11,7 +11,7 @@ index 914b62c00..6363c6b91 100644
      print('NVTX could not be found')
      return None
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index d53ceccec..cee9a68d0 100644
+index d53ceccec..147dec2fd 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
 @@ -260,20 +260,22 @@ def _rpath_base():
@@ -23,7 +23,7 @@ index d53ceccec..cee9a68d0 100644
      elif PLATFORM_WIN32:
          filename = f'{name}.lib'
 -        libdir = 'lib\\x64'
-+        libdirs = ['lib\\x64']
++        libdirs = ['lib\\x64', 'lib']
      else:
          raise Exception('not supported on this platform')
  
