@@ -41,17 +41,20 @@ outputs:
       run:
         - python
         - {{ pin_subpackage('cupy-core', max_pin='x.x.x') }}
-        - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
-        - cuda-nvrtc                                             # [(cuda_compiler_version or "").startswith("12")]
-        - cuda-nvtx                                              # [(cuda_compiler_version or "").startswith("12")]
-        - libcublas                                              # [(cuda_compiler_version or "").startswith("12")]
-        - libcufft                                               # [(cuda_compiler_version or "").startswith("12")]
-        - libcurand                                              # [(cuda_compiler_version or "").startswith("12")]
-        - libcusolver                                            # [(cuda_compiler_version or "").startswith("12")]
-        - libcusparse                                            # [(cuda_compiler_version or "").startswith("12")]
+        - cudatoolkit      # [(cuda_compiler_version or "").startswith("11")]
+        - cuda-nvrtc       # [(cuda_compiler_version or "").startswith("12")]
+        - cuda-nvtx        # [(cuda_compiler_version or "").startswith("12")]
+        - libcublas        # [(cuda_compiler_version or "").startswith("12")]
+        - libcufft         # [(cuda_compiler_version or "").startswith("12")]
+        - libcurand        # [(cuda_compiler_version or "").startswith("12")]
+        - libcusolver      # [(cuda_compiler_version or "").startswith("12")]
+        - libcusparse      # [(cuda_compiler_version or "").startswith("12")]
     test:
-      imports:
-        - cupy  # dummy
+      requires:
+        # need the libcuda stub for import test
+        - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
+      source_files:
+        - tests
     about:
       home: https://cupy.dev/
       license: MIT
@@ -220,11 +223,8 @@ outputs:
         - {{ pin_compatible('cutensor') }}
         - {{ pin_compatible('cusparselt', max_pin='x.x') }}      # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
     test:
-      requires:
-        # need the libcuda stub for import test
-        - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
-      source_files:
-        - tests
+      imports:
+        - cupy  # dummy
     about:
       home: https://cupy.dev/
       license: MIT
