@@ -5,7 +5,6 @@ build_platform:
   linux_ppc64le: linux_64
 conda_build:
   pkg_format: '2'
-conda_build_tool: conda-build+conda-libmamba-solver
 conda_forge_output_validation: true
 github:
   branch_name: main
