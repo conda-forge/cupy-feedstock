@@ -188,7 +188,7 @@ outputs:
         # TODO: see https://github.com/conda-forge/cudnn-feedstock/issues/58
         - cudnn ~=8.8           # [not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12"))]
         - nccl ~=2.16           # [linux]
-        - cutensor ~=2
+        - cutensor ~=2.0
         - cusparselt ~=0.2.0    # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
       run:
         - python
