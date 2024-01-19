@@ -92,7 +92,7 @@ outputs:
   
         # {{ PYTHON }} is not resolved properly in multi-output recipes...
         - $PREFIX/bin/python -m pip install . --no-deps -vv                          # [linux]
-        - if 1 == 1 %PREFIX%\bin\python -m pip install . --no-deps -vv               # [win]
+        - if 1 == 1 %PREFIX%\python -m pip install . --no-deps -vv                   # [win]
         - if errorlevel 1 exit 1  # [win]
   
         # copy activate/deactivate scripts
