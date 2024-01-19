@@ -38,7 +38,9 @@ outputs:
     requirements:
       build:
       host:
+        - python
       run:
+        - python
         - {{ pin_subpackage('cupy-core', max_pin='x.x.x') }}
         - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
         - cuda-nvrtc                                             # [(cuda_compiler_version or "").startswith("12")]
