@@ -3,6 +3,10 @@ About cupy-split-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cupy-feedstock/blob/main/LICENSE.txt)
 
+
+About cupy-split
+----------------
+
 Home: https://cupy.dev/
 
 Package license: MIT
@@ -13,6 +17,24 @@ Summary: CuPy: NumPy & SciPy for GPU
 Development: https://github.com/cupy/cupy/
 
 Documentation: https://docs.cupy.dev/en/stable/
+
+About cupy-core
+---------------
+
+Home: https://cupy.dev/
+
+Package license: MIT
+
+Summary: CuPy: NumPy & SciPy for GPU
+
+
+Development: https://github.com/cupy/cupy/
+
+Documentation: https://docs.cupy.dev/en/stable/
+
+This is the CuPy core package without any dependencies on the CUDA libraries, suitable for
+deployment under resource constraint. You need to install the needed dependencies explicitly.
+
 
 Current build status
 ====================
@@ -324,7 +346,6 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cupy-green.svg)](https://anaconda.org/conda-forge/cupy) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cupy.svg)](https://anaconda.org/conda-forge/cupy) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cupy.svg)](https://anaconda.org/conda-forge/cupy) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cupy.svg)](https://anaconda.org/conda-forge/cupy) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-cupy--core-green.svg)](https://anaconda.org/conda-forge/cupy-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cupy-core.svg)](https://anaconda.org/conda-forge/cupy-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cupy-core.svg)](https://anaconda.org/conda-forge/cupy-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cupy-core.svg)](https://anaconda.org/conda-forge/cupy-core) |
 
 Installing cupy-split
@@ -337,41 +358,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `cupy, cupy-core` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `cupy-core` can be installed with `conda`:
 
 ```
-conda install cupy cupy-core
-```
-
-or with `mamba`:
-
-```
-mamba install cupy cupy-core
-```
-
-It is possible to list all of the versions of `cupy` available on your platform with `conda`:
-
-```
-conda search cupy --channel conda-forge
+conda install cupy-core
 ```
 
 or with `mamba`:
 
 ```
-mamba search cupy --channel conda-forge
+mamba install cupy-core
+```
+
+It is possible to list all of the versions of `cupy-core` available on your platform with `conda`:
+
+```
+conda search cupy-core --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search cupy-core --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search cupy --channel conda-forge
+mamba repoquery search cupy-core --channel conda-forge
 
-# List packages depending on `cupy`:
-mamba repoquery whoneeds cupy --channel conda-forge
+# List packages depending on `cupy-core`:
+mamba repoquery whoneeds cupy-core --channel conda-forge
 
-# List dependencies of `cupy`:
-mamba repoquery depends cupy --channel conda-forge
+# List dependencies of `cupy-core`:
+mamba repoquery depends cupy-core --channel conda-forge
 ```
 
 
