@@ -87,7 +87,8 @@ outputs:
         - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
   
         # {{ PYTHON }} is not resolved properly in multi-output recipes...
-        - $PREFIX/bin/python -m pip install . --no-deps -vv
+        - $PREFIX/bin/python -m pip install . --no-deps -vv                          # [linux]
+        - %PREFIX%/bin/python -m pip install . --no-deps -vv                         # [win]
         - if errorlevel 1 exit 1  # [win]
   
         # copy activate/deactivate scripts
@@ -129,7 +130,7 @@ outputs:
         {% endif %}
       ignore_run_exports:
         # optional dependencies
-        - cudnn       # [not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12"))]
+        - cudnn       # [aarch64 or not (ppc64le and (cuda_compiler_version or "").startswith("12"))]
         - nccl        # [linux]
         - cutensor
         - cusparselt  # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
@@ -145,7 +146,7 @@ outputs:
         - cython >=0.29.22,<3                   # [build_platform != target_platform]
         # TODO: clean up
         {% if cuda_major >= 12 %}
-        - cuda-driver-dev                       # [linux and build_platform != target_platform]
+        - cuda-driver-dev                       # [build_platform != target_platform and linux]
         - cuda-cudart-dev                       # [build_platform != target_platform]
         - cuda-nvrtc-dev                        # [build_platform != target_platform]
         - cuda-nvtx-dev                         # [build_platform != target_platform]
@@ -158,7 +159,7 @@ outputs:
         - libcusparse-dev                       # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
-        - cudnn ~=8.8                           # [build_platform != target_platform and (not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12")))]
+        - cudnn ~=8.8                           # [build_platform != target_platform and (aarch64 or not (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - nccl ~=2.16                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
         - cusparselt ~=0.2.0                    # [build_platform != target_platform and (linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
@@ -187,7 +188,7 @@ outputs:
         {% endif %}
         # optional dependencies
         # TODO: see https://github.com/conda-forge/cudnn-feedstock/issues/58
-        - cudnn ~=8.8           # [not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12"))]
+        - cudnn ~=8.8           # [aarch64 or not (ppc64le and (cuda_compiler_version or "").startswith("12"))]
         - nccl ~=2.16           # [linux]
         - cutensor ~=2.0
         - cusparselt ~=0.2.0    # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
@@ -212,8 +213,8 @@ outputs:
         - optuna ~=3.0
         - __cuda >=11.2                                          # [(cuda_compiler_version or "").startswith("11")]
         - __cuda >=12.0                                          # [(cuda_compiler_version or "").startswith("12")]
-        # TODO: Waiting for `aarch64` & `ppc64le` CUDA 12 support
-        - {{ pin_compatible('cudnn') }}                          # [not ((aarch64 or ppc64le) and (cuda_compiler_version or "").startswith("12"))]
+        # TODO: see https://github.com/conda-forge/cudnn-feedstock/issues/58
+        - {{ pin_compatible('cudnn') }}                          # [aarch64 or not (ppc64le and (cuda_compiler_version or "").startswith("12"))]
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
         - {{ pin_compatible('cusparselt', max_pin='x.x') }}      # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
