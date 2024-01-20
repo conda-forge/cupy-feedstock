@@ -14,6 +14,11 @@
 {% set cuda_major = environ.get("cuda_compiler_version", "11.8").split(".")[0] | int %}
 {% endif %}
 
+# {{ PYTHON }} is not resolved properly in multi-output recipes...
+{% set PYTHON = '"$PREFIX/bin/python"' %}  # [linux]
+{% set PYTHON = "%PREFIX%\python" %}       # [win]
+
+
 package:
   name: {{ name|lower }}-split
   version: {{ version }}
@@ -90,9 +95,7 @@ outputs:
         # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
         - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
   
-        # {{ PYTHON }} is not resolved properly in multi-output recipes...
-        - $PREFIX/bin/python -m pip install . --no-deps -vv                          # [linux]
-        - if 1 == 1 %PREFIX%\python -m pip install . --no-deps -vv                   # [win]
+        - {{ PYTHON }} -m pip install . --no-deps -vv
         - if errorlevel 1 exit 1  # [win]
   
         # copy activate/deactivate scripts
