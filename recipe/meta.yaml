@@ -15,8 +15,9 @@
 {% endif %}
 
 # {{ PYTHON }} is not resolved properly in multi-output recipes...
-{% set PYTHON = '"$PREFIX/bin/python"' %}  # [linux]
-{% set PYTHON = "%PREFIX%\python" %}       # [win]
+{% set PYTHON = "python" %}
+{% set PYTHON = "$PREFIX/bin/python" %}  # [linux]
+{% set PYTHON = "%PREFIX%\python" %}     # [win]
 
 
 package:
@@ -95,7 +96,8 @@ outputs:
         # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
         - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
   
-        - {{ PYTHON }} -m pip install . --no-deps -vv
+        - >-
+          {{ PYTHON }} -m pip install . --no-deps -vv
         - if errorlevel 1 exit 1  # [win]
   
         # copy activate/deactivate scripts
