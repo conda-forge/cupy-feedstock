@@ -52,7 +52,6 @@ outputs:
         - {{ pin_subpackage('cupy-core', exact=True) }}
         - cudatoolkit      # [(cuda_compiler_version or "").startswith("11")]
         - cuda-nvrtc       # [(cuda_compiler_version or "").startswith("12")]
-        - cuda-nvtx        # [(cuda_compiler_version or "").startswith("12")]
         - libcublas        # [(cuda_compiler_version or "").startswith("12")]
         - libcufft         # [(cuda_compiler_version or "").startswith("12")]
         - libcurand        # [(cuda_compiler_version or "").startswith("12")]
@@ -180,7 +179,6 @@ outputs:
         - cython >=0.29.22,<3
         - fastrlock >=0.5
         - cuda-version {{ cuda_compiler_version }}
-        - nvtx-c  # [win64]
         # TODO: clean up
         {% if cuda_major >= 12 %}
         - cuda-driver-dev  # [linux]
@@ -212,7 +210,6 @@ outputs:
         - __glibc >=2.17  # [linux]
         - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
         - {{ pin_compatible('cuda-nvrtc', max_pin='x') }}        # [(cuda_compiler_version or "").startswith("12")]
-        - {{ pin_compatible('cuda-nvtx', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_compatible('libcublas', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_compatible('libcufft', max_pin='x') }}          # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_compatible('libcurand', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
