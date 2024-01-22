@@ -36,24 +36,6 @@ This is the CuPy core package without any dependencies on the CUDA libraries, su
 deployment under resource constraint. You need to install the needed dependencies explicitly.
 
 
-About cupy
-----------
-
-Home: https://cupy.dev/
-
-Package license: MIT
-
-Summary: CuPy: NumPy & SciPy for GPU
-
-
-Development: https://github.com/cupy/cupy/
-
-Documentation: https://docs.cupy.dev/en/stable/
-
-This is the CuPy core package without any dependencies on the CUDA libraries, suitable for
-deployment under resource constraint. You need to install the needed dependencies explicitly.
-
-
 Current build status
 ====================
 
