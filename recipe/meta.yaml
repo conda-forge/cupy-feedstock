@@ -71,9 +71,6 @@ outputs:
       license_file: LICENSE
       summary: |
         CuPy: NumPy & SciPy for GPU
-      description: |
-        This is the CuPy core package without any dependencies on the CUDA libraries, suitable for
-        deployment under resource constraint. You need to install the needed dependencies explicitly.
       dev_url: https://github.com/cupy/cupy/
       doc_url: https://docs.cupy.dev/en/stable/    
 
