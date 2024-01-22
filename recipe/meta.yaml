@@ -133,7 +133,6 @@ outputs:
         - cuda-nvrtc-dev
         - cuda-nvtx-dev
         - cuda-profiler-api
-        - cuda-cccl_{{ target_platform }}
         - libcublas-dev
         - libcufft-dev
         - libcurand-dev
@@ -162,7 +161,6 @@ outputs:
         - cuda-nvrtc-dev                        # [build_platform != target_platform]
         - cuda-nvtx-dev                         # [build_platform != target_platform]
         - cuda-profiler-api                     # [build_platform != target_platform]
-        - cuda-cccl_{{ build_platform }}        # [build_platform != target_platform]
         - libcublas-dev                         # [build_platform != target_platform]
         - libcufft-dev                          # [build_platform != target_platform]
         - libcurand-dev                         # [build_platform != target_platform]
@@ -190,7 +188,6 @@ outputs:
         - cuda-nvrtc-dev
         - cuda-nvtx-dev
         - cuda-profiler-api
-        - cuda-cccl_{{ target_platform }}
         - libcublas-dev
         - libcufft-dev
         - libcurand-dev
