@@ -49,7 +49,7 @@ outputs:
         - python
       run:
         - python
-        - {{ pin_subpackage('cupy-core', max_pin='x.x.x') }}
+        - {{ pin_subpackage('cupy-core', exact=True) }}
         - cudatoolkit      # [(cuda_compiler_version or "").startswith("11")]
         - cuda-nvrtc       # [(cuda_compiler_version or "").startswith("12")]
         - cuda-nvtx        # [(cuda_compiler_version or "").startswith("12")]
@@ -213,13 +213,13 @@ outputs:
         # Only GLIBC_2.17 or older symbols present
         - __glibc >=2.17  # [linux]
         - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
-        - cuda-nvrtc                                             # [(cuda_compiler_version or "").startswith("12")]
-        - cuda-nvtx                                              # [(cuda_compiler_version or "").startswith("12")]
-        - libcublas                                              # [(cuda_compiler_version or "").startswith("12")]
-        - libcufft                                               # [(cuda_compiler_version or "").startswith("12")]
-        - libcurand                                              # [(cuda_compiler_version or "").startswith("12")]
-        - libcusolver                                            # [(cuda_compiler_version or "").startswith("12")]
-        - libcusparse                                            # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('cuda-nvrtc', max_pin='x') }}        # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('cuda-nvtx', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcublas', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcufft', max_pin='x') }}          # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcurand', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcusolver', max_pin='x') }}       # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcusparse', max_pin='x') }}       # [(cuda_compiler_version or "").startswith("12")]
         - scipy ~=1.7
         - optuna ~=3.0
         - __cuda >=11.2                                          # [(cuda_compiler_version or "").startswith("11")]
