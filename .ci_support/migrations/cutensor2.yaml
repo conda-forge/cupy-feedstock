@@ -1,0 +1,9 @@
+migrator_ts: 1705683187
+__migrator:
+  kind: version
+  migration_number: 1
+  bump_number: 1
+  use_local: True
+
+cutensor:
+  - 2

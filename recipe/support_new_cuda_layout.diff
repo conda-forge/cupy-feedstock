@@ -1,21 +1,60 @@
+diff --git a/install/cupy_builder/_environment.py b/install/cupy_builder/_environment.py
+index 914b62c00..6363c6b91 100644
+--- a/install/cupy_builder/_environment.py
++++ b/install/cupy_builder/_environment.py
+@@ -33,5 +33,7 @@ def get_nvtx_path() -> Optional[str]:
+         nvtx = candidates[-1]
+         print(f'Using NVTX at: {nvtx}')
+         return nvtx
++    if os.environ.get('CONDA_BUILD', '0') == '1':
++        return os.environ['PREFIX']
+     print('NVTX could not be found')
+     return None
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index 8023e46ad..466f7152f 100644
+index d53ceccec..4895a49b6 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
-@@ -3,8 +3,10 @@
- import copy
- from distutils import ccompiler
- from distutils import sysconfig
-+import logging
- import os
- import shutil
-+import subprocess
- import sys
+@@ -260,20 +260,31 @@ def _rpath_base():
+ def _find_static_library(name: str) -> str:
+     if PLATFORM_LINUX:
+         filename = f'lib{name}.a'
+-        libdir = 'lib64'
++        if (int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION', 0)) == 1 and
++                os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('11')):
++            # CUDA 11 on conda-forge has an ad hoc layout to support cross
++            # compiling
++            libdirs = ['lib']
++            cuda_path = (f'{build.get_cuda_path()}/targets/'
++                         f'{build.conda_get_target_name()}/')
++        else:
++            libdirs = ['lib64', 'lib']
++            cuda_path = build.get_cuda_path()
+     elif PLATFORM_WIN32:
+         filename = f'{name}.lib'
+-        libdir = 'lib\\x64'
++        libdirs = ['lib\\x64', 'lib']
++        cuda_path = build.get_cuda_path()
+     else:
+         raise Exception('not supported on this platform')
  
- import setuptools
-@@ -294,16 +296,39 @@ def make_extensions(ctx: Context, compiler, use_cython):
-         # deprecated since ROCm 4.2.0
+-    cuda_path = build.get_cuda_path()
+     if cuda_path is None:
+         raise Exception(f'Could not find {filename}: CUDA path unavailable')
+-    path = os.path.join(cuda_path, libdir, filename)
+-    if not os.path.exists(path):
++    for libdir in libdirs:
++        path = os.path.join(cuda_path, libdir, filename)
++        if os.path.exists(path):
++            return path
++    else:
+         raise Exception(f'Could not find {filename}: {path} does not exist')
+-    return path
+ 
+ 
+ def make_extensions(ctx: Context, compiler, use_cython):
+@@ -317,16 +328,42 @@ def make_extensions(ctx: Context, compiler, use_cython):
          settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
+     settings['define_macros'].append(('CUPY_CACHE_KEY', ctx.cupy_cache_key))
  
 -    available_modules = []
 -    if no_cuda:
@@ -30,21 +69,24 @@ index 8023e46ad..466f7152f 100644
 +    try:
 +        host_compiler = compiler
 +        if int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION', 0)) == 1:
-+            os.symlink(f'{os.environ["BUILD_PREFIX"]}/x86_64-conda-linux-gnu/bin/x86_64-conda-linux-gnu-ld',
++            os.symlink(f'{os.environ["BUILD_PREFIX"]}/x86_64-conda-linux-gnu/'
++                       'bin/x86_64-conda-linux-gnu-ld',
 +                       f'{os.environ["BUILD_PREFIX"]}/bin/ld')
-+        if int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION', 0)) == 1 or os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
-+            # If cross-compiling, we need build_and_run() & build_shlib() to use the compiler
-+            # on the build platform to generate stub files that are executable in the build
-+            # environment, not the target environment.
-+            logging.debug("creating a new compiler instance...")
++        if (int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION', 0)) == 1 or
++                os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12')):
++            # If cross-compiling, we need build_and_run() & build_shlib() to
++            # use the compiler on the build platform to generate stub files
++            # that are executable in the build environment, not the target
++            # environment.
 +            compiler = ccompiler.new_compiler()
-+            cc = os.environ['CC_FOR_BUILD'] if PLATFORM_LINUX else os.environ['CC']
-+            cxx = os.environ['CXX_FOR_BUILD'] if PLATFORM_LINUX else os.environ['CXX']
++            cc = os.environ['CC_FOR_BUILD' if PLATFORM_LINUX else 'CC']
++            cxx = os.environ['CXX_FOR_BUILD' if PLATFORM_LINUX else 'CXX']
 +            compiler.compiler = [cc,]
 +            compiler.compiler_cxx = [cxx,]
 +            compiler.compiler_so = [cc,]
 +            compiler.linker_exe = [cc, f'-B{os.environ["BUILD_PREFIX"]}/bin']
-+            compiler.linker_so = [cc, f'-B{os.environ["BUILD_PREFIX"]}/bin', '-shared']
++            compiler.linker_so = [cc, f'-B{os.environ["BUILD_PREFIX"]}/bin',
++                                  '-shared']
 +
 +        available_modules = []
 +        if no_cuda:
@@ -64,7 +106,7 @@ index 8023e46ad..466f7152f 100644
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index d0317e324..210bf46f7 100644
+index 6617bd147..f39f7d439 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -1,7 +1,9 @@
@@ -87,21 +129,7 @@ index d0317e324..210bf46f7 100644
  PLATFORM_LINUX = sys.platform.startswith('linux')
  PLATFORM_WIN32 = sys.platform.startswith('win32')
  
-@@ -188,6 +193,13 @@ def get_compiler_setting(ctx: Context, use_hip):
-             cuda_cub_path = None
-     else:
-         cuda_cub_path = None
-+
-+    if cuda_cub_path is None:
-+        if int(os.environ.get('CONDA_BUILD', 0)) == 1 and PLATFORM_WIN32:
-+            cuda_cub_path = os.path.join(os.environ['BUILD_PREFIX'], 'Library', 'include', 'targets', 'x64', 'cub')
-+            if not os.path.exists(cuda_cub_path):
-+                cuda_cub_path = None
-+
-     global _cub_path
-     if cuda_cub_path:
-         _cub_path = cuda_cub_path
-@@ -689,9 +701,69 @@ def get_cusparselt_version(formatted=False):
+@@ -688,9 +693,75 @@ def get_cusparselt_version(formatted=False):
      return _cusparselt_version
  
  
@@ -122,20 +150,23 @@ index d0317e324..210bf46f7 100644
 +
 +
 +def conda_update_dirs(include_dirs, library_dirs):
-+    # Note: These hacks are needed for the dependency detection stage to function,
-+    # because we create a fresh compiler instance that does not honor CFLAGS etc set
-+    # in the conda-build environment.
++    # Note: These hacks are needed for the dependency detection stage to
++    # function, because we create a fresh compiler instance that does not
++    # honor CFLAGS etc set in the conda-build environment.
 +    include_dirs = list(include_dirs)
 +    library_dirs = list(library_dirs)
 +
-+    if int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION', 0)) == 1:
++    if (int(os.environ.get('CONDA_BUILD_CROSS_COMPILATION', 0)) == 1):
 +        # If we're cross compiling, we need to generate stub files that are
 +        # executable in the build environment, not the target environment.
 +        # This assumes, however, that the build/host environments see the same
 +        # CUDA Toolkit.
 +        if os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
-+            include_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include')
-+            library_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib')
++            include_dirs.insert(
++                0,
++                f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/include')
++            library_dirs.insert(
++                0, f'{os.environ["BUILD_PREFIX"]}/targets/x86_64-linux/lib')
 +            library_dirs.insert(0, f'{os.environ["BUILD_PREFIX"]}/lib/stubs')
 +        elif os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('11'):
 +            include_dirs.append('/usr/local/cuda/include')
@@ -147,17 +178,20 @@ index d0317e324..210bf46f7 100644
 +
 +    if os.environ.get('CONDA_OVERRIDE_CUDA', '0').startswith('12'):
 +        if PLATFORM_LINUX:
-+            include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/targets/{conda_get_target_name()}/include')  # for crt headers
++            include_dirs.append(
++                f'{os.environ["BUILD_PREFIX"]}/targets/'
++                f'{conda_get_target_name()}/include')  # for crt headers
 +            library_dirs.append(f'{os.environ["PREFIX"]}/lib/stubs')
 +            # for optional dependencies
 +            include_dirs.append(f'{os.environ["PREFIX"]}/include')
 +            library_dirs.append(f'{os.environ["PREFIX"]}/lib')
 +        else:
-+            include_dirs.append(f'{os.environ["BUILD_PREFIX"]}/Library/include/targets/{conda_get_target_name()}')  # for CCCL headers
 +            # there seems to be no stubs for windows
 +            # for optional dependencies
-+            include_dirs.append(f'{os.environ["LIBRARY_INC"]}')  # $PREFIX/Library/include
-+            library_dirs.append(f'{os.environ["LIBRARY_LIB"]}')  # $PREFIX/Library/lib
++            include_dirs.append(
++                f'{os.environ["LIBRARY_INC"]}')  # $PREFIX/Library/include
++            library_dirs.append(
++                f'{os.environ["LIBRARY_LIB"]}')  # $PREFIX/Library/lib
 +
 +    return include_dirs, library_dirs
 +
@@ -171,7 +205,7 @@ index d0317e324..210bf46f7 100644
      with _tempdir() as temp_dir:
          fname = os.path.join(temp_dir, 'a.cpp')
          with open(fname, 'w') as f:
-@@ -717,6 +789,9 @@ def build_shlib(compiler, source, libraries=(),
+@@ -716,6 +787,9 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):
