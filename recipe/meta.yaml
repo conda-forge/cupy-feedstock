@@ -92,7 +92,6 @@ outputs:
         # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
         - set "NVCC=%NVCC% --use-local-env"  # [win64]
         - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"  # [win]
-        - export CUSPARSELT_PATH="${PREFIX}"                                         # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
         # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
         - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
   
@@ -141,7 +140,6 @@ outputs:
         - cudnn       # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - nccl        # [linux]
         - cutensor
-        - cusparselt  # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
     requirements:
       build:
         - {{ compiler("c") }}
@@ -168,7 +166,6 @@ outputs:
         - cudnn ~=8.8                           # [build_platform != target_platform and not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - nccl ~=2.16                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
-        - cusparselt ~=0.2.0                    # [build_platform != target_platform and (linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
       host:
         - python
         - pip
@@ -195,7 +192,6 @@ outputs:
         - cudnn ~=8.8           # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - nccl ~=2.16           # [linux]
         - cutensor ~=2.0
-        - cusparselt ~=0.2.0    # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
       run:
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
@@ -220,7 +216,6 @@ outputs:
         - {{ pin_compatible('cudnn') }}                          # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
-        - {{ pin_compatible('cusparselt', max_pin='x.x') }}      # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
     test:
       imports:
         - cupy  # dummy
