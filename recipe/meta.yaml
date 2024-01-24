@@ -94,10 +94,17 @@ outputs:
         - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"  # [win]
         # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
         - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
-  
+
+        # When cross-compiling, symlink `targets` from `$PREFIX` to `$BUILD_PREFIX`
+        - ln -s "${PREFIX}/targets/ppc64le-linux" "${BUILD_PREFIX}/targets/ppc64le-linux"         # [ppc64le and (build_platform != target_platform)]
+        - ln -s "${PREFIX}/targets/sbsa-linux" "${BUILD_PREFIX}/targets/sbsa-linux"               # [aarch64 and (build_platform != target_platform)]
+
         - >-
           {{ PYTHON }} -m pip install . --no-deps -vv
         - if errorlevel 1 exit 1  # [win]
+
+        - rm "${PREFIX}/targets/ppc64le-linux"                                                    # [ppc64le and (build_platform != target_platform)]
+        - rm "${PREFIX}/targets/sbsa-linux"                                                       # [aarch64 and (build_platform != target_platform)]
   
         # copy activate/deactivate scripts
         - mkdir -p "${PREFIX}/etc/conda/activate.d"                                               # [linux]
