@@ -58,7 +58,8 @@ outputs:
         - libcusolver      # [(cuda_compiler_version or "").startswith("12")]
         - libcusparse      # [(cuda_compiler_version or "").startswith("12")]
         # see discussions/references in conda-forge/cupy-feedstock#247
-        - cuda-version
+        - cuda-version >=12.0,<13.0a0  # [(cuda_compiler_version or "").startswith("12")]
+        - cuda-version >=11.0,<12.0a0  # [(cuda_compiler_version or "").startswith("11")]
     test:
       requires:
         # need the libcuda stub for import test
