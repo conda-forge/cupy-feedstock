@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.0.0" %}
 {% set sha256 = "2f04e7857f692a713360dc9c3b06709806ab8404fca39b5af9721c04a2979aae" %}
-{% set build_num = 1 %}
+{% set build_num = 2 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -57,6 +57,8 @@ outputs:
         - libcurand        # [(cuda_compiler_version or "").startswith("12")]
         - libcusolver      # [(cuda_compiler_version or "").startswith("12")]
         - libcusparse      # [(cuda_compiler_version or "").startswith("12")]
+        # see discussions/references in conda-forge/cupy-feedstock#247
+        - cuda-version
     test:
       requires:
         # need the libcuda stub for import test
