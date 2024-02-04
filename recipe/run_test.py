@@ -14,11 +14,6 @@ def get_target_name():
         out = f"{plat}-linux"
     return out
 
-# Check CUDA_PATH is set
-cuda_path = os.environ.get('CUDA_PATH')
-assert cuda_path is not None
-print("CUDA_PATH:", cuda_path)
-
 # check _wheel.json exists
 # note that we don't rely on cupy.__file__ because we cannot import CuPy on Windows
 pypaths = site.getsitepackages()
