@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.0.0" %}
 {% set sha256 = "2f04e7857f692a713360dc9c3b06709806ab8404fca39b5af9721c04a2979aae" %}
-{% set build_num = 2 %}
+{% set build_num = 3 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -101,16 +101,6 @@ outputs:
         - >-
           {{ PYTHON }} -m pip install . --no-deps -vv
         - if errorlevel 1 exit 1  # [win]
-  
-        # copy activate/deactivate scripts
-        - mkdir -p "${PREFIX}/etc/conda/activate.d"                                               # [linux]
-        - cp "${RECIPE_DIR}/activate.sh" "${PREFIX}/etc/conda/activate.d/cupy_activate.sh"        # [linux]
-        - mkdir -p "${PREFIX}/etc/conda/deactivate.d"                                             # [linux]
-        - cp "${RECIPE_DIR}/deactivate.sh" "${PREFIX}/etc/conda/deactivate.d/cupy_deactivate.sh"  # [linux]
-        - if not exist %PREFIX%\etc\conda\activate.d mkdir %PREFIX%\etc\conda\activate.d          # [win]
-        - copy %RECIPE_DIR%\activate.bat %PREFIX%\etc\conda\activate.d\cupy_activate.bat          # [win]
-        - if not exist %PREFIX%\etc\conda\deactivate.d mkdir %PREFIX%\etc\conda\deactivate.d      # [win]
-        - copy %RECIPE_DIR%\deactivate.bat %PREFIX%\etc\conda\deactivate.d\cupy_deactivate.bat    # [win]
   
         # enable CuPy's preload mechanism
         - mkdir -p "${SP_DIR}/cupy/.data/"                                                                          # [linux]
