@@ -53,6 +53,7 @@ outputs:
         - python
       run:
         - python
+    {%- if cuda_major != 0 %}
         - {{ pin_subpackage('cupy-core', exact=True) }}
         - cudatoolkit      # [(cuda_compiler_version or "").startswith("11")]
         - cuda-nvrtc       # [(cuda_compiler_version or "").startswith("12")]
@@ -71,6 +72,7 @@ outputs:
       script: run_test.py
       source_files:
         - tests
+    {%- endif %}  # cuda_major != 0
     about:
       home: https://cupy.dev/
       license: MIT
@@ -81,6 +83,7 @@ outputs:
       dev_url: https://github.com/cupy/cupy/
       doc_url: https://docs.cupy.dev/en/stable/
 
+  {%- if cuda_major != 0 %}
   - name: cupy-core
     version: {{ version }}
     build:
@@ -132,13 +135,11 @@ outputs:
         - libcusolver-dev
         - libcusparse-dev
         {% endif %}
-      {%- if cuda_major != 0 %}
       ignore_run_exports:
         # optional dependencies
         - cudnn       # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - nccl        # [linux]
         - cutensor
-      {%- endif %}
     requirements:
       build:
         - {{ compiler("c") }}
@@ -222,9 +223,7 @@ outputs:
         # TODO: see https://github.com/conda-forge/cudnn-feedstock/issues/58
         - {{ pin_compatible('cudnn') }}                          # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - {{ pin_compatible('nccl') }}                           # [linux]
-        {%- if cuda_major != 0 %}
         - {{ pin_compatible('cutensor') }}
-        {%- endif %}
     test:
       imports:
         - cupy  # dummy
@@ -240,6 +239,7 @@ outputs:
         deployment under resource constraint. You need to install the needed dependencies explicitly.
       dev_url: https://github.com/cupy/cupy/
       doc_url: https://docs.cupy.dev/en/stable/
+    {%- endif %}   # cuda_version != 0
 
 about:
   home: https://cupy.dev/
