@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.1.0" %}
 {% set sha256 = "5caf62288481a27713384523623045380ff42e618be4245f478238ed1786f32d" %}
-{% set build_num = 3 %}
+{% set build_num = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -203,6 +203,7 @@ outputs:
         - optuna ~=3.0
         - __cuda >=11.2                                          # [(cuda_compiler_version or "").startswith("11")]
         - __cuda >=12.0                                          # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_subpackage('cupy', max_pin='x.x') }}
         # TODO: see https://github.com/conda-forge/cudnn-feedstock/issues/58
         - {{ pin_compatible('cudnn') }}                          # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - {{ pin_compatible('nccl') }}                           # [linux]
