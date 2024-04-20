@@ -10,11 +10,71 @@ index 914b62c00..6363c6b91 100644
 +        return os.environ['PREFIX']
      print('NVTX could not be found')
      return None
+diff --git a/install/cupy_builder/_features.py b/install/cupy_builder/_features.py
+index 99b7e4324..7c05a7b0d 100644
+--- a/install/cupy_builder/_features.py
++++ b/install/cupy_builder/_features.py
+@@ -147,7 +147,6 @@ _cuda_files = [
+ 
+ # Libraries required for cudart_static
+ _cudart_static_libs = (
+-    ['cudart_static'] +
+     (['pthread', 'rt', 'dl'] if sys.platform == 'linux' else [])
+ )
+ 
+@@ -272,6 +271,7 @@ def get_features(ctx: Context) -> Dict[str, Feature]:
+             'cub/util_namespace.cuh',  # dummy
+         ],
+         'libraries': list(_cudart_static_libs),
++        'static_libraries': ['cudart_static'],
+         'check_method': build.check_cub_version,
+         'version_method': build.get_cub_version,
+     }
+@@ -291,6 +291,7 @@ def get_features(ctx: Context) -> Dict[str, Feature]:
+             'cuda',
+             'nvrtc',
+         ] + _cudart_static_libs,
++        'static_libraries': ['cudart_static'],
+         'check_method': build.check_jitify_version,
+         'version_method': build.get_jitify_version,
+     }
+@@ -307,6 +308,7 @@ def get_features(ctx: Context) -> Dict[str, Feature]:
+         'libraries': [
+             'curand',
+         ] + _cudart_static_libs,
++        'static_libraries': ['cudart_static'],
+     }
+     HIP_random = {
+         'name': 'random',
+@@ -393,6 +395,7 @@ def get_features(ctx: Context) -> Dict[str, Feature]:
+             'thrust/version.h',
+         ],
+         'libraries': list(_cudart_static_libs),
++        'static_libraries': ['cudart_static'],
+         'check_method': build.check_thrust_version,
+         'version_method': build.get_thrust_version,
+     }
+@@ -459,6 +462,7 @@ class CUDA_cuda(Feature):
+             # CUDA Toolkit
+             ['cublas', 'cufft', 'curand', 'cusparse']
+         )
++        self.static_libraries = ['cudart_static']
+         self._version = self._UNDETERMINED
+ 
+     def configure(self, compiler: Any, settings: Any) -> bool:
 diff --git a/install/cupy_builder/cupy_setup_build.py b/install/cupy_builder/cupy_setup_build.py
-index d53ceccec..4895a49b6 100644
+index 369c8f09b..ba32bf46d 100644
 --- a/install/cupy_builder/cupy_setup_build.py
 +++ b/install/cupy_builder/cupy_setup_build.py
-@@ -260,20 +260,31 @@ def _rpath_base():
+@@ -3,6 +3,7 @@
+ import copy
+ from distutils import ccompiler
+ from distutils import sysconfig
++import logging
+ import os
+ import shutil
+ import sys
+@@ -260,20 +261,32 @@ def _rpath_base():
  def _find_static_library(name: str) -> str:
      if PLATFORM_LINUX:
          filename = f'lib{name}.a'
@@ -38,6 +98,7 @@ index d53ceccec..4895a49b6 100644
          raise Exception('not supported on this platform')
  
 -    cuda_path = build.get_cuda_path()
++    logging.debug(f"{cuda_path=}")
      if cuda_path is None:
          raise Exception(f'Could not find {filename}: CUDA path unavailable')
 -    path = os.path.join(cuda_path, libdir, filename)
@@ -52,7 +113,7 @@ index d53ceccec..4895a49b6 100644
  
  
  def make_extensions(ctx: Context, compiler, use_cython):
-@@ -317,16 +328,42 @@ def make_extensions(ctx: Context, compiler, use_cython):
+@@ -317,16 +330,42 @@ def make_extensions(ctx: Context, compiler, use_cython):
          settings['define_macros'].append(('__HIP_PLATFORM_HCC__', '1'))
      settings['define_macros'].append(('CUPY_CACHE_KEY', ctx.cupy_cache_key))
  
@@ -106,7 +167,7 @@ index d53ceccec..4895a49b6 100644
      ret = []
      for module in MODULES:
 diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/install_build.py
-index 6617bd147..f39f7d439 100644
+index 720917e0f..37635528d 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
 @@ -1,7 +1,9 @@
@@ -129,7 +190,7 @@ index 6617bd147..f39f7d439 100644
  PLATFORM_LINUX = sys.platform.startswith('linux')
  PLATFORM_WIN32 = sys.platform.startswith('win32')
  
-@@ -688,9 +693,75 @@ def get_cusparselt_version(formatted=False):
+@@ -692,9 +697,75 @@ def get_cusparselt_version(formatted=False):
      return _cusparselt_version
  
  
@@ -205,7 +266,7 @@ index 6617bd147..f39f7d439 100644
      with _tempdir() as temp_dir:
          fname = os.path.join(temp_dir, 'a.cpp')
          with open(fname, 'w') as f:
-@@ -716,6 +787,9 @@ def build_shlib(compiler, source, libraries=(),
+@@ -720,6 +791,9 @@ def build_shlib(compiler, source, libraries=(),
  def build_and_run(compiler, source, libraries=(),
                    include_dirs=(), library_dirs=(), define_macros=None,
                    extra_compile_args=()):

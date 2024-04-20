@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
-{% set version = "13.0.0" %}
-{% set sha256 = "2f04e7857f692a713360dc9c3b06709806ab8404fca39b5af9721c04a2979aae" %}
-{% set build_num = 3 %}
+{% set version = "13.1.0" %}
+{% set sha256 = "5caf62288481a27713384523623045380ff42e618be4245f478238ed1786f32d" %}
+{% set build_num = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -17,7 +17,7 @@
 # {{ PYTHON }} is not resolved properly in multi-output recipes...
 {% set PYTHON = "python" %}
 {% set PYTHON = "$PREFIX/bin/python" %}  # [linux]
-{% set PYTHON = "%PREFIX%\python" %}     # [win]
+{% set PYTHON = "%PREFIX%\\python" %}  # [win]
 
 
 package:
@@ -28,6 +28,7 @@ source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     patches:
+      - fix_cub_constexpr.diff  # [win64]
       - support_new_cuda_layout.diff  # [((linux or win64) and (cuda_compiler_version or "").startswith("12")) or (build_platform != target_platform)]
 
 build:
@@ -75,7 +76,7 @@ outputs:
       summary: |
         CuPy: NumPy & SciPy for GPU
       dev_url: https://github.com/cupy/cupy/
-      doc_url: https://docs.cupy.dev/en/stable/    
+      doc_url: https://docs.cupy.dev/en/stable/
 
   - name: cupy-core
     version: {{ version }}
@@ -97,17 +98,14 @@ outputs:
         - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"  # [win]
         # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
         - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
-  
         - >-
           {{ PYTHON }} -m pip install . --no-deps -vv
         - if errorlevel 1 exit 1  # [win]
-  
         # enable CuPy's preload mechanism
         - mkdir -p "${SP_DIR}/cupy/.data/"                                                                          # [linux]
         - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_major }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
         - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                # [win]    
         - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_major }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
-  
         # cupy/cupy#7578
         - if not exist %SP_DIR%\cupy\.data\_depends.json exit 1  # [win]
       missing_dso_whitelist:
@@ -136,6 +134,7 @@ outputs:
     requirements:
       build:
         - {{ compiler("c") }}
+        - {{ stdlib("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("cuda") }}
         - sysroot_{{ target_platform }} 2.17    # [linux]
@@ -205,6 +204,7 @@ outputs:
         - optuna ~=3.0
         - __cuda >=11.2                                          # [(cuda_compiler_version or "").startswith("11")]
         - __cuda >=12.0                                          # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_subpackage('cupy', max_pin='x.x') }}
         # TODO: see https://github.com/conda-forge/cudnn-feedstock/issues/58
         - {{ pin_compatible('cudnn') }}                          # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
         - {{ pin_compatible('nccl') }}                           # [linux]
