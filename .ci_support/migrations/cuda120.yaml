@@ -2,6 +2,8 @@ migrator_ts: 1682985063
 __migrator:
   kind:
     version
+  # Vendor CUDA 12 migrator to use CUDA 12.4 (instead of 12.0).
+  use_local: true
   migration_number:
     3
   build_number:
@@ -79,7 +81,7 @@ cuda_compiler:                 # [(linux or win64) and os.environ.get("CF_CUDA_E
   - cuda-nvcc                  # [(linux or win64) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
 
 cuda_compiler_version:         # [(linux or win64) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 12.0                       # [(linux or win64) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+  - 12.4                       # [(linux or win64) and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
 
 c_compiler_version:            # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
   - 12                         # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
