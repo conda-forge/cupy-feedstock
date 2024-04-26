@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.1.0" %}
 {% set sha256 = "5caf62288481a27713384523623045380ff42e618be4245f478238ed1786f32d" %}
-{% set number = 2 %}
+{% set number = 3 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -190,9 +190,10 @@ outputs:
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
         - numpy ~=1.22
+      run_constrained:
+        # we move these here so that cupy-core can be installed in CPU-only envs
         - cuda-version >={{ cuda_major }}.2,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("11")]
         - cuda-version >={{ cuda_major }}.0,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("12")]
-      run_constrained:
         # Only GLIBC_2.17 or older symbols present
         - __glibc >=2.17  # [linux]
         - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
