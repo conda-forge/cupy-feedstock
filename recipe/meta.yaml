@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.1.0" %}
 {% set sha256 = "5caf62288481a27713384523623045380ff42e618be4245f478238ed1786f32d" %}
-{% set build_num = 1 %}
+{% set number = 2 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -32,8 +32,9 @@ source:
       - support_new_cuda_layout.diff  # [((linux or win64) and (cuda_compiler_version or "").startswith("12")) or (build_platform != target_platform)]
 
 build:
-  number: {{ build_num }}
-  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.0")]
+  number: {{ number }}
+  # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.4")]
 
 requirements:
   host:
@@ -43,8 +44,9 @@ outputs:
   - name: cupy
     version: {{ version }}
     build:
-      number: {{ build_num }}
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.0")]
+      number: {{ number }}
+      # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.4")]
     requirements:
       host:
         - python
@@ -81,8 +83,9 @@ outputs:
   - name: cupy-core
     version: {{ version }}
     build:
-      number: {{ build_num }}
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.0")]
+      number: {{ number }}
+      # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.4")]
       script:
         # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
         # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
@@ -128,7 +131,7 @@ outputs:
         {% endif %}
       ignore_run_exports:
         # optional dependencies
-        - cudnn       # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
+        - cudnn
         - nccl        # [linux]
         - cutensor
     requirements:
@@ -155,7 +158,7 @@ outputs:
         - libcusparse-dev                       # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
-        - cudnn ~=8.8                           # [build_platform != target_platform and not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
+        - cudnn ~=8.8
         - nccl ~=2.16                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
       host:
@@ -180,8 +183,7 @@ outputs:
         - libcusparse-dev
         {% endif %}
         # optional dependencies
-        # TODO: see https://github.com/conda-forge/cudnn-feedstock/issues/58
-        - cudnn ~=8.8           # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
+        - cudnn ~=8.8
         - nccl ~=2.16           # [linux]
         - cutensor ~=2.0
       run:
@@ -206,8 +208,7 @@ outputs:
         - __cuda >=11.2                                          # [(cuda_compiler_version or "").startswith("11")]
         - __cuda >=12.0                                          # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
-        # TODO: see https://github.com/conda-forge/cudnn-feedstock/issues/58
-        - {{ pin_compatible('cudnn') }}                          # [not (aarch64 or (ppc64le and (cuda_compiler_version or "").startswith("12")))]
+        - {{ pin_compatible('cudnn') }}
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
     test:
