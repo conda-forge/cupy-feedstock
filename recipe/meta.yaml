@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.1.0" %}
 {% set sha256 = "5caf62288481a27713384523623045380ff42e618be4245f478238ed1786f32d" %}
-{% set number = 3 %}
+{% set number = 4 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -197,12 +197,12 @@ outputs:
         # Only GLIBC_2.17 or older symbols present
         - __glibc >=2.17  # [linux]
         - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
-        - {{ pin_compatible('cuda-nvrtc', max_pin='x') }}        # [(cuda_compiler_version or "").startswith("12")]
-        - {{ pin_compatible('libcublas', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
-        - {{ pin_compatible('libcufft', max_pin='x') }}          # [(cuda_compiler_version or "").startswith("12")]
-        - {{ pin_compatible('libcurand', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
-        - {{ pin_compatible('libcusolver', max_pin='x') }}       # [(cuda_compiler_version or "").startswith("12")]
-        - {{ pin_compatible('libcusparse', max_pin='x') }}       # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}        # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcublas', min_pin='x', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcufft', min_pin='x', max_pin='x') }}          # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}       # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}       # [(cuda_compiler_version or "").startswith("12")]
         - scipy ~=1.7
         - optuna ~=3.0
         - __cuda >=11.2                                          # [(cuda_compiler_version or "").startswith("11")]
