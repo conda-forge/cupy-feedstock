@@ -1,5 +1,4 @@
 azure:
-  store_build_artifacts: true
   free_disk_space: true
   settings_win:
     variables:
