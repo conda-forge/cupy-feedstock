@@ -140,7 +140,6 @@ outputs:
         - {{ stdlib("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("cuda") }}
-        - sysroot_{{ target_platform }} 2.17    # [linux]
         - cross-python_{{ target_platform }}    # [build_platform != target_platform]
         - python                                # [build_platform != target_platform]
         - cython >=0.29.22,<3                   # [build_platform != target_platform]
@@ -194,8 +193,6 @@ outputs:
         # we move these here so that cupy-core can be installed in CPU-only envs
         - cuda-version >={{ cuda_major }}.2,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("11")]
         - cuda-version >={{ cuda_major }}.0,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("12")]
-        # Only GLIBC_2.17 or older symbols present
-        - __glibc >=2.17  # [linux]
         - cudatoolkit                                            # [(cuda_compiler_version or "").startswith("11")]
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}        # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_compatible('libcublas', min_pin='x', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
