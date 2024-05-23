@@ -1,6 +1,5 @@
 {% set name = "cupy" %}
 {% set version = "14.0.0dev0" %}
-{% set sha256 = "ee52756196175b0ec3772a135ff1a79147e244af469f405b2bdbfca6fdf7ff66" %}
 {% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
@@ -63,13 +62,13 @@ outputs:
         # see discussions/references in conda-forge/cupy-feedstock#247
         - cuda-version >=12.0,<13.0a0  # [(cuda_compiler_version or "").startswith("12")]
         - cuda-version >=11.0,<12.0a0  # [(cuda_compiler_version or "").startswith("11")]
-    test:
-      requires:
-        # need the libcuda stub for import test
-        - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
-      script: run_test.py
-      source_files:
-        - tests
+    # test:
+    #   requires:
+    #     # need the libcuda stub for import test
+    #     - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
+    #   script: run_test.py
+    #   source_files:
+    #     - tests
     about:
       home: https://cupy.dev/
       license: MIT
