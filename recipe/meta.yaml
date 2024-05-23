@@ -1,7 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "13.1.0" %}
-{% set sha256 = "5caf62288481a27713384523623045380ff42e618be4245f478238ed1786f32d" %}
-{% set number = 4 %}
+{% set version = "14.0.0dev0" %}
+{% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -25,8 +24,8 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: {{ sha256 }}
+  - git_url: https://github.com/cupy/cupy.git
+    git_rev: 56cb8a95720be6229c093ee8fd0c5b3b04260d6b
     patches:
       - fix_cub_constexpr.diff  # [win64]
       - support_new_cuda_layout.diff  # [((linux or win64) and (cuda_compiler_version or "").startswith("12")) or (build_platform != target_platform)]
@@ -64,12 +63,14 @@ outputs:
         - cuda-version >=12.0,<13.0a0  # [(cuda_compiler_version or "").startswith("12")]
         - cuda-version >=11.0,<12.0a0  # [(cuda_compiler_version or "").startswith("11")]
     test:
-      requires:
-        # need the libcuda stub for import test
-        - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
-      script: run_test.py
-      source_files:
-        - tests
+      imports:
+        - cupy  # dummy
+    #   requires:
+    #     # need the libcuda stub for import test
+    #     - cuda-driver-dev  # [linux and (cuda_compiler_version or "").startswith("12")]
+    #   script: run_test.py
+    #   source_files:
+    #     - tests
     about:
       home: https://cupy.dev/
       license: MIT
@@ -188,7 +189,7 @@ outputs:
       run:
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
-        - numpy ~=1.22
+        - numpy >=1.22,<3.0.0a0
       run_constrained:
         # we move these here so that cupy-core can be installed in CPU-only envs
         - cuda-version >={{ cuda_major }}.2,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("11")]

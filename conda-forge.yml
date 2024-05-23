@@ -1,5 +1,6 @@
 azure:
   free_disk_space: true
+  store_build_artifacts: true
   settings_win:
     variables:
       SET_PAGEFILE: 'True'
