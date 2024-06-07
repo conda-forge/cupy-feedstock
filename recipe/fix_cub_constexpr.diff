@@ -1,18 +1,24 @@
 diff --git a/cupy/cuda/cupy_cub.cu b/cupy/cuda/cupy_cub.cu
-index 802d62bd5..3b230e8d1 100644
+index 802d62bd59d..b68d8f638d8 100644
 --- a/cupy/cuda/cupy_cub.cu
 +++ b/cupy/cuda/cupy_cub.cu
-@@ -85,8 +85,11 @@ class numeric_limits<__half> {
+@@ -84,9 +84,16 @@ template <>
+ class numeric_limits<__half> {
    public:
      static __host__ __device__ constexpr __half infinity() noexcept {
-         unsigned short inf_half = 0x7C00U;
+-        unsigned short inf_half = 0x7C00U;
 -        __half inf_value = *reinterpret_cast<__half*>(&inf_half);
 -        return inf_value;
++        constexpr unsigned short inf_half = 0x7C00U;
++        #if (defined(_MSC_VER) && _MSC_VER >= 1920)
 +        // WAR:
 +        // - we want a constexpr here, but reinterpret_cast cannot be used
 +        // - we want to use std::bit_cast, but it requires C++20 which is too new
 +        // - we use the compiler builtin, fortunately both gcc and msvc have it
 +        return __builtin_bit_cast(__half, inf_half);
++        #else
++        return *reinterpret_cast<__half*>(&inf_half);
++        #endif
      }
  
      static constexpr bool has_infinity = true;
