@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.2.0" %}
 {% set sha256 = "e4dbd2b2ed4159a5cc0c0f98a710a014950eb2c16eeb455e956128f3b3bd0d51" %}
-{% set number = 4 %}
+{% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -28,7 +28,6 @@ source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     patches:
-      - fix_cub_constexpr.diff  # [win64]
       - support_new_cuda_layout.diff  # [((linux or win64) and (cuda_compiler_version or "").startswith("12")) or (build_platform != target_platform)]
 
 build:
