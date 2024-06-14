@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
-{% set version = "13.1.0" %}
-{% set sha256 = "5caf62288481a27713384523623045380ff42e618be4245f478238ed1786f32d" %}
-{% set number = 4 %}
+{% set version = "13.2.0" %}
+{% set sha256 = "e4dbd2b2ed4159a5cc0c0f98a710a014950eb2c16eeb455e956128f3b3bd0d51" %}
+{% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -28,13 +28,12 @@ source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     patches:
-      - fix_cub_constexpr.diff  # [win64]
       - support_new_cuda_layout.diff  # [((linux or win64) and (cuda_compiler_version or "").startswith("12")) or (build_platform != target_platform)]
 
 build:
   number: {{ number }}
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.4")]
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.5") or ppc64le]
 
 requirements:
   host:
@@ -46,7 +45,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.4")]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.5") or ppc64le]
     requirements:
       host:
         - python
@@ -85,7 +84,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.4")]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.5") or ppc64le]
       script:
         # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
         # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
@@ -188,7 +187,7 @@ outputs:
       run:
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
-        - numpy ~=1.22
+        - numpy >=1.22,<3.0.0a0
       run_constrained:
         # we move these here so that cupy-core can be installed in CPU-only envs
         - cuda-version >={{ cuda_major }}.2,<{{ cuda_major+1 }}  # [(cuda_compiler_version or "").startswith("11")]
