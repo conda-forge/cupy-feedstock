@@ -1,5 +1,6 @@
 {% set name = "cupy" %}
 {% set version = "14.0.0dev0" %}
+{% set git_rev = "56cb8a95720be6229c093ee8fd0c5b3b04260d6b" %}
 {% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
@@ -25,7 +26,7 @@ package:
 
 source:
   - git_url: https://github.com/cupy/cupy.git
-    git_rev: 56cb8a95720be6229c093ee8fd0c5b3b04260d6b
+    git_rev: {{ git_rev }}
     patches:
       - support_new_cuda_layout.diff  # [((linux or win64) and (cuda_compiler_version or "").startswith("12")) or (build_platform != target_platform)]
 
