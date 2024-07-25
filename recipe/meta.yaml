@@ -1,5 +1,5 @@
 {% set name = "cupy" %}
-{% set version = "14.0.0dev0" %}
+{% set version = "14.0.0dev" ~ GIT_DESCRIBE_NUMBER %}
 {% set git_rev = "56cb8a95720be6229c093ee8fd0c5b3b04260d6b" %}
 {% set number = 0 %}
 
