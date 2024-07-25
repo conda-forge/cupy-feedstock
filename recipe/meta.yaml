@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "14.0.0dev" ~ GIT_DESCRIBE_NUMBER %}
-{% set git_rev = "56cb8a95720be6229c093ee8fd0c5b3b04260d6b" %}
+{% set version = "13.3.0dev" ~ GIT_DESCRIBE_NUMBER %}
+{% set git_rev = "v13" %}
 {% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
