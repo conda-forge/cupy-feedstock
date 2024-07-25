@@ -8,22 +8,22 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_cuda_compilercuda-nvcccuda_compiler_version12.4python3.10.____cpython:
-        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.4python3.10.____cpython
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.10.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_h1a2b625219
-      win_64_cuda_compilercuda-nvcccuda_compiler_version12.4python3.11.____cpython:
-        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.4python3.11.____cpython
+        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_ha04e48f122
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.11.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_h36f00e85dd
-      win_64_cuda_compilercuda-nvcccuda_compiler_version12.4python3.12.____cpython:
-        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.4python3.12.____cpython
+        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_ha3b2c00765
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.12.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_hf69d72efb8
-      win_64_cuda_compilercuda-nvcccuda_compiler_version12.4python3.9.____cpython:
-        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.4python3.9.____cpython
+        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_h55c0af3228
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.9.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_h24f1c55106
+        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_h0a1d50dd92
       win_64_cuda_compilernvcccuda_compiler_version11.8python3.10.____cpython:
         CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.10.____cpython
         UPLOAD_PACKAGES: 'True'

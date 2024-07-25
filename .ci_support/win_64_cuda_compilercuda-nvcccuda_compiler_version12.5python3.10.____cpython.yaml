@@ -9,7 +9,7 @@ channel_targets:
 cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
-- '12.4'
+- '12.5'
 cudnn:
 - '8'
 cutensor:
@@ -21,7 +21,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.10.* *_cpython
 target_platform:
 - win-64
 zip_keys:
