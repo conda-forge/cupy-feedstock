@@ -52,7 +52,7 @@ if NOT [%flow_run_id%] == [] (
 call :end_group
 
 call :start_group "Enable git symlinks on Windows"
-git config core.symlinks true
+git config --global core.symlinks true
 call :end_group
 
 :: Build the recipe
