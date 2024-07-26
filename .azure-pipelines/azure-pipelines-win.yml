@@ -11,27 +11,35 @@ jobs:
       win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.10.____cpython:
         CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_ha04e48f122
       win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.11.____cpython:
         CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_ha3b2c00765
       win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.12.____cpython:
         CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_h55c0af3228
       win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.9.____cpython:
         CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.5python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_cuda_compilercuda-nvcccuda_c_h0a1d50dd92
       win_64_cuda_compilernvcccuda_compiler_version11.8python3.10.____cpython:
         CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_cuda_compilernvcccuda_compil_h200ec4340e
       win_64_cuda_compilernvcccuda_compiler_version11.8python3.11.____cpython:
         CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_cuda_compilernvcccuda_compil_haec70b9094
       win_64_cuda_compilernvcccuda_compiler_version11.8python3.12.____cpython:
         CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_cuda_compilernvcccuda_compil_h3457fb9941
       win_64_cuda_compilernvcccuda_compiler_version11.8python3.9.____cpython:
         CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_cuda_compilernvcccuda_compil_hf10085d904
   timeoutInMinutes: 360
   variables:
     CONDA_BLD_PATH: D:\\bld\\
@@ -39,6 +47,11 @@ jobs:
     UPLOAD_TEMP: D:\\tmp
 
   steps:
+    - powershell: |
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+        git config --global core.symlinks true
+      displayName: Enable Developer Mode on Windows & git links
+      # https://learn.microsoft.com/en-us/windows/apps/get-started/developer-mode-features-and-debugging
 
     - task: PythonScript@0
       displayName: 'Download Miniforge'
@@ -72,3 +85,30 @@ jobs:
         BINSTAR_TOKEN: $(BINSTAR_TOKEN)
         FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
         STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
+    - script: |
+        set CI=azure
+        set CI_RUN_ID=$(build.BuildNumber).$(system.JobAttempt)
+        set FEEDSTOCK_NAME=$(build.Repository.Name)
+        set ARTIFACT_STAGING_DIR=$(Build.ArtifactStagingDirectory)
+        set CONDA_BLD_DIR=$(CONDA_BLD_PATH)
+        set BLD_ARTIFACT_PREFIX=conda_artifacts
+        if "%AGENT_JOBSTATUS%" == "Failed" (
+            set ENV_ARTIFACT_PREFIX=conda_envs
+        )
+        call ".scripts\create_conda_build_artifacts.bat"
+      displayName: Prepare conda build artifacts
+      condition: succeededOrFailed()
+
+    - task: PublishPipelineArtifact@1
+      displayName: Store conda build artifacts
+      condition: not(eq(variables.BLD_ARTIFACT_PATH, ''))
+      inputs:
+        targetPath: $(BLD_ARTIFACT_PATH)
+        artifactName: $(BLD_ARTIFACT_NAME)
+
+    - task: PublishPipelineArtifact@1
+      displayName: Store conda build environment artifacts
+      condition: not(eq(variables.ENV_ARTIFACT_PATH, ''))
+      inputs:
+        targetPath: $(ENV_ARTIFACT_PATH)
+        artifactName: $(ENV_ARTIFACT_NAME)
