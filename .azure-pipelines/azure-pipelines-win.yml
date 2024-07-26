@@ -47,6 +47,10 @@ jobs:
     UPLOAD_TEMP: D:\\tmp
 
   steps:
+    - powershell: |
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+      displayName: Enable Developer Mode on Windows
+      # https://learn.microsoft.com/en-us/windows/apps/get-started/developer-mode-features-and-debugging
 
     - task: PythonScript@0
       displayName: 'Download Miniforge'
