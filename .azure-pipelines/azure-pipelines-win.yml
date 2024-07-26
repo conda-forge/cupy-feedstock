@@ -49,7 +49,8 @@ jobs:
   steps:
     - powershell: |
         reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
-      displayName: Enable Developer Mode on Windows
+        git config --global core.symlinks true
+      displayName: Enable Developer Mode on Windows & git links
       # https://learn.microsoft.com/en-us/windows/apps/get-started/developer-mode-features-and-debugging
 
     - task: PythonScript@0
