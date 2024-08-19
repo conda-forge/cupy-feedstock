@@ -51,10 +51,6 @@ if NOT [%flow_run_id%] == [] (
 
 call :end_group
 
-call :start_group "Enable git symlinks on Windows"
-git config --global core.symlinks true
-call :end_group
-
 :: Build the recipe
 echo Building recipe
 conda-build.exe "recipe" -m .ci_support\%CONFIG%.yaml --suppress-variables %EXTRA_CB_OPTIONS%

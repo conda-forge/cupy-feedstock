@@ -47,11 +47,6 @@ jobs:
     UPLOAD_TEMP: D:\\tmp
 
   steps:
-    - powershell: |
-        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
-        git config --global core.symlinks true
-      displayName: Enable Developer Mode on Windows & git links
-      # https://learn.microsoft.com/en-us/windows/apps/get-started/developer-mode-features-and-debugging
 
     - task: PythonScript@0
       displayName: 'Download Miniforge'
@@ -59,7 +54,7 @@ jobs:
         scriptSource: inline
         script: |
           import urllib.request
-          url = 'https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Windows-x86_64.exe'
+          url = 'https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe'
           path = r"$(Build.ArtifactStagingDirectory)/Miniforge.exe"
           urllib.request.urlretrieve(url, path)
 
