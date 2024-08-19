@@ -50,14 +50,14 @@ outputs:
       run:
         - python
         - {{ pin_subpackage('cupy-core', exact=True) }}
-        - cudatoolkit      # [(cuda_compiler_version or "").startswith("11")]
-        - cuda-cudart-dev  # [(cuda_compiler_version or "").startswith("12")]
-        - cuda-nvrtc       # [(cuda_compiler_version or "").startswith("12")]
-        - libcublas        # [(cuda_compiler_version or "").startswith("12")]
-        - libcufft         # [(cuda_compiler_version or "").startswith("12")]
-        - libcurand        # [(cuda_compiler_version or "").startswith("12")]
-        - libcusolver      # [(cuda_compiler_version or "").startswith("12")]
-        - libcusparse      # [(cuda_compiler_version or "").startswith("12")]
+        - cudatoolkit                            # [(cuda_compiler_version or "").startswith("11")]
+        - cuda-cudart-dev_{{ target_platform }}  # [(cuda_compiler_version or "").startswith("12")]
+        - cuda-nvrtc                             # [(cuda_compiler_version or "").startswith("12")]
+        - libcublas                              # [(cuda_compiler_version or "").startswith("12")]
+        - libcufft                               # [(cuda_compiler_version or "").startswith("12")]
+        - libcurand                              # [(cuda_compiler_version or "").startswith("12")]
+        - libcusolver                            # [(cuda_compiler_version or "").startswith("12")]
+        - libcusparse                            # [(cuda_compiler_version or "").startswith("12")]
         # see discussions/references in conda-forge/cupy-feedstock#247
         - cuda-version >=12.0,<13.0a0  # [(cuda_compiler_version or "").startswith("12")]
         - cuda-version >=11.0,<12.0a0  # [(cuda_compiler_version or "").startswith("11")]
