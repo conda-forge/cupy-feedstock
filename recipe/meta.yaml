@@ -27,8 +27,6 @@ package:
 source:
   - git_url: https://github.com/cupy/cupy.git
     git_rev: {{ git_rev }}
-    patches:
-      - support_new_cuda_layout.diff  # [((linux or win64) and (cuda_compiler_version or "").startswith("12")) or (build_platform != target_platform)]
 
 build:
   number: {{ number }}
