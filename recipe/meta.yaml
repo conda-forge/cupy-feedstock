@@ -146,7 +146,6 @@ outputs:
         # TODO: clean up
         {% if cuda_major >= 12 %}
         - cuda-driver-dev                       # [build_platform != target_platform and linux]
-        - cuda-cudart                           # [build_platform != target_platform]
         - cuda-cudart-dev                       # [build_platform != target_platform]
         - cuda-nvrtc-dev                        # [build_platform != target_platform]
         - cuda-nvtx-dev                         # [build_platform != target_platform]
@@ -171,7 +170,6 @@ outputs:
         # TODO: clean up
         {% if cuda_major >= 12 %}
         - cuda-driver-dev  # [linux]
-        - cuda-cudart
         - cuda-cudart-dev
         - cuda-cudart-static
         - cuda-nvrtc-dev
