@@ -194,7 +194,7 @@ outputs:
         - cuda-version >={{ cuda_major }}.2,<{{ cuda_major+1 }}                # [(cuda_compiler_version or "").startswith("11")]
         - cuda-version >={{ cuda_major }}.0,<{{ cuda_major+1 }}                # [(cuda_compiler_version or "").startswith("12")]
         - cudatoolkit                                                          # [(cuda_compiler_version or "").startswith("11")]
-        - {{ pin_subpackage("cuda-cudart_" ~ target_platform, max_pin="x") }}  # [(cuda_compiler_version or "").startswith("12")]
+        - {{ pin_subpackage('cuda-cudart_' ~ target_platform, max_pin="x") }}  # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}         # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_compatible('libcublas', min_pin='x', max_pin='x') }}          # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_compatible('libcufft', min_pin='x', max_pin='x') }}           # [(cuda_compiler_version or "").startswith("12")]
