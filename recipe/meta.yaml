@@ -188,7 +188,7 @@ outputs:
         - cutensor ~=2.0
       run:
         {% if cuda_major >= 12 %}
-        - cuda-cudart-dev
+        - cuda-cudart-dev_{{ target_platform }}
         {% endif %}
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
