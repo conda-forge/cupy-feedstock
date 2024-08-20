@@ -90,8 +90,8 @@ outputs:
         # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
         # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
         - export NVCC="$(which nvcc)"                                                # [linux]
+        - export CUPY_NUM_BUILD_JOBS=1                                               # [(aarch64 or ppc64le)]
         {% if cuda_major >= 12 %}
-        - export CUPY_NUM_BUILD_JOBS=1                                               # [(aarch64 or ppc64le) and (build_platform == target_platform)]
         - export CUDA_PATH=$PREFIX/targets/{{ target_name }}                         # [linux]
         {% endif %}
         - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
