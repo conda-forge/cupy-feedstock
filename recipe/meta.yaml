@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
 {% set version = "13.3.0b0" %}
-{% set git_rev = "lookup_conda_includes_v13" %}
+{% set git_rev = "v13" %}
 {% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
@@ -25,7 +25,7 @@ package:
   version: {{ version }}
 
 source:
-  - git_url: https://github.com/jakirkham/cupy.git
+  - git_url: https://github.com/cupy/cupy.git
     git_rev: {{ git_rev }}
 
 build:
