@@ -31,7 +31,7 @@ source:
 build:
   number: {{ number }}
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.5") or ppc64le]
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.6") or ppc64le]
 
 requirements:
   host:
@@ -43,7 +43,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.5") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.6") or ppc64le]
     requirements:
       host:
         - python
@@ -82,7 +82,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.5") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.6") or ppc64le]
       script:
         # CuPy default detects CUDA from nvcc, but on Conda-Forge's dockers nvcc lives in a different place...
         # With conda-forge/nvcc-feedstock#58, CUDA_PATH is set correctly
