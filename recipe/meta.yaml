@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.3.0" %}
 {% set sha256 = "9a2a17af2b99cce91dd1366939c3805e3f51f9de5046df64f29ccbad3bdf78ed" %}
-{% set number = 0 %}
+{% set number = 1 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -27,6 +27,8 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      - 8544.diff
 
 build:
   number: {{ number }}
