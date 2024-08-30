@@ -11,7 +11,7 @@ cuda_compiler:
 cuda_compiler_version:
 - '12.6'
 cudnn:
-- '8'
+- '9'
 cutensor:
 - '2'
 cxx_compiler:
