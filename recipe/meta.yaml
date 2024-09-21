@@ -156,7 +156,7 @@ outputs:
         - libcusparse-dev                       # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
-        - cudnn ~=8.8
+        - cudnn
         - nccl ~=2.16                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
       host:
@@ -181,7 +181,7 @@ outputs:
         - libcusparse-dev
         {% endif %}
         # optional dependencies
-        - cudnn ~=8.8
+        - cudnn
         - nccl ~=2.16           # [linux]
         - cutensor ~=2.0
       run:
