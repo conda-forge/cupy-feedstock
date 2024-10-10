@@ -30,7 +30,7 @@ source:
     patches:
       # Apply fix for platform.processor() returning unexpected results on some platforms 
       # https://github.com/cupy/cupy/issues/8654
-      - fixes_8654.patch
+      - fixes_8654.diff
 
 build:
   number: {{ number }}
