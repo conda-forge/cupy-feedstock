@@ -27,6 +27,10 @@ package:
 source:
   - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      # Apply fix for platform.processor() returning unexpected results on some platforms 
+      # https://github.com/cupy/cupy/issues/8654
+      - fixes_8654.patch
 
 build:
   number: {{ number }}

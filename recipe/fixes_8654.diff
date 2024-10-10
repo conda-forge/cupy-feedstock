@@ -1,0 +1,122 @@
+From 57456d4c07e8b34bb8f92ddea932d763fa1118f1 Mon Sep 17 00:00:00 2001
+From: David Gardner <dagardner@nvidia.com>
+Date: Wed, 9 Oct 2024 15:45:46 -0700
+Subject: [PATCH 1/5] Fallback to calling platform.machine() if
+ platform.processor() returns an empty string
+
+---
+ cupy/_environment.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/cupy/_environment.py b/cupy/_environment.py
+index 4edcf41d3d5..1b3de5c98b9 100644
+--- a/cupy/_environment.py
++++ b/cupy/_environment.py
+@@ -470,6 +470,8 @@ def _get_include_dir_from_conda_or_wheel(major: int, minor: int) -> List[str]:
+     if config is not None and config['packaging'] == 'conda':
+         if sys.platform.startswith('linux'):
+             arch = platform.processor()
++            if arch == '': # Not all systems report this
++                arch = platform.machine()
+             if arch == "aarch64":
+                 arch = "sbsa"
+             target_dir = f"{arch}-linux"
+
+From 9dd8f257126b4174a7b4feb39cce529b733e5ed2 Mon Sep 17 00:00:00 2001
+From: David Gardner <dagardner@nvidia.com>
+Date: Wed, 9 Oct 2024 15:49:57 -0700
+Subject: [PATCH 2/5] Lint fix
+
+---
+ cupy/_environment.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cupy/_environment.py b/cupy/_environment.py
+index 1b3de5c98b9..ebaaab10ab4 100644
+--- a/cupy/_environment.py
++++ b/cupy/_environment.py
+@@ -470,7 +470,7 @@ def _get_include_dir_from_conda_or_wheel(major: int, minor: int) -> List[str]:
+     if config is not None and config['packaging'] == 'conda':
+         if sys.platform.startswith('linux'):
+             arch = platform.processor()
+-            if arch == '': # Not all systems report this
++            if arch == '':  # Not all systems report this
+                 arch = platform.machine()
+             if arch == "aarch64":
+                 arch = "sbsa"
+
+From fc18cbde04a08eda80f5e4b15e2f7bfc5257fc48 Mon Sep 17 00:00:00 2001
+From: David Gardner <96306125+dagardner-nv@users.noreply.github.com>
+Date: Wed, 9 Oct 2024 16:08:59 -0700
+Subject: [PATCH 3/5] Update cupy/_environment.py
+
+Just use `platform.machine()` instead of calling `platform.processor()` and then checking the output
+
+Co-authored-by: jakirkham <jakirkham@gmail.com>
+---
+ cupy/_environment.py | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/cupy/_environment.py b/cupy/_environment.py
+index ebaaab10ab4..0916674d11f 100644
+--- a/cupy/_environment.py
++++ b/cupy/_environment.py
+@@ -469,9 +469,7 @@ def _get_include_dir_from_conda_or_wheel(major: int, minor: int) -> List[str]:
+     config = get_preload_config()
+     if config is not None and config['packaging'] == 'conda':
+         if sys.platform.startswith('linux'):
+-            arch = platform.processor()
+-            if arch == '':  # Not all systems report this
+-                arch = platform.machine()
++            arch = platform.machine()
+             if arch == "aarch64":
+                 arch = "sbsa"
+             target_dir = f"{arch}-linux"
+
+From c59205997de635e46e3a32ce62ac2cbb4cf10547 Mon Sep 17 00:00:00 2001
+From: David Gardner <96306125+dagardner-nv@users.noreply.github.com>
+Date: Wed, 9 Oct 2024 16:10:19 -0700
+Subject: [PATCH 4/5] Update cupy/_environment.py
+
+Assert arch is not empty
+
+Co-authored-by: jakirkham <jakirkham@gmail.com>
+---
+ cupy/_environment.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/cupy/_environment.py b/cupy/_environment.py
+index 0916674d11f..3d487e2d323 100644
+--- a/cupy/_environment.py
++++ b/cupy/_environment.py
+@@ -472,6 +472,7 @@ def _get_include_dir_from_conda_or_wheel(major: int, minor: int) -> List[str]:
+             arch = platform.machine()
+             if arch == "aarch64":
+                 arch = "sbsa"
++            assert arch
+             target_dir = f"{arch}-linux"
+             return [
+                 os.path.join(sys.prefix, "targets", target_dir, "include"),
+
+From d2ebdf866121b6802d910cbb346965eaf42e4e05 Mon Sep 17 00:00:00 2001
+From: David Gardner <dagardner@nvidia.com>
+Date: Wed, 9 Oct 2024 16:11:22 -0700
+Subject: [PATCH 5/5] Add an error message to the assert
+
+---
+ cupy/_environment.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cupy/_environment.py b/cupy/_environment.py
+index 3d487e2d323..105f16b5d09 100644
+--- a/cupy/_environment.py
++++ b/cupy/_environment.py
+@@ -472,7 +472,7 @@ def _get_include_dir_from_conda_or_wheel(major: int, minor: int) -> List[str]:
+             arch = platform.machine()
+             if arch == "aarch64":
+                 arch = "sbsa"
+-            assert arch
++            assert arch, "platform.machine() returned an empty string"
+             target_dir = f"{arch}-linux"
+             return [
+                 os.path.join(sys.prefix, "targets", target_dir, "include"),
