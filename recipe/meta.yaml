@@ -133,7 +133,6 @@ outputs:
         {% endif %}
       ignore_run_exports:
         # optional dependencies
-        - cudnn
         - nccl        # [linux]
         - cutensor
     requirements:
@@ -160,7 +159,6 @@ outputs:
         - libcusparse-dev                       # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
-        - cudnn ~=8.8
         - nccl ~=2.16                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
       host:
@@ -185,7 +183,6 @@ outputs:
         - libcusparse-dev
         {% endif %}
         # optional dependencies
-        - cudnn ~=8.8
         - nccl ~=2.16           # [linux]
         - cutensor ~=2.0
       run:
@@ -208,7 +205,6 @@ outputs:
         - __cuda >=11.2                                          # [(cuda_compiler_version or "").startswith("11")]
         - __cuda >=12.0                                          # [(cuda_compiler_version or "").startswith("12")]
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
-        - {{ pin_compatible('cudnn') }}
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
     test:
