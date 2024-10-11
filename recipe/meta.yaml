@@ -38,6 +38,10 @@ build:
   skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.6") or ppc64le]
 
 requirements:
+  build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cython                                 # [build_platform != target_platform]
   host:
     - python
 
