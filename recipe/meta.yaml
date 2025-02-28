@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "13.3.0" %}
-{% set sha256 = "9a2a17af2b99cce91dd1366939c3805e3f51f9de5046df64f29ccbad3bdf78ed" %}
+{% set version = "13.4.0" %}
+{% set sha256 = "d4b60e5a1d3b89be40fad0845bb9fc467a653abe8660f752416fd38d24ab7fdb" %}
 {% set number = 2 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
@@ -25,7 +25,7 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     patches:
       # Apply fix for platform.processor() returning unexpected results on some platforms 
