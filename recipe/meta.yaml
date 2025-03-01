@@ -97,7 +97,6 @@ outputs:
         # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
         - set "NVCC=%NVCC% --use-local-env"  # [win64]
         - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"  # [win]
-        - export CUSPARSELT_PATH="${PREFIX}"                                         # [(linux64 or aarch64 or win) and (cuda_compiler_version or "").startswith("11")]
         # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
         - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
         - >-
@@ -132,7 +131,6 @@ outputs:
         # optional dependencies
         - nccl        # [linux]
         - cutensor
-        - cusparselt
     requirements:
       build:
         - {{ compiler("c") }}
@@ -155,11 +153,6 @@ outputs:
         - libcurand-dev                         # [build_platform != target_platform]
         - libcusolver-dev                       # [build_platform != target_platform]
         - libcusparse-dev                       # [build_platform != target_platform]
-        # optional dependencies for CUDA 12+
-        - cusparselt ~=0.6.0                    # [build_platform != target_platform]
-        {% else %}
-        # optional dependencies for CUDA 11
-        - cusparselt ~=0.2.0                    # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
         - nccl ~=2.16                           # [build_platform != target_platform]
@@ -184,13 +177,8 @@ outputs:
         - libcurand-dev
         - libcusolver-dev
         - libcusparse-dev
-        # optional dependencies for CUDA 12+
-        - cusparselt ~=0.6.0
-        {% else %}
-        # optional dependencies for CUDA 11
-        - cusparselt ~=0.2.0
         {% endif %}
-        # optional dependencies for CUDA 11.2+
+        # optional dependencies
         - nccl ~=2.16           # [linux]
         - cutensor ~=2.0
       run:
@@ -215,7 +203,6 @@ outputs:
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
-        - {{ pin_compatible('cusparselt', max_pin='x.x') }}
     test:
       imports:
         - cupy  # dummy
