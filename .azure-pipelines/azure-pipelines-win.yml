@@ -8,17 +8,17 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.10.____cpython:
-        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.10.____cpython
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.8python3.10.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.8python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.11.____cpython:
-        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.11.____cpython
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.8python3.11.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.8python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.12.____cpython:
-        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.12.____cpython
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.8python3.12.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.8python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.9.____cpython:
-        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.9.____cpython
+      win_64_cuda_compilercuda-nvcccuda_compiler_version12.8python3.9.____cpython:
+        CONFIG: win_64_cuda_compilercuda-nvcccuda_compiler_version12.8python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
       win_64_cuda_compilernvcccuda_compiler_version11.8python3.10.____cpython:
         CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.8python3.10.____cpython
@@ -46,6 +46,7 @@ jobs:
       displayName: Run Windows build
       env:
         MINIFORGE_HOME: $(MINIFORGE_HOME)
+        CONDA_BLD_PATH: $(CONDA_BLD_PATH)
         PYTHONUNBUFFERED: 1
         CONFIG: $(CONFIG)
         CI: azure
