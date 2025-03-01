@@ -139,7 +139,7 @@ outputs:
         - {{ compiler("cuda") }}
         - cross-python_{{ target_platform }}    # [build_platform != target_platform]
         - python                                # [build_platform != target_platform]
-        - cython >=0.29.22,<3                   # [build_platform != target_platform]
+        - cython >=3                            # [build_platform != target_platform]
         - setuptools <72.2.0                    # [build_platform != target_platform]
         # TODO: clean up
         {% if cuda_major >= 12 %}
@@ -161,7 +161,7 @@ outputs:
         - python
         - pip
         - setuptools <72.2.0
-        - cython >=0.29.22,<3
+        - cython >=3
         - fastrlock >=0.5
         - cuda-version {{ cuda_compiler_version }}
         # TODO: clean up
