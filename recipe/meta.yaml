@@ -155,11 +155,15 @@ outputs:
         - libcurand-dev                         # [build_platform != target_platform]
         - libcusolver-dev                       # [build_platform != target_platform]
         - libcusparse-dev                       # [build_platform != target_platform]
+        # optional dependencies for CUDA 12+
+        - cusparselt ~=0.6.0                    # [build_platform != target_platform]
+        {% else %}
+        # optional dependencies for CUDA 11
+        - cusparselt ~=0.2.0                    # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
         - nccl ~=2.16                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
-        - cusparselt ~=0.6.0                    # [build_platform != target_platform]
       host:
         - python
         - pip
@@ -180,11 +184,15 @@ outputs:
         - libcurand-dev
         - libcusolver-dev
         - libcusparse-dev
+        # optional dependencies for CUDA 12+
+        - cusparselt ~=0.6.0
+        {% else %}
+        # optional dependencies for CUDA 11
+        - cusparselt ~=0.2.0
         {% endif %}
-        # optional dependencies
+        # optional dependencies for CUDA 11.2+
         - nccl ~=2.16           # [linux]
         - cutensor ~=2.0
-        - cusparselt ~=0.6.0
       run:
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
