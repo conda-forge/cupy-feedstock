@@ -96,7 +96,7 @@ outputs:
         # Do this by prepending to the CL environment variable.
         # ref: https://learn.microsoft.com/en-us/cpp/build/reference/cgthreads-compiler-threads?view=msvc-170
         # ref: https://learn.microsoft.com/en-us/cpp/build/reference/cl-environment-variables?view=msvc-170
-        - set CL=/cgthreads:2 %CL%                                                   # [win]
+        - set CL=/cgthreads2 %CL%                                                    # [win]
         {% if cuda_major >= 12 %}
         - export CUDA_PATH=$PREFIX/targets/{{ target_name }}                         # [linux]
         {% endif %}
