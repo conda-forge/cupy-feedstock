@@ -107,7 +107,7 @@ outputs:
         # enable CuPy's preload mechanism
         - mkdir -p "${SP_DIR}/cupy/.data/"                                                                          # [linux]
         - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_major }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
-        - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                # [win]    
+        - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                # [win]
         - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_major }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
         # cupy/cupy#7578
         - if not exist %SP_DIR%\cupy\.data\_depends.json exit 1  # [win]
@@ -206,8 +206,12 @@ outputs:
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
     test:
+      requires:
+        - pip
       imports:
         - cupy  # dummy
+      commands:
+        - pip check
     about:
       home: https://cupy.dev/
       license: MIT
