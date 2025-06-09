@@ -186,7 +186,7 @@ outputs:
       run:
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
-        - numpy >=1.22,<3.0.0a0
+        - numpy >=1.22,<2.3
       run_constrained:
         # we move these here so that cupy-core can be installed in CPU-only envs
         - {{ pin_compatible("cuda-version", lower_bound="11.2") }}            # [cuda_compiler == "nvcc"]
@@ -198,7 +198,7 @@ outputs:
         - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}         # [cuda_compiler == "cuda-nvcc"]
         - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
         - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
-        - scipy ~=1.7
+        - scipy >=1.7,<1.17
         - optuna ~=3.0
         - __cuda >={{ cuda_major }}.2                            # [cuda_compiler == "nvcc"]
         - __cuda >={{ cuda_major }}.0                            # [cuda_compiler == "cuda-nvcc"]
