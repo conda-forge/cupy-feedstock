@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.4.1" %}
 {% set sha256 = "9654730da3f7122ba3fe99ce951247e299f3f9c23449a884ba9914444845f0cd" %}
-{% set number = 0 %}
+{% set number = 1 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -107,7 +107,7 @@ outputs:
         # enable CuPy's preload mechanism
         - mkdir -p "${SP_DIR}/cupy/.data/"                                                                          # [linux]
         - cp ${RECIPE_DIR}/preload_config/linux64_cuda{{ cuda_major }}_wheel.json ${SP_DIR}/cupy/.data/_wheel.json  # [linux]
-        - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                # [win]    
+        - if not exist %SP_DIR%\cupy\.data mkdir %SP_DIR%\cupy\.data                                                # [win]
         - copy %RECIPE_DIR%\preload_config\win64_cuda{{ cuda_major }}_wheel.json %SP_DIR%\cupy\.data\_wheel.json    # [win]
         # cupy/cupy#7578
         - if not exist %SP_DIR%\cupy\.data\_depends.json exit 1  # [win]
@@ -141,7 +141,7 @@ outputs:
         - {{ compiler("cuda") }}
         - cross-python_{{ target_platform }}    # [build_platform != target_platform]
         - python                                # [build_platform != target_platform]
-        - cython >=3                            # [build_platform != target_platform]
+        - cython >=3,<3.1                       # [build_platform != target_platform]
         - setuptools <72.2.0                    # [build_platform != target_platform]
         # TODO: clean up
         {% if cuda_major >= 12 %}
@@ -163,7 +163,7 @@ outputs:
         - python
         - pip
         - setuptools <72.2.0
-        - cython >=3
+        - cython >=3,<3.1
         - fastrlock >=0.5
         - cuda-version {{ cuda_compiler_version }}
         # TODO: clean up
@@ -186,7 +186,7 @@ outputs:
       run:
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
-        - numpy >=1.22,<3.0.0a0
+        - numpy >=1.22,<2.3
       run_constrained:
         # we move these here so that cupy-core can be installed in CPU-only envs
         - {{ pin_compatible("cuda-version", lower_bound="11.2") }}            # [cuda_compiler == "nvcc"]
@@ -198,7 +198,7 @@ outputs:
         - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}         # [cuda_compiler == "cuda-nvcc"]
         - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
         - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
-        - scipy ~=1.7
+        - scipy >=1.7,<1.17
         - optuna ~=3.0
         - __cuda >={{ cuda_major }}.2                            # [cuda_compiler == "nvcc"]
         - __cuda >={{ cuda_major }}.0                            # [cuda_compiler == "cuda-nvcc"]
@@ -206,8 +206,12 @@ outputs:
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
     test:
+      requires:
+        - pip
       imports:
         - cupy  # dummy
+      commands:
+        - pip check
     about:
       home: https://cupy.dev/
       license: MIT
