@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "13.4.1" %}
-{% set sha256 = "9654730da3f7122ba3fe99ce951247e299f3f9c23449a884ba9914444845f0cd" %}
+{% set version = "13.5.0" %}
+{% set sha256 = "e24be7837c857f95cf484b4eff91a627a5e622aaece559060b138d9d64e6161d" %}
 {% set number = 1 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
