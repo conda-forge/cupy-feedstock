@@ -33,10 +33,8 @@ pin_run_as_build:
 python:
 - 3.12.* *_cpython
 target_platform:
-- linux-aarch64
+- linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-  - cuda_compiler
   - cuda_compiler_version
-  - docker_image
