@@ -31,7 +31,7 @@ source:
 build:
   number: {{ number }}
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.8") or ppc64le]
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9") or ppc64le]
 
 requirements:
   host:
