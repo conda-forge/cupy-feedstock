@@ -3,10 +3,6 @@ About cupy-split-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cupy-feedstock/blob/main/LICENSE.txt)
 
-
-About cupy-split
-----------------
-
 Home: https://cupy.dev/
 
 Package license: MIT
@@ -17,153 +13,12 @@ Summary: CuPy: NumPy & SciPy for GPU
 Development: https://github.com/cupy/cupy/
 
 Documentation: https://docs.cupy.dev/en/stable/
-
-About cupy-core
----------------
-
-Home: https://cupy.dev/
-
-Package license: MIT
-
-Summary: CuPy: NumPy & SciPy for GPU
-
-
-Development: https://github.com/cupy/cupy/
-
-Documentation: https://docs.cupy.dev/en/stable/
-
-This is the CuPy core package without any dependencies on the CUDA libraries, suitable for
-deployment under resource constraint. You need to install the needed dependencies explicitly.
-
 
 Current build status
 ====================
 
 
 <table>
-    
-  <tr>
-    <td>Azure</td>
-    <td>
-      <details>
-        <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main">
-          </a>
-        </summary>
-        <table>
-          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
-          <tbody><tr>
-              <td>linux_64_cuda_compiler_version12.8python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cuda_compiler_version12.8python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cuda_compiler_version12.8python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cuda_compiler_version12.8python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cuda_compiler_version12.8python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cuda_compiler_version12.8python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cuda_compiler_version12.8python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cuda_compiler_version12.8python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_cuda_compiler_version12.8python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cuda_compiler_version12.8python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cuda_compiler_version12.8python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cuda_compiler_version12.8python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cuda_compiler_version12.8python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cuda_compiler_version12.8python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cuda_compiler_version12.8python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cuda_compiler_version12.8python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cuda_compiler_version12.8python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cuda_compiler_version12.8python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_cuda_compiler_version12.8python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cuda_compiler_version12.8python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_cuda_compiler_version12.8python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compiler_version12.8python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_cuda_compiler_version12.8python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compiler_version12.8python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_cuda_compiler_version12.8python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compiler_version12.8python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_cuda_compiler_version12.8python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compiler_version12.8python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_cuda_compiler_version12.8python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8275&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cupy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cuda_compiler_version12.8python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
-    </td>
-  </tr>
 </table>
 
 Current release info
@@ -171,8 +26,7 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cupy-green.svg)](https://anaconda.org/conda-forge/cupy) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cupy.svg)](https://anaconda.org/conda-forge/cupy) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cupy.svg)](https://anaconda.org/conda-forge/cupy) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cupy.svg)](https://anaconda.org/conda-forge/cupy) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cupy--core-green.svg)](https://anaconda.org/conda-forge/cupy-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cupy-core.svg)](https://anaconda.org/conda-forge/cupy-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cupy-core.svg)](https://anaconda.org/conda-forge/cupy-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cupy-core.svg)](https://anaconda.org/conda-forge/cupy-core) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cupy--split-green.svg)](https://anaconda.org/conda-forge/cupy-split) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cupy-split.svg)](https://anaconda.org/conda-forge/cupy-split) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cupy-split.svg)](https://anaconda.org/conda-forge/cupy-split) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cupy-split.svg)](https://anaconda.org/conda-forge/cupy-split) |
 
 Installing cupy-split
 =====================
@@ -184,41 +38,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `cupy, cupy-core` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `cupy-split` can be installed with `conda`:
 
 ```
-conda install cupy cupy-core
-```
-
-or with `mamba`:
-
-```
-mamba install cupy cupy-core
-```
-
-It is possible to list all of the versions of `cupy` available on your platform with `conda`:
-
-```
-conda search cupy --channel conda-forge
+conda install cupy-split
 ```
 
 or with `mamba`:
 
 ```
-mamba search cupy --channel conda-forge
+mamba install cupy-split
+```
+
+It is possible to list all of the versions of `cupy-split` available on your platform with `conda`:
+
+```
+conda search cupy-split --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search cupy-split --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search cupy --channel conda-forge
+mamba repoquery search cupy-split --channel conda-forge
 
-# List packages depending on `cupy`:
-mamba repoquery whoneeds cupy --channel conda-forge
+# List packages depending on `cupy-split`:
+mamba repoquery whoneeds cupy-split --channel conda-forge
 
-# List dependencies of `cupy`:
-mamba repoquery depends cupy --channel conda-forge
+# List dependencies of `cupy-split`:
+mamba repoquery depends cupy-split --channel conda-forge
 ```
 
 
