@@ -21,18 +21,19 @@ __migrator:
     cuda_compiler:
       - None
       - cuda-nvcc
+      - cuda-nvcc
+      - cuda-nvcc
       - nvcc
     cuda_compiler_version:
+      - None
       - 12.4
       - 12.6
-      - 12.8
-      - None
       - 12.9
       - 11.8
     cuda_compiler_version_min:
+      - None
       - 12.4
       - 12.6
-      - 12.8
       - 12.9
       - 11.8
 
