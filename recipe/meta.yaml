@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "13.4.1" %}
-{% set sha256 = "9654730da3f7122ba3fe99ce951247e299f3f9c23449a884ba9914444845f0cd" %}
+{% set version = "13.5.1" %}
+{% set sha256 = "3dba2f30258463482d52deb420862fbbbaf2c446165a5e8d67377ac6cb5c0870" %}
 {% set number = 1 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
@@ -31,7 +31,7 @@ source:
 build:
   number: {{ number }}
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.8") or ppc64le]
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9") or ppc64le]
 
 requirements:
   host:
@@ -43,7 +43,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.8") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9") or ppc64le]
     requirements:
       host:
         - python
@@ -83,7 +83,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.8") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9") or ppc64le]
       script_env:
         # To avoid memory usage warnings on CI, reduce parallelism of CuPy builds.
         - CUPY_NUM_BUILD_JOBS=1
@@ -141,8 +141,8 @@ outputs:
         - {{ compiler("cuda") }}
         - cross-python_{{ target_platform }}    # [build_platform != target_platform]
         - python                                # [build_platform != target_platform]
-        - cython >=3,<3.1                       # [build_platform != target_platform]
-        - setuptools <72.2.0                    # [build_platform != target_platform]
+        - cython >=3,<3.2                       # [build_platform != target_platform]
+        - setuptools >=77                       # [build_platform != target_platform]
         # TODO: clean up
         {% if cuda_major >= 12 %}
         - cuda-driver-dev                       # [build_platform != target_platform and linux]
@@ -162,8 +162,8 @@ outputs:
       host:
         - python
         - pip
-        - setuptools <72.2.0
-        - cython >=3,<3.1
+        - setuptools >=77
+        - cython >=3,<3.2
         - fastrlock >=0.5
         - cuda-version {{ cuda_compiler_version }}
         # TODO: clean up

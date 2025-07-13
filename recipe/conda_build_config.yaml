@@ -1,0 +1,7 @@
+# CUDA 11.8 has issues with vs2022. We cannot adjust the compiler version based on
+# the CUDA version, so we use the old compiler for both 11.8/12.9 for now. Drop this
+# once we drop CUDA 11 support.
+c_compiler:    # [win64]
+  - vs2019     # [win64]
+cxx_compiler:  # [win64]
+  - vs2019     # [win64]
