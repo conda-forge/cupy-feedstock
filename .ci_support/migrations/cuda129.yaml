@@ -15,6 +15,10 @@ __migrator:
   check_solvable: false
   primary_key: cuda_compiler_version
   ordering:
+    cuda_compiler:
+      - None
+      - cuda-nvcc
+      - nvcc
     cuda_compiler_version:
       - 12.4
       - 12.6
