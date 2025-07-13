@@ -2,14 +2,16 @@ migrator_ts: 1738229377
 __migrator:
   kind:
     version
+  # Use migrator to add CUDA 12 latest.
+  use_local: true
   migration_number:
     1
   build_number:
     1
   paused: false
-  use_local: true
   override_cbc_keys:
     - cuda_compiler_stub
+  operation: key_add
   check_solvable: false
   primary_key: cuda_compiler_version
   ordering:
