@@ -1,5 +1,5 @@
 c_compiler:
-- vs2022
+- vs2019
 c_stdlib:
 - vs
 channel_sources:
@@ -13,7 +13,7 @@ cuda_compiler_version:
 cutensor:
 - '2'
 cxx_compiler:
-- vs2022
+- vs2019
 pin_run_as_build:
   python:
     min_pin: x.x
