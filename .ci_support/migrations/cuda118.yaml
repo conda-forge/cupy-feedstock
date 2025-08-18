@@ -6,8 +6,9 @@ __migrator:
     1
   build_number:
     1
-  paused: false
-  use_local: true
+  # This is intended as a _manual_ migrator to re-add CUDA 11.8, after we
+  # dropped it as version that's built by default; DO NOT unpause
+  paused: true
   override_cbc_keys:
     - cuda_compiler_stub
   operation: key_add
@@ -27,6 +28,7 @@ __migrator:
       - 12.8
       - None
       - 12.9
+      - 13.0
       - 11.8
     cuda_compiler_version_min:
       - 12.4
@@ -43,6 +45,9 @@ cuda_compiler_version:      # [(linux or win64) and os.environ.get("CF_CUDA_ENAB
 
 cuda_compiler_version_min:  # [linux or win64]
   - 11.8                    # [linux or win64]
+
+c_stdlib_version:           # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+  - 2.17                    # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
 
 c_compiler_version:         # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
   - 11                      # [linux and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
