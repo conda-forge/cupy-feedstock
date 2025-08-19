@@ -1,0 +1,4 @@
+{
+ "packaging": "conda",
+ "cuda": "13.x"
+}
