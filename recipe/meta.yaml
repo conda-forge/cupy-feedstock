@@ -97,12 +97,12 @@ outputs:
         - export CUDA_PATH=$PREFIX/targets/{{ target_name }}                         # [linux]
         {% endif %}
         - echo "nvcc is $NVCC, CUDA path is $CUDA_PATH"                              # [linux]
+        - echo "CONDA_OVERRIDE_CUDA is $CONDA_OVERRIDE_CUDA"                         # [linux]
         - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
         # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
         - set "NVCC=%NVCC% --use-local-env"  # [win64]
-        - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"  # [win]
-        # Workaround __ieee128 error; see https://github.com/LLNL/blt/issues/341
-        - export NVCC="$NVCC -Xcompiler -mno-float128"  # [ppc64le]
+        - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                            # [win]
+        - echo "CONDA_OVERRIDE_CUDA is %CONDA_OVERRIDE_CUDA%"                        # [win]
         - >-
           {{ PYTHON }} -m pip install . --no-deps -vv
         - if errorlevel 1 exit 1  # [win]
