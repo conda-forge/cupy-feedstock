@@ -100,9 +100,9 @@ outputs:
         - echo "CONDA_OVERRIDE_CUDA is $CONDA_OVERRIDE_CUDA"                         # [linux]
         - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win]
         # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
-        - set "NVCC=%NVCC% --use-local-env"  # [win64]
-        - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                            # [win]
-        - echo "CONDA_OVERRIDE_CUDA is %CONDA_OVERRIDE_CUDA%"                        # [win]
+        - set "NVCC=%NVCC% --use-local-env"                                          # [win64 and cuda_compiler_version != "13.0"]
+        - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                            # [win64 and cuda_compiler_version != "13.0"]
+        - echo "CONDA_OVERRIDE_CUDA is %CONDA_OVERRIDE_CUDA%"                        # [win64 and cuda_compiler_version != "13.0"]
         - >-
           {{ PYTHON }} -m pip install . --no-deps -vv
         - if errorlevel 1 exit 1  # [win]
