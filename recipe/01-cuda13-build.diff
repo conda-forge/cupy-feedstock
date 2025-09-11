@@ -15,14 +15,6 @@ diff --git a/install/cupy_builder/install_build.py b/install/cupy_builder/instal
 index 2d9b3aaa0..35fe517d0 100644
 --- a/install/cupy_builder/install_build.py
 +++ b/install/cupy_builder/install_build.py
-@@ -151,6 +151,7 @@ def get_compiler_setting(ctx: Context, use_hip):
-         include_dirs.append(os.path.join(cuda_path, 'include'))
-         if PLATFORM_WIN32:
-             library_dirs.append(os.path.join(cuda_path, 'bin'))
-+            library_dirs.append(os.path.join(cuda_path, 'bin', 'x64'))
-             library_dirs.append(os.path.join(cuda_path, 'lib', 'x64'))
-         else:
-             library_dirs.append(os.path.join(cuda_path, 'lib64'))
 @@ -746,7 +747,7 @@ def conda_update_dirs(include_dirs, library_dirs):
          # executable in the build environment, not the target environment.
          # This assumes, however, that the build/host environments see the same
