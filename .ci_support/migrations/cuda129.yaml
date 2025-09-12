@@ -7,17 +7,16 @@ __migrator:
   build_number:
     1
   paused: false
-  use_local: true
   override_cbc_keys:
     - cuda_compiler_stub
-  operation: key_add
   check_solvable: false
   primary_key: cuda_compiler_version
   ordering:
     cuda_compiler_version:
-      - None
       - 12.4
       - 12.6
+      - 12.8
+      - None
       - 12.9
       - 13.0
       # to allow manual opt-in for CUDA 11.8, see
