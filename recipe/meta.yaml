@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "13.6.0" %}
 {% set sha256 = "3cba30ae3dd32b5d5c6536e710cb98015227cd4ba83c46b3f1825a7ae55b6667" %}
-{% set number = 1 %}
+{% set number = 2 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -136,10 +136,8 @@ outputs:
         {% endif %}
       ignore_run_exports:
         # optional dependencies
-        {% if cuda_major < 13 %}
         - nccl        # [linux]
         - cutensor
-        {% endif %}
     requirements:
       build:
         - {{ compiler("c") }}
@@ -164,10 +162,8 @@ outputs:
         - libcusparse-dev                       # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
-        {% if cuda_major < 13 %}
         - nccl ~=2.16                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
-        {% endif %}
       host:
         - python
         - pip
@@ -190,14 +186,12 @@ outputs:
         - libcusparse-dev
         {% endif %}
         # optional dependencies
-        {% if cuda_major < 13 %}
         - nccl ~=2.16           # [linux]
         - cutensor ~=2.0
-        {% endif %}
       run:
         - python
         - {{ pin_compatible('fastrlock', max_pin='x.x') }}
-        - numpy >=1.22,<2.3
+        - numpy >=1.22
       run_constrained:
         # we move these here so that cupy-core can be installed in CPU-only envs
         - {{ pin_compatible("cuda-version", lower_bound="11.2") }}            # [cuda_compiler == "nvcc"]
@@ -214,10 +208,8 @@ outputs:
         - __cuda >={{ cuda_major }}.2                            # [cuda_compiler == "nvcc"]
         - __cuda >={{ cuda_major }}.0                            # [cuda_compiler == "cuda-nvcc"]
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
-        {% if cuda_major < 13 %}
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
-        {% endif %}
     test:
       requires:
         - pip
