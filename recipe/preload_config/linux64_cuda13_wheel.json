@@ -1,4 +1,6 @@
 {
  "packaging": "conda",
- "cuda": "13.x"
+ "cuda": "13.x",
+ "nccl": {},
+ "cutensor": {}
 }

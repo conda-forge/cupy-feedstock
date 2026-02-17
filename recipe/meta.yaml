@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
-{% set version = "13.6.0" %}
-{% set sha256 = "3cba30ae3dd32b5d5c6536e710cb98015227cd4ba83c46b3f1825a7ae55b6667" %}
-{% set number = 2 %}
+{% set version = "14.0.0" %}
+{% set sha256 = "615a7dfbe699729785fa9ef0789de05ec1c278b8c3b675460ad19c8808802995" %}
+{% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -27,13 +27,11 @@ package:
 source:
   - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      - 01-cuda13-build.diff
 
 build:
   number: {{ number }}
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9", "13.0") or ppc64le]
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
 
 requirements:
   host:
@@ -45,7 +43,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9", "13.0") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
     requirements:
       host:
         - python
@@ -53,20 +51,19 @@ outputs:
       run:
         - python
         - {{ pin_subpackage('cupy-core', exact=True) }}
-        - cudatoolkit                                        # [cuda_compiler == "nvcc"]
-        - cuda-cudart-dev_{{ target_platform }}              # [cuda_compiler == "cuda-nvcc"]
-        - cuda-nvrtc                                         # [cuda_compiler == "cuda-nvcc"]
-        - libcublas                                          # [cuda_compiler == "cuda-nvcc"]
-        - libcufft                                           # [cuda_compiler == "cuda-nvcc"]
-        - libcurand                                          # [cuda_compiler == "cuda-nvcc"]
-        - libcusolver                                        # [cuda_compiler == "cuda-nvcc"]
-        - libcusparse                                        # [cuda_compiler == "cuda-nvcc"]
+        - cuda-cudart-dev_{{ target_platform }}
+        - cuda-nvrtc
+        - libcublas
+        - libcufft
+        - libcurand
+        - libcusolver
+        - libcusparse
         # see discussions/references in conda-forge/cupy-feedstock#247
         - {{ pin_compatible("cuda-version", min_pin="x") }}
     test:
       requires:
         # need the libcuda stub for import test
-        - cuda-driver-dev  # [linux and cuda_compiler == "cuda-nvcc"]
+        - cuda-driver-dev  # [linux]
       script: run_test.py
       source_files:
         - tests
@@ -85,7 +82,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9", "13.0") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
       script_env:
         # To avoid memory usage warnings on CI, reduce parallelism of CuPy builds.
         - CUPY_NUM_BUILD_JOBS=1
@@ -103,7 +100,7 @@ outputs:
         - set "NVCC=%NVCC% --use-local-env"                                          # [win64]
         # Starting CUDA 13, everything is pushed one level down (bin->bin\x64, lib->lib\x64). We need to assist CuPy's build
         # system to locate things when build env != target env.
-        - set "CUDA_PATH=%PREFIX%\Library"                                           # [win64 and cuda_compiler_version == "13.0"]
+        - set "CUDA_PATH=%PREFIX%\Library"                                           # [win64 and cuda_compiler_version == "13.1"]
         - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                            # [win64]
         - echo "CONDA_OVERRIDE_CUDA is %CONDA_OVERRIDE_CUDA%"                        # [win64]
         - >-
@@ -146,9 +143,9 @@ outputs:
         - {{ compiler("cuda") }}
         - cross-python_{{ target_platform }}    # [build_platform != target_platform]
         - python                                # [build_platform != target_platform]
-        - cython >=3,<3.2                       # [build_platform != target_platform]
+        - cython >=3.1,<3.2                     # [build_platform != target_platform]
+        - numpy 2.*                             # [build_platform != target_platform]
         - setuptools >=77                       # [build_platform != target_platform]
-        # TODO: clean up
         {% if cuda_major >= 12 %}
         - cuda-driver-dev                       # [build_platform != target_platform and linux]
         - cuda-cudart-dev                       # [build_platform != target_platform]
@@ -162,16 +159,15 @@ outputs:
         - libcusparse-dev                       # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
-        - nccl ~=2.16                           # [build_platform != target_platform]
+        - nccl ~=2.17                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
       host:
         - python
         - pip
         - setuptools >=77
-        - cython >=3,<3.2
-        - fastrlock >=0.5
+        - cython >=3.1,<3.2
+        - numpy 2.*
         - cuda-version {{ cuda_compiler_version }}
-        # TODO: clean up
         {% if cuda_major >= 12 %}
         - cuda-driver-dev  # [linux]
         - cuda-cudart-dev
@@ -186,27 +182,24 @@ outputs:
         - libcusparse-dev
         {% endif %}
         # optional dependencies
-        - nccl ~=2.16           # [linux]
+        - nccl ~=2.17           # [linux]
         - cutensor ~=2.0
       run:
         - python
-        - {{ pin_compatible('fastrlock', max_pin='x.x') }}
-        - numpy >=1.22
+        - cuda-pathfinder >=1.3.3,<2.0a0
+        - numpy >=2.0
       run_constrained:
         # we move these here so that cupy-core can be installed in CPU-only envs
-        - {{ pin_compatible("cuda-version", lower_bound="11.2") }}            # [cuda_compiler == "nvcc"]
-        - {{ pin_compatible("cuda-version", min_pin="x") }}                   # [cuda_compiler == "cuda-nvcc"]
-        - cudatoolkit                                                         # [cuda_compiler == "nvcc"]
-        - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}        # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcublas', min_pin='x', max_pin='x') }}         # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcufft', min_pin='x', max_pin='x') }}          # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}         # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
-        - scipy >=1.7,<1.17
+        - {{ pin_compatible("cuda-version", min_pin="x") }}
+        - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcublas', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcufft', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}
+        - scipy >=1.10,<1.17
         - optuna ~=3.0
-        - __cuda >={{ cuda_major }}.2                            # [cuda_compiler == "nvcc"]
-        - __cuda >={{ cuda_major }}.0                            # [cuda_compiler == "cuda-nvcc"]
+        - __cuda >={{ cuda_major }}.0
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
