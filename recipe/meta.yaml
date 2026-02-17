@@ -144,7 +144,7 @@ outputs:
         - cross-python_{{ target_platform }}    # [build_platform != target_platform]
         - python                                # [build_platform != target_platform]
         - cython >=3.1,<3.2                     # [build_platform != target_platform]
-        - numpy ~=2.0                           # [build_platform != target_platform]
+        - numpy 2.*                             # [build_platform != target_platform]
         - setuptools >=77                       # [build_platform != target_platform]
         {% if cuda_major >= 12 %}
         - cuda-driver-dev                       # [build_platform != target_platform and linux]
@@ -166,7 +166,7 @@ outputs:
         - pip
         - setuptools >=77
         - cython >=3.1,<3.2
-        - numpy ~=2.0
+        - numpy 2.*
         - cuda-version {{ cuda_compiler_version }}
         {% if cuda_major >= 12 %}
         - cuda-driver-dev  # [linux]
