@@ -143,9 +143,8 @@ outputs:
         - {{ compiler("cuda") }}
         - cross-python_{{ target_platform }}    # [build_platform != target_platform]
         - python                                # [build_platform != target_platform]
-        - cython >=3,<3.2                       # [build_platform != target_platform]
+        - cython >=3.1,<3.2                     # [build_platform != target_platform]
         - setuptools >=77                       # [build_platform != target_platform]
-        # TODO: clean up
         {% if cuda_major >= 12 %}
         - cuda-driver-dev                       # [build_platform != target_platform and linux]
         - cuda-cudart-dev                       # [build_platform != target_platform]
@@ -165,10 +164,9 @@ outputs:
         - python
         - pip
         - setuptools >=77
-        - cython >=3,<3.2
-        - numpy 2.*
+        - cython >=3.1,<3.2
+        - numpy ~=2.0
         - cuda-version {{ cuda_compiler_version }}
-        # TODO: clean up
         {% if cuda_major >= 12 %}
         - cuda-driver-dev  # [linux]
         - cuda-cudart-dev
@@ -187,7 +185,8 @@ outputs:
         - cutensor ~=2.0
       run:
         - python
-        - numpy >=1.22
+        - {{ pin_compatible("numpy", min_pin="x", max_pin="x") }}
+        - cuda-pathfinder >=1.3.3,==1.*
       run_constrained:
         # we move these here so that cupy-core can be installed in CPU-only envs
         - {{ pin_compatible("cuda-version", min_pin="x") }}                   # [cuda_compiler == "cuda-nvcc"]
@@ -197,7 +196,7 @@ outputs:
         - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}         # [cuda_compiler == "cuda-nvcc"]
         - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
         - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
-        - scipy >=1.7,<1.17
+        - scipy >=1.10,<1.17
         - optuna ~=3.0
         - __cuda >={{ cuda_major }}.0                            # [cuda_compiler == "cuda-nvcc"]
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
