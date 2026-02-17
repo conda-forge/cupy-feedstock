@@ -51,19 +51,19 @@ outputs:
       run:
         - python
         - {{ pin_subpackage('cupy-core', exact=True) }}
-        - cuda-cudart-dev_{{ target_platform }}              # [cuda_compiler == "cuda-nvcc"]
-        - cuda-nvrtc                                         # [cuda_compiler == "cuda-nvcc"]
-        - libcublas                                          # [cuda_compiler == "cuda-nvcc"]
-        - libcufft                                           # [cuda_compiler == "cuda-nvcc"]
-        - libcurand                                          # [cuda_compiler == "cuda-nvcc"]
-        - libcusolver                                        # [cuda_compiler == "cuda-nvcc"]
-        - libcusparse                                        # [cuda_compiler == "cuda-nvcc"]
+        - cuda-cudart-dev_{{ target_platform }}
+        - cuda-nvrtc
+        - libcublas
+        - libcufft
+        - libcurand
+        - libcusolver
+        - libcusparse
         # see discussions/references in conda-forge/cupy-feedstock#247
         - {{ pin_compatible("cuda-version", min_pin="x") }}
     test:
       requires:
         # need the libcuda stub for import test
-        - cuda-driver-dev  # [linux and cuda_compiler == "cuda-nvcc"]
+        - cuda-driver-dev  # [linux]
       script: run_test.py
       source_files:
         - tests
@@ -158,7 +158,7 @@ outputs:
         - libcusparse-dev                       # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
-        - nccl ~=2.16                           # [build_platform != target_platform]
+        - nccl ~=2.17                           # [build_platform != target_platform]
         - cutensor ~=2.0                        # [build_platform != target_platform]
       host:
         - python
@@ -181,24 +181,23 @@ outputs:
         - libcusparse-dev
         {% endif %}
         # optional dependencies
-        - nccl ~=2.16           # [linux]
+        - nccl ~=2.17           # [linux]
         - cutensor ~=2.0
       run:
         - python
-        - {{ pin_compatible("numpy", min_pin="x", max_pin="x") }}
         - cuda-pathfinder >=1.3.3,==1.*
       run_constrained:
         # we move these here so that cupy-core can be installed in CPU-only envs
-        - {{ pin_compatible("cuda-version", min_pin="x") }}                   # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}        # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcublas', min_pin='x', max_pin='x') }}         # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcufft', min_pin='x', max_pin='x') }}          # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}         # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
-        - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}       # [cuda_compiler == "cuda-nvcc"]
+        - {{ pin_compatible("cuda-version", min_pin="x") }}
+        - {{ pin_compatible('cuda-nvrtc', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcublas', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcufft', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}
+        - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}
         - scipy >=1.10,<1.17
         - optuna ~=3.0
-        - __cuda >={{ cuda_major }}.0                            # [cuda_compiler == "cuda-nvcc"]
+        - __cuda >={{ cuda_major }}.0
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
         - {{ pin_compatible('nccl') }}                           # [linux]
         - {{ pin_compatible('cutensor') }}
