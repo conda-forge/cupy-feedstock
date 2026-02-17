@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "14.0.0" %}
 {% set sha256 = "615a7dfbe699729785fa9ef0789de05ec1c278b8c3b675460ad19c8808802995" %}
-{% set number = 2 %}
+{% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
@@ -27,13 +27,11 @@ package:
 source:
   - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      - 01-cuda13-build.diff
 
 build:
   number: {{ number }}
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-  skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9", "13.0") or ppc64le]
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
 
 requirements:
   host:
@@ -45,7 +43,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9", "13.0") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
     requirements:
       host:
         - python
@@ -85,7 +83,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("11.8", "12.9", "13.0") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
       script_env:
         # To avoid memory usage warnings on CI, reduce parallelism of CuPy builds.
         - CUPY_NUM_BUILD_JOBS=1
@@ -103,7 +101,7 @@ outputs:
         - set "NVCC=%NVCC% --use-local-env"                                          # [win64]
         # Starting CUDA 13, everything is pushed one level down (bin->bin\x64, lib->lib\x64). We need to assist CuPy's build
         # system to locate things when build env != target env.
-        - set "CUDA_PATH=%PREFIX%\Library"                                           # [win64 and cuda_compiler_version == "13.0"]
+        - set "CUDA_PATH=%PREFIX%\Library"                                           # [win64 and cuda_compiler_version == "13.1"]
         - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                            # [win64]
         - echo "CONDA_OVERRIDE_CUDA is %CONDA_OVERRIDE_CUDA%"                        # [win64]
         - >-
