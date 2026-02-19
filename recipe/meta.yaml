@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "14.0.0" %}
-{% set sha256 = "615a7dfbe699729785fa9ef0789de05ec1c278b8c3b675460ad19c8808802995" %}
+{% set version = "14.0.1b0" %}
+{% set git_rev = "v14" %}
 {% set number = 0 %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
@@ -25,8 +25,8 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: {{ sha256 }}
+  - git_url: https://github.com/cupy/cupy.git
+    git_rev: {{ git_rev }}
 
 build:
   number: {{ number }}
