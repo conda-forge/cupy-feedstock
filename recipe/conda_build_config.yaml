@@ -1,4 +1,0 @@
-c_compiler:    # [win64]
-  - vs2022     # [win64]
-cxx_compiler:  # [win64]
-  - vs2022     # [win64]
