@@ -2,6 +2,7 @@
 {% set version = "14.1.0" %}
 {% set sha256 = "bf72bdffcaabf70490350d9c76a4a79b1e923a933d894691b7f5115dc0d9879d" %}
 {% set number = 0 %}
+{% set is_freethreading = environ.get("is_freethreading", False) %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
