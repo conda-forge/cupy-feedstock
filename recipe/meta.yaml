@@ -31,7 +31,7 @@ source:
 build:
   number: {{ number }}
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-  skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
+  skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.2") or ppc64le]
 
 requirements:
   host:
@@ -43,7 +43,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.2") or ppc64le]
     requirements:
       host:
         - python
@@ -82,7 +82,7 @@ outputs:
     build:
       number: {{ number }}
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
-      skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.1") or ppc64le]
+      skip: true  # [(py < 39) or cuda_compiler_version not in ("12.9", "13.2") or ppc64le]
       script_env:
         # To avoid memory usage warnings on CI, reduce parallelism of CuPy builds.
         - CUPY_NUM_BUILD_JOBS=1
@@ -98,9 +98,7 @@ outputs:
         - for /f "tokens=* usebackq" %%f in (`where nvcc`) do (set "dummy=%%f" && call set "NVCC=%%dummy:\=\\%%")  # [win64]
         # we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
         - set "NVCC=%NVCC% --use-local-env"                                          # [win64]
-        # Starting CUDA 13, everything is pushed one level down (bin->bin\x64, lib->lib\x64). We need to assist CuPy's build
-        # system to locate things when build env != target env.
-        - set "CUDA_PATH=%PREFIX%\Library"                                           # [win64 and cuda_compiler_version == "13.1"]
+        - set "CUDA_PATH=%PREFIX%\Library"                                           # [win64]
         - echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"                            # [win64]
         - echo "CONDA_OVERRIDE_CUDA is %CONDA_OVERRIDE_CUDA%"                        # [win64]
         - >-
