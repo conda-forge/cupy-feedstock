@@ -22,6 +22,8 @@ cxx_compiler_version:
 - '14'
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
+is_freethreading:
+- false
 nccl:
 - '2'
 pin_run_as_build:
