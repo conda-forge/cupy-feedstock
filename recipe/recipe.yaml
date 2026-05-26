@@ -6,8 +6,7 @@ context:
   sha256: bf72bdffcaabf70490350d9c76a4a79b1e923a933d894691b7f5115dc0d9879d
   number: 1
   target_name: ${{ "sbsa-linux" if aarch64 else 'ppc64le-linux' if ppc64le else 'x86_64-linux' if linux else "x64" if win else "" }}
-  cuda_compiler_version: ${{ env.get("cuda_compiler_version", default="11.8") }}
-  cuda_major: ${{ (cuda_compiler_version | split("."))[0] | int }}
+  cuda_major: ${{ 0 if cuda_compiler_version in (None, "None", True, False) else (env.get("cuda_compiler_version", default="11.8") | split("."))[0] | int }}
   touch_is_freethreading: ${{ is_freethreading }}
 
 recipe:
@@ -34,7 +33,7 @@ outputs:
     requirements:
       host:
         - python
-        - cuda-version ~=${{ cuda_compiler_version }}
+        - cuda-version ==${{ cuda_compiler_version }}
       run:
         - python
         - ${{ pin_subpackage('cupy-core', exact=True) }}
@@ -117,7 +116,7 @@ outputs:
         - setuptools >=77
         - cython >=3.2,<3.3
         - numpy 2.*
-        - cuda-version ~=${{ cuda_compiler_version }}
+        - cuda-version ==${{ cuda_compiler_version }}
         - if: linux
           then: cuda-driver-dev
         - cuda-cudart-dev
