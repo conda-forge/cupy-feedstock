@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 export NVCC="$(which nvcc)"
 if [ "${CUDA_MAJOR}" -ge 12 ]; then
     export CUDA_PATH=$PREFIX/targets/${TARGET_NAME}
