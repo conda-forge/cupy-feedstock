@@ -34,7 +34,7 @@ outputs:
     requirements:
       host:
         - python
-        - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-version ~=${{ cuda_compiler_version }}
       run:
         - python
         - ${{ pin_subpackage('cupy-core', exact=True) }}
@@ -117,7 +117,7 @@ outputs:
         - setuptools >=77
         - cython >=3.2,<3.3
         - numpy 2.*
-        - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-version ~=${{ cuda_compiler_version }}
         - if: linux
           then: cuda-driver-dev
         - cuda-cudart-dev
@@ -133,8 +133,8 @@ outputs:
         - cuda-cuxxfilt
         # optional dependencies
         - if: linux
-          then: nccl ~=2.17
-        - cutensor ~=2.0
+          then: nccl
+        - cutensor
       run:
         - python
         - cuda-pathfinder >=1.3.4,<2.0a0
