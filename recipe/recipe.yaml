@@ -20,7 +20,7 @@ source:
 build:
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
   number: ${{ number }}
-  skip: match(python, "<3.9") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
+  skip: match(python, "<3.10") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
 
 outputs:
   - package:
@@ -29,7 +29,7 @@ outputs:
     build:
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
       number: ${{ number }}
-      skip: match(python, "<3.9") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
+      skip: match(python, "<3.10") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
     requirements:
       host:
         - python
@@ -69,7 +69,7 @@ outputs:
     build:
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
       number: ${{ number }}
-      skip: match(python, "<3.9") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
+      skip: match(python, "<3.10") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
       script:
         env:
           CUDA_COMPILER_VERSION: ${{ cuda_compiler_version }}
