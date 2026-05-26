@@ -6,8 +6,9 @@ context:
   sha256: bf72bdffcaabf70490350d9c76a4a79b1e923a933d894691b7f5115dc0d9879d
   number: 1
   target_name: ${{ "sbsa-linux" if aarch64 else 'ppc64le-linux' if ppc64le else 'x86_64-linux' if linux else "x64" if win else "" }}
-  cuda_major: ${{ 0 if cuda_compiler_version in (None, "None", True, False) else cuda_compiler_version | split("."))[0] | int }}
-  touch_is_freethreading: ${{ is_freethreading }}
+  cuda_compiler_version: ${{ cuda_compiler_version if cuda_compiler_version is defined else "None" }}
+  cuda_major: ${{ 0 if cuda_compiler_version == "None" else (cuda_compiler_version | split("."))[0] | int }}
+  touch_is_freethreading: ${{ is_freethreading if is_freethreading is defined else False }}
 
 recipe:
   name: ${{ name|lower }}-split
