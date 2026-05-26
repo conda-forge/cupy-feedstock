@@ -1,0 +1,214 @@
+schema_version: 1
+
+context:
+  name: cupy
+  version: "14.1.0"
+  sha256: bf72bdffcaabf70490350d9c76a4a79b1e923a933d894691b7f5115dc0d9879d
+  number: 1
+  target_name: ${{ "sbsa-linux" if aarch64 else 'ppc64le-linux' if ppc64le else 'x86_64-linux' if linux else "x64" if win else "" }}
+  cuda_compiler_version: ${{ env.get("cuda_compiler_version", default="11.8") }}
+  cuda_major: ${{ (cuda_compiler_version | split("."))[0] | int }}
+  touch_is_freethreading: ${{ is_freethreading }}
+
+recipe:
+  name: ${{ name|lower }}-split
+  version: ${{ version }}
+
+source:
+  - url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+    sha256: ${{ sha256 }}
+
+build:
+  # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
+  number: ${{ number }}
+  skip: match(python, "<3.9") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
+
+outputs:
+  - package:
+      name: cupy
+      version: ${{ version }}
+    build:
+      # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
+      number: ${{ number }}
+      skip: match(python, "<3.9") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
+    requirements:
+      host:
+        - python
+        - cuda-version ==${{ cuda_compiler_version }}
+      run:
+        - python
+        - ${{ pin_subpackage('cupy-core', exact=True) }}
+        - cuda-cudart-dev_${{ target_platform }}
+        - cuda-nvrtc
+        - libcublas
+        - libcufft
+        - libcurand
+        - libcusolver
+        - libcusparse
+        # see discussions/references in conda-forge/cupy-feedstock#247
+        - ${{ pin_compatible("cuda-version", lower_bound="x") }}
+    tests:
+      - script: run_test.py
+        files:
+          source:
+            - tests
+        requirements:
+          run:
+            - if: linux
+              then: cuda-driver-dev
+    about:
+      license: MIT
+      license_file: LICENSE
+      summary: |
+        CuPy: NumPy & SciPy for GPU
+      homepage: https://cupy.dev/
+      repository: https://github.com/cupy/cupy/
+      documentation: https://docs.cupy.dev/en/stable/
+  - package:
+      name: cupy-core
+      version: ${{ version }}
+    build:
+      # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
+      number: ${{ number }}
+      skip: match(python, "<3.9") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
+      script:
+        env:
+          CUDA_COMPILER_VERSION: ${{ cuda_compiler_version }}
+          CUDA_MAJOR: ${{ cuda_major }}
+          CUPY_NUM_BUILD_JOBS: 1
+          TARGET_NAME: ${{ target_name }}
+        file: ${{ 'build_output.bat' if win else 'build_output.sh' if linux else '' }}
+      dynamic_linking:
+        missing_dso_allowlist:
+          - if: linux
+            then: "*/libcuda.*"
+          - if: win
+            then: "*/nvcuda.dll"
+    requirements:
+      build:
+        - ${{ compiler("c") }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler("cxx") }}
+        - ${{ compiler("cuda") }}
+        - if: build_platform != target_platform
+          then:
+          - cross-python_${{ target_platform }}
+          - python
+          - cython >=3.2,<3.3
+          - numpy 2.*
+          - setuptools >=77
+          - cuda-driver-dev
+          - cuda-cudart-dev
+          - cuda-nvrtc-dev
+          - cuda-nvtx-dev
+          - cuda-profiler-api
+          - libcublas-dev
+          - libcufft-dev
+          - libcurand-dev
+          - libcusolver-dev
+          - libcusparse-dev
+          - cuda-cuxxfilt
+          # optional dependencies for CUDA 11.2+
+          - nccl ~=2.17
+          - cutensor ~=2.0
+      host:
+        - python
+        - pip
+        - setuptools >=77
+        - cython >=3.2,<3.3
+        - numpy 2.*
+        - cuda-version ==${{ cuda_compiler_version }}
+        - if: linux
+          then: cuda-driver-dev
+        - cuda-cudart-dev
+        - cuda-cudart-static
+        - cuda-nvrtc-dev
+        - cuda-nvtx-dev
+        - cuda-profiler-api
+        - libcublas-dev
+        - libcufft-dev
+        - libcurand-dev
+        - libcusolver-dev
+        - libcusparse-dev
+        - cuda-cuxxfilt
+        # optional dependencies
+        - if: linux
+          then: nccl ~=2.17
+        - cutensor ~=2.0
+      run:
+        - python
+        - cuda-pathfinder >=1.3.4,<2.0a0
+        - numpy >=2.0
+      ignore_run_exports:
+        by_name:
+          - if: linux
+            then: nccl
+          - cutensor
+        from_package:
+          - if: match(cuda_major, ">=12.0")
+            then:
+            - ${{ compiler('cuda') }}
+            - if: linux
+              then: cuda-driver-dev
+            - cuda-cudart-dev
+            - cuda-cudart-static
+            - cuda-nvrtc-dev
+            - cuda-nvtx-dev
+            - cuda-profiler-api
+            - libcublas-dev
+            - libcufft-dev
+            - libcurand-dev
+            - libcusolver-dev
+            - libcusparse-dev
+      run_constraints:
+        - ${{ pin_compatible("cuda-version", lower_bound="x") }}
+        - ${{ pin_compatible('cuda-nvrtc', lower_bound='x', upper_bound='x') }}
+        - ${{ pin_compatible('libcublas', lower_bound='x', upper_bound='x') }}
+        - ${{ pin_compatible('libcufft', lower_bound='x', upper_bound='x') }}
+        - ${{ pin_compatible('libcurand', lower_bound='x', upper_bound='x') }}
+        - ${{ pin_compatible('libcusolver', lower_bound='x', upper_bound='x') }}
+        - ${{ pin_compatible('libcusparse', lower_bound='x', upper_bound='x') }}
+        - scipy >=1.14,<1.17
+        - optuna ~=3.0
+        # TODO: migrate to v1 (if it's still even needed)
+        # - __cuda >=${{ cuda_major }}.0
+        # Rattler-build views this as circular dependency
+        # TODO: should this be removed outright
+        # - ${{ pin_subpackage('cupy', upper_bound='x.x') }}
+        - if: linux
+          then: ${{ pin_compatible('nccl') }}
+        - ${{ pin_compatible('cutensor') }}
+    tests:
+      - python:
+          imports:
+            - cupy
+          pip_check: true
+    about:
+      license: MIT
+      license_file: LICENSE
+      summary: |
+        CuPy: NumPy & SciPy for GPU
+      description: |
+        This is the CuPy core package without any dependencies on the CUDA libraries, suitable for
+        deployment under resource constraint. You need to install the needed dependencies explicitly.
+      homepage: https://cupy.dev/
+      repository: https://github.com/cupy/cupy/
+      documentation: https://docs.cupy.dev/en/stable/
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: |
+    CuPy: NumPy & SciPy for GPU
+  homepage: https://cupy.dev/
+  repository: https://github.com/cupy/cupy/
+  documentation: https://docs.cupy.dev/en/stable/
+
+extra:
+  recipe-maintainers:
+    - jakirkham
+    - leofang
+    - kmaehashi
+    - asi1024
+    - emcastillo
+    - toslunar
