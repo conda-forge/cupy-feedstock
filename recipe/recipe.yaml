@@ -8,6 +8,7 @@ context:
   target_name: ${{ "sbsa-linux" if aarch64 else 'ppc64le-linux' if ppc64le else 'x86_64-linux' if linux else "x64" if win else "" }}
   cuda_compiler_version: ${{ cuda_compiler_version if cuda_compiler_version is defined else "None" }}
   cuda_major: ${{ 0 if cuda_compiler_version == "None" else (cuda_compiler_version | split("."))[0] | int }}
+  conda_override_cuda: ${{ cuda_compiler_version }}
   touch_is_freethreading: ${{ is_freethreading if is_freethreading is defined else False }}
 
 recipe:
@@ -73,6 +74,7 @@ outputs:
       skip: match(python, "<3.10") or cuda_compiler_version not in ("12.9", "13.2") or ppc64le
       script:
         env:
+          CONDA_OVERRIDE_CUDA: ${{ conda_override_cuda }}
           CUDA_COMPILER_VERSION: ${{ cuda_compiler_version }}
           CUDA_MAJOR: ${{ cuda_major }}
           CUPY_NUM_BUILD_JOBS: 1
@@ -170,8 +172,7 @@ outputs:
         - ${{ pin_compatible('libcusparse', lower_bound='x', upper_bound='x') }}
         - scipy >=1.14,<1.17
         - optuna ~=3.0
-        # TODO: migrate to v1 (if it's still even needed)
-        # - __cuda >=${{ cuda_major }}.0
+        - __cuda >=${{ cuda_major }}.0
         # Rattler-build views this as circular dependency
         # TODO: should this be removed outright
         # - ${{ pin_subpackage('cupy', upper_bound='x.x') }}
