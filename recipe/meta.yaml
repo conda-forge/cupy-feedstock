@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "14.1.0" %}
-{% set sha256 = "bf72bdffcaabf70490350d9c76a4a79b1e923a933d894691b7f5115dc0d9879d" %}
+{% set version = "14.1.1" %}
+{% set sha256 = "3d4d193a5b028e1823d1d44fe6268364d8fb76c3793ad4e28e1427c56ceb2f80" %}
 {% set number = 0 %}
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 
