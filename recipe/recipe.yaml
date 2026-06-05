@@ -2,8 +2,8 @@ schema_version: 1
 
 context:
   name: cupy
-  version: "14.1.0"
-  sha256: bf72bdffcaabf70490350d9c76a4a79b1e923a933d894691b7f5115dc0d9879d
+  version: "14.1.1"
+  sha256: 3d4d193a5b028e1823d1d44fe6268364d8fb76c3793ad4e28e1427c56ceb2f80
   number: 1
   target_name: ${{ "sbsa-linux" if aarch64 else 'ppc64le-linux' if ppc64le else 'x86_64-linux' if linux else "x64" if win else "" }}
   cuda_compiler_version: ${{ cuda_compiler_version if cuda_compiler_version is defined else "None" }}
