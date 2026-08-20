@@ -1,6 +1,6 @@
 {% set name = "cupy" %}
-{% set version = "14.1.1" %}
-{% set sha256 = "3d4d193a5b028e1823d1d44fe6268364d8fb76c3793ad4e28e1427c56ceb2f80" %}
+{% set version = "14.2.0" %}
+{% set sha256 = "cfed725e612178cfbdbf62f4a3a598b60edecbbca718c0d4580c21a16ae4a62c" %}
 {% set number = 0 %}
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 
@@ -26,7 +26,7 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  - url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
 
 build:
@@ -156,7 +156,6 @@ outputs:
         - libcurand-dev                         # [build_platform != target_platform]
         - libcusolver-dev                       # [build_platform != target_platform]
         - libcusparse-dev                       # [build_platform != target_platform]
-        - cuda-cuxxfilt                         # [build_platform != target_platform]
         {% endif %}
         # optional dependencies for CUDA 11.2+
         - nccl ~=2.17                           # [build_platform != target_platform]
@@ -165,7 +164,7 @@ outputs:
         - python
         - pip
         - setuptools >=77
-        - cython >=3.2,<3.3
+        - cython >=3.2,!=3.2.6,<3.3
         - numpy 2.*
         - cuda-version {{ cuda_compiler_version }}
         {% if cuda_major >= 12 %}
@@ -180,7 +179,6 @@ outputs:
         - libcurand-dev
         - libcusolver-dev
         - libcusparse-dev
-        - cuda-cuxxfilt
         {% endif %}
         # optional dependencies
         - nccl ~=2.17           # [linux]
@@ -198,7 +196,7 @@ outputs:
         - {{ pin_compatible('libcurand', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}
-        - scipy >=1.14,<1.17
+        - scipy >=1.14,<1.18
         - optuna ~=3.0
         - __cuda >={{ cuda_major }}.0
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
