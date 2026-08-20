@@ -7,7 +7,7 @@ import sys
 os.environ["CUPY_TEST_GPU_LIMIT"] = "1"
 
 def get_target_name():
-    plat = platform.processor()
+    plat = platform.machine()
     if plat == "aarch64":
         out = "sbsa-linux"
     else:
