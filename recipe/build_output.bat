@@ -3,6 +3,7 @@ for /f "tokens=* usebackq" %%f in (`where nvcc`) do (
     call set "NVCC=%%dummy:\=\\%%"
 )
 
+set "SP_DIR=%SP_DIR:/=\%"  # Workaround to rattler-build using forward-slashes
 set "NVCC=%NVCC% --use-local-env"
 set "CUDA_PATH=%PREFIX%\Library"
 echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"
