@@ -1,7 +1,7 @@
 {% set name = "cupy" %}
 {% set version = "14.2.0" %}
 {% set sha256 = "cfed725e612178cfbdbf62f4a3a598b60edecbbca718c0d4580c21a16ae4a62c" %}
-{% set number = 0 %}
+{% set number = 1 %}
 {% set is_freethreading = environ.get("is_freethreading", False) %}
 
 {% set target_name = "x86_64-linux" %}  # [linux64]
@@ -197,7 +197,7 @@ outputs:
         - {{ pin_compatible('libcusolver', min_pin='x', max_pin='x') }}
         - {{ pin_compatible('libcusparse', min_pin='x', max_pin='x') }}
         - scipy >=1.14,<1.18
-        - optuna ~=3.0
+        - optuna >=3.0
         - __cuda >={{ cuda_major }}.0
         - {{ pin_subpackage('cupy', max_pin='x.x') }}
         - {{ pin_compatible('nccl') }}                           # [linux]
