@@ -1,0 +1,19 @@
+# Local override: keep py310 alive after conda-forge globally dropped it.
+python:
+  - 3.10.* *_cpython
+  - 3.11.* *_cpython
+  - 3.12.* *_cpython
+  - 3.13.* *_cp313
+  - 3.14.* *_cp314
+  - 3.14.* *_cp314t
+
+# Without this, conda-smithy throws a ValueError with a message stating that
+# it expects the zipped 'is_python_min' key, and that conda_build_config.yaml is
+# ambiguous without it
+is_python_min:
+  - true
+  - false
+  - false
+  - false
+  - false
+  - false
