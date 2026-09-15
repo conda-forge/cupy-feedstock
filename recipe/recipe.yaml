@@ -168,7 +168,7 @@ outputs:
         - ${{ pin_compatible('libcusolver', lower_bound='x', upper_bound='x') }}
         - ${{ pin_compatible('libcusparse', lower_bound='x', upper_bound='x') }}
         - scipy >=1.14,<1.18
-        - optuna ~=3.0
+        - optuna >=3.0
         - __cuda >=${{ cuda_major }}.0
         # Rattler-build views this as circular dependency
         # TODO: should this be removed outright
