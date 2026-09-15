@@ -3,6 +3,7 @@ for /f "tokens=* usebackq" %%f in (`where nvcc`) do (
     call set "NVCC=%%dummy:\=\\%%"
 )
 
+REM we use this WAR until we figure out how to proceed with conda-forge/nvcc-feedstock#88
 set "NVCC=%NVCC% --use-local-env"
 set "CUDA_PATH=%PREFIX%\Library"
 echo "nvcc is %NVCC%, CUDA path is %CUDA_PATH%"

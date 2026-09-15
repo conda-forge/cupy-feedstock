@@ -55,6 +55,7 @@ outputs:
         requirements:
           run:
             - if: linux
+              # need the libcuda stub for import test
               then: cuda-driver-dev
     about:
       license: MIT
@@ -98,7 +99,8 @@ outputs:
           - cython >=3.2,!=3.2.6,<3.3
           - numpy 2.*
           - setuptools >=77
-          - cuda-driver-dev
+          - if: linux
+            then: cuda-driver-dev
           - cuda-cudart-dev
           - cuda-nvrtc-dev
           - cuda-nvtx-dev
@@ -109,13 +111,14 @@ outputs:
           - libcusolver-dev
           - libcusparse-dev
           # optional dependencies for CUDA 11.2+
-          - nccl ~=2.17
+          - if: linux
+            then: nccl ~=2.17
           - cutensor ~=2.0
       host:
         - python
         - pip
         - setuptools >=77
-        - cython >=3.2,<3.3
+        - cython >=3.2,!=3.2.6,<3.3
         - numpy 2.*
         - cuda-version ==${{ cuda_compiler_version }}
         - if: linux
@@ -132,8 +135,8 @@ outputs:
         - libcusparse-dev
         # optional dependencies
         - if: linux
-          then: nccl
-        - cutensor
+          then: nccl ~=2.17
+        - cutensor ~=2.0
       run:
         - python
         - cuda-pathfinder >=1.3.4,<2.0a0
@@ -144,21 +147,19 @@ outputs:
             then: nccl
           - cutensor
         from_package:
-          - if: match(cuda_major, ">=12.0")
-            then:
-            - ${{ compiler('cuda') }}
-            - if: linux
-              then: cuda-driver-dev
-            - cuda-cudart-dev
-            - cuda-cudart-static
-            - cuda-nvrtc-dev
-            - cuda-nvtx-dev
-            - cuda-profiler-api
-            - libcublas-dev
-            - libcufft-dev
-            - libcurand-dev
-            - libcusolver-dev
-            - libcusparse-dev
+          - ${{ compiler('cuda') }}
+          - if: linux
+            then: cuda-driver-dev
+          - cuda-cudart-dev
+          - cuda-cudart-static
+          - cuda-nvrtc-dev
+          - cuda-nvtx-dev
+          - cuda-profiler-api
+          - libcublas-dev
+          - libcufft-dev
+          - libcurand-dev
+          - libcusolver-dev
+          - libcusparse-dev
       run_constraints:
         - ${{ pin_compatible("cuda-version", lower_bound="x") }}
         - ${{ pin_compatible('cuda-nvrtc', lower_bound='x', upper_bound='x') }}
@@ -170,9 +171,6 @@ outputs:
         - scipy >=1.14,<1.18
         - optuna >=3.0
         - __cuda >=${{ cuda_major }}.0
-        # Rattler-build views this as circular dependency
-        # TODO: should this be removed outright
-        # - ${{ pin_subpackage('cupy', upper_bound='x.x') }}
         - if: linux
           then: ${{ pin_compatible('nccl') }}
         - ${{ pin_compatible('cutensor') }}

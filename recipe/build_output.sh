@@ -2,14 +2,8 @@
 
 set -ex
 
-# Debugging aarch64 build failures
-find $BUILD_PREFIX -name "cusparseLt.h"
-find $PREFIX -name "cusparseLt.h"
-
 export NVCC="$(which nvcc)"
-if [ "${CUDA_MAJOR}" -ge 12 ]; then
-    export CUDA_PATH=$PREFIX/targets/${TARGET_NAME}
-fi
+export CUDA_PATH=$PREFIX/targets/${TARGET_NAME}
 echo "nvcc is $NVCC, CUDA path is $CUDA_PATH, CUDA major version is $CUDA_MAJOR"
 echo "CONDA_OVERRIDE_CUDA is $CONDA_OVERRIDE_CUDA"
 
