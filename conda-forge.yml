@@ -1,12 +1,4 @@
-azure:
-  free_disk_space: true
-  settings_linux:
-    swapfile_size: 8GiB
-  settings_win:
-    variables:
-      SET_PAGEFILE: 'True'
 build_platform:
-  linux_aarch64: linux_64
   linux_ppc64le: linux_64
 conda_build:
   pkg_format: '2'
@@ -17,6 +9,13 @@ github:
   tooling_branch_name: main
 idle_timeout_minutes: 120
 provider:
-  linux_aarch64: azure
+  linux_aarch64: default
   linux_ppc64le: azure
 test: native
+workflow_settings:
+  free_disk_space: quick
+  pagefile_size:
+  - os: linux
+    value: 8
+  - os: win
+    value: 16
