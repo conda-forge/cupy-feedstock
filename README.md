@@ -219,6 +219,3 @@ Feedstock Maintainers
 * [@kmaehashi](https://github.com/kmaehashi/)
 * [@leofang](https://github.com/leofang/)
 
-
-<!-- dummy commit to enable rerendering -->
-
