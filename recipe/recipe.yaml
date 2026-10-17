@@ -4,7 +4,7 @@ context:
   name: cupy
   version: "14.2.0"
   sha256: cfed725e612178cfbdbf62f4a3a598b60edecbbca718c0d4580c21a16ae4a62c
-  number: 2
+  number: 3
   target_name: ${{ "sbsa-linux" if aarch64 else 'ppc64le-linux' if ppc64le else 'x86_64-linux' if linux else "x64" if win else "" }}
   cuda_compiler_version: ${{ cuda_compiler_version if cuda_compiler_version is defined else "None" }}
   cuda_major: ${{ 0 if cuda_compiler_version == "None" else (cuda_compiler_version | split("."))[0] | int }}
