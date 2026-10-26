@@ -5,7 +5,7 @@ context:
   version: "14.2.0"
   sha256: cfed725e612178cfbdbf62f4a3a598b60edecbbca718c0d4580c21a16ae4a62c
   number: 3
-  target_name: ${{ "sbsa-linux" if aarch64 else 'ppc64le-linux' if ppc64le else 'x86_64-linux' if linux else "x64" if win else "" }}
+  target_name: ${{ "sbsa-linux" if aarch64 else 'ppc64le-linux' if ppc64le else 'x86_64-linux' if linux else "x64" if (win and x86_64) else "arm64" if (win and arm64) else "" }}
   cuda_compiler_version: ${{ cuda_compiler_version if cuda_compiler_version is defined else "None" }}
   cuda_major: ${{ 0 if cuda_compiler_version == "None" else (cuda_compiler_version | split("."))[0] | int }}
   conda_override_cuda: ${{ cuda_compiler_version }}
@@ -21,7 +21,12 @@ source:
 build:
   # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
   number: ${{ number }}
-  skip: match(python, "<3.10") or cuda_compiler_version not in ("12.9", "13.4") or ppc64le
+  skip:
+    - match(python, "<3.10")
+    - cuda_compiler_version not in ("12.9", "13.4")
+    - ppc64le
+    # conda-forge supports only Python 3.14+ on win-arm64
+    - win and arm64 and match(python, "<3.14")
 
 outputs:
   - package:
@@ -30,7 +35,12 @@ outputs:
     build:
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
       number: ${{ number }}
-      skip: match(python, "<3.10") or cuda_compiler_version not in ("12.9", "13.4") or ppc64le
+      skip:
+        - match(python, "<3.10")
+        - cuda_compiler_version not in ("12.9", "13.4")
+        - ppc64le
+        # conda-forge supports only Python 3.14+ on win-arm64
+        - win and arm64 and match(python, "<3.14")
     requirements:
       host:
         - python
@@ -71,7 +81,12 @@ outputs:
     build:
       # For CUDA 12, the compiler version is hard-coded in the cuda120.yaml migrator
       number: ${{ number }}
-      skip: match(python, "<3.10") or cuda_compiler_version not in ("12.9", "13.4") or ppc64le
+      skip:
+        - match(python, "<3.10")
+        - cuda_compiler_version not in ("12.9", "13.4")
+        - ppc64le
+        # conda-forge supports only Python 3.14+ on win-arm64
+        - win and arm64 and match(python, "<3.14")
       script:
         env:
           CONDA_OVERRIDE_CUDA: ${{ conda_override_cuda }}
