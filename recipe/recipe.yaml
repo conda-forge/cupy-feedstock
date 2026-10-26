@@ -27,6 +27,7 @@ build:
     - ppc64le
     # conda-forge supports only Python 3.14+ on win-arm64
     - win and arm64 and match(python, "<3.14")
+    - not (win and arm64)
 
 outputs:
   - package:
